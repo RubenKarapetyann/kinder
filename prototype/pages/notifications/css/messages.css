@@ -1,0 +1,32 @@
+.friend-chat{
+    display: flex;
+    cursor: pointer;
+}
+.message-info{
+    margin-left: 5px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.friend-chat:hover{
+    background-color: rgb(241, 241, 241);
+}
+
+.friend-message-username{
+    font-weight: 600;
+}
+.friend-last-message{
+    font-size: 14px;
+    font-weight: 400;
+}  
+.friend-last-message-age{
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    font-weight: 300;
+}
+.message-info-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
