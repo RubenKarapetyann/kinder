@@ -70,3 +70,25 @@
     font-weight: 600;
     margin-top: 5px;
 }
+
+.post-likes-comments{
+    display: flex;
+}
+.post-likes{
+    font-size: 13px;
+    font-weight: 300;
+    padding: 2px;
+
+}
+
+header{
+    background-color: rgb(253, 253, 253);
+    z-index: 2;
+}
+
+@media(min-width:600px) {
+    header{
+        position: sticky;
+        top: 0;
+    }
+}
