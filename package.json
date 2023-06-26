@@ -1,0 +1,27 @@
+{
+  "name": "kinder",
+  "version": "1.0.0",
+  "description": "kinder social media",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --require dotenv/config index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RubenKarapetyann/kinder.git"
+  },
+  "author": "Ruben Karapetyan",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/RubenKarapetyann/kinder/issues"
+  },
+  "homepage": "https://github.com/RubenKarapetyann/kinder#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
