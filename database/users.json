@@ -1,0 +1,23 @@
+[
+    {
+        "userName" : "Ruben",
+        "email" : "ruben@gmail.com",
+        "password" : "sagergehjrbiejrberbwe",
+        "id" : "sdfusdf7sd6f87s76dfs84df84sfd8se4f",
+        "posts" : [
+            {
+                "postId" : "asdasfsdgdf"
+            }
+        ],
+        "frends" : [
+            {
+                "friendId" : "asrgedgerg"
+            }
+        ],
+        "favorites" : [
+            {
+                "postId" : "asnasfjnfjsdf"
+            }
+        ]
+    }
+]

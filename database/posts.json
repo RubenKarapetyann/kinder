@@ -1,0 +1,17 @@
+[
+    {
+        "postDescription" : "pretty summer",
+        "autherId" : "asdasfsgdfg",
+        "id" : "asdasgrg",
+        "img" : "./asdnsdufsdf/user.png",
+        "likes" : 84615,
+        "publicDate" : "fafsdgsfg",
+        "comments" : [
+            {
+                "text" : "good",
+                "autherId" : "dasfsgdfgsdf",
+                "likes" : 6181
+            }
+        ]
+    }
+]
