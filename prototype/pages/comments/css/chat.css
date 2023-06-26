@@ -13,7 +13,7 @@
 .comment-like{
     width: fit-content;
     margin-left: 30px;
-    display: flex;
+    display: flex; 
 }
 .comment-like-count{
     font-size: 12px;
