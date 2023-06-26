@@ -1,0 +1,49 @@
+.profile-row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.profile-info-friends-posts{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.profile-info-friends{
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-info-posts{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-item-count{
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+.profile-item-name{
+    font-size: 14px;
+    color: rgb(70, 69, 69);
+}
+.profile-description-text{
+    font-size: 14px;
+}
+.profile-img-container{
+    width: 30%;
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    margin-top: 10px;
+    overflow-x: hidden;
+    margin: 2px;
+}
+.profile-posts-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
