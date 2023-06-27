@@ -1,0 +1,32 @@
+.profile-title-container{
+    display: flex;
+    cursor: pointer;
+}
+.profile-title-info{
+    margin-left: 5px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.profile-title-container:hover{
+    background-color: rgb(241, 241, 241);
+}
+
+.profile-title-username{
+    font-weight: 600;
+}
+.profile-title-comment{
+    font-size: 14px;
+    font-weight: 400;
+}  
+.profile-title-function{
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    font-weight: 300;
+}
+.profile-title-info-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

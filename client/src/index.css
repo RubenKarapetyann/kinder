@@ -15,7 +15,27 @@ code {
 @font-face {
   font-family: "Nunito";
   src: url(../public/fonts/static/Nunito-Regular.ttf);  
+  font-weight: 400;
 }
+
+@font-face {
+  font-family: "Nunito";
+  src: url(../public/fonts/static/Nunito-Bold.ttf); 
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url(../public/fonts/static/Nunito-ExtraBold.ttf);  
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url(../public/fonts/static/Nunito-Black.ttf);   
+  font-weight: 900;
+}
+
 
 body::-webkit-scrollbar{
   width: 5px;
