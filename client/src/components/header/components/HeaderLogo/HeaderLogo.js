@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { HOME } from "../../../constants/routes-constants"
+import { HOME } from "../../../../constants/routes-constants"
 
 const HeaderLogo = ()=>{
     return (

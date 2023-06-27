@@ -1,5 +1,5 @@
-import HeaderItem from "./HeaderItem"
-import { HEADER_ITEMS } from "../../../constants/header-constants"
+import HeaderItem from "./components/HeaderItem"
+import { HEADER_ITEMS } from "../../../../constants/header-constants"
 
 const HeaderItems = ()=>{
     return (
@@ -9,7 +9,6 @@ const HeaderItems = ()=>{
                     icon={item.displayIcon}
                     key={item.id}
                     route={item.routeName}
-                    name={item.displayName}
                 />
             })}
         </ul>

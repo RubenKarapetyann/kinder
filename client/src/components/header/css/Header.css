@@ -1,0 +1,23 @@
+.logo{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 900;
+    font-size: 20px;
+    width: 160px;
+    text-align: center;
+}
+.der{
+    color: red;
+}
+
+header{
+    background-color: rgb(253, 253, 253);
+    z-index: 2;
+}
+
+@media(min-width:600px) {
+    header{
+        position: sticky;
+        top: 0;
+    }
+}
