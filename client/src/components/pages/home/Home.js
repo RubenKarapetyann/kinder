@@ -2,7 +2,7 @@ import AnyText from "../../usable-components/more/AnyText"
 import ProfileTitle from "../../usable-components/profile/ProfileTitle/ProfileTitle"
 import PostImage from "./components/PostImage/PostImage"
 import PostTools from "./components/PostTools/PostTools"
-
+import "./css/Home.css"
 
 function Home(){
     return(
