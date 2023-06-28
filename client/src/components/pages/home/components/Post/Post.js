@@ -6,7 +6,7 @@ import PostTools from "../PostTools/PostTools"
 function Post(){
     return(
         <>
-            <div class="post-top-part">
+            <div className="post-top-part">
                 <ProfileTitle userName={"Ruben"}/>
                 {/* <div class="post-manu">
                     <i class="fa fa-ellipsis-h" aria-hidden="true"></i>

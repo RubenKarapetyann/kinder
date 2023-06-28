@@ -1,3 +1,4 @@
+import { memo } from "react"
 import HeaderAccount from "./components/HeaderAccount/HeaderAccount"
 import HeaderItems from "./components/HeaderItems/HeaderItems"
 import HeaderLogo from "./components/HeaderLogo/HeaderLogo"
@@ -21,4 +22,4 @@ function Header(){
 
 
 
-export default Header
+export default memo(Header)

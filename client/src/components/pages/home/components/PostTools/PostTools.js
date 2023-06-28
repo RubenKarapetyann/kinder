@@ -5,7 +5,7 @@ import favorite from "../../../../../images/post-tools/favorite.svg"
 
 const PostTools = ()=>{
     return(
-        <div class="post-tools">
+        <div className="post-tools">
             <RateTools divClass={"likecom"}>
                 <img src={like} alt="like"/>
                 <img src={comment} alt="comment"/>

@@ -4,7 +4,7 @@ import "./css/Home.css"
 
 function Home(){
     return(
-        <div class="post">
+        <div className="post">
             <Post/>
         </div>
     )
