@@ -3,13 +3,15 @@ import { HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, PROFILE, SETTINGS, LO
 import { lazy } from "react"
 
 const Home = lazy(()=>import("../components/pages/home/Home"))
+const Friends = lazy(()=>import("../components/pages/friends/Friends"))
+
 
 function Router(){
     return(
         <Routes>
             <Route path="*" element={<Navigate to={HOME}/>}/>
             <Route path={HOME} element={<Home/>}/>
-            <Route path={FRIENDS} element={<p>Friends</p>}/>
+            <Route path={FRIENDS} element={<Friends/>}/>
             <Route path={NOTIFICATIONS} element={<p>Notifications</p>}/>
             <Route path={MESSAGES} element={<p>Messages</p>}/>
             <Route path={NEW_POST} element={<p>new Post</p>}/>
