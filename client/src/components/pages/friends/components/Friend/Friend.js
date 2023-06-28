@@ -7,7 +7,7 @@ const Friend = ()=>{
     return(
         <>        
             <ProfileTitle userName={"Ruben"}>
-                <div className="friend-last-message-age">
+                <div>
                     <DropDown list={FRIENDS_DROPDOWN}/>
                 </div>
             </ProfileTitle>
