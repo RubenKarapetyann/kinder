@@ -4,6 +4,8 @@ import FormInput from "../../usable-components/form/FormInput"
 import FormText from "../../usable-components/form/FormText"
 import FormTitle from "../../usable-components/form/FormTitle"
 
+
+//dont forget use it with children
 function Register(){
     const [inputData,setInputData] = useState({
         name : "",
@@ -11,6 +13,13 @@ function Register(){
         password : "",
         repeatPassword : ""
     })
+    const [error,setError] = useState(false)
+
+    const emailChange = (e)=> setInputData(data=>({...data,email : e.target.value})) 
+    const nameChange = (e)=> setInputData(data=>({...data,name : e.target.value})) 
+    const passwordChange = (e)=> setInputData(data=>({...data,password : e.target.value})) 
+    const repeatPasswordChange = (e)=> setInputData(data=>({...data,repeatPassword : e.target.value})) 
+
     return(
         <div className="form-container">
             <FormTitle text={"Register"}/>
@@ -19,21 +28,21 @@ function Register(){
                 <FormInput 
                     type={"text"} 
                     name={"Name"}
-                    // changeHandle={emailChange}
+                    changeHandle={nameChange}
                     value={inputData.name}
                 />
 
                 <FormInput 
                     type={"email"} 
                     name={"Email"}
-                    // changeHandle={emailChange}
+                    changeHandle={emailChange}
                     value={inputData.email}
                 />
         
                 <FormInput 
                     type={"password"} 
                     name={"Password"}
-                    // changeHandle={passwordChange}
+                    changeHandle={passwordChange}
                     value={inputData.password}
                 />
 
@@ -41,10 +50,10 @@ function Register(){
                 <FormInput 
                     type={"password"} 
                     name={"Repeat Password"}
-                    // changeHandle={passwordChange}
+                    changeHandle={repeatPasswordChange}
                     value={inputData.repeatPassword}
                 />
-                <FormError />
+                <FormError error={error}/>
     
                 
                 <button type="submit" className="btn btn-primary btn-block mb-4 form-btn">Sign up</button>
@@ -53,6 +62,6 @@ function Register(){
             </form>
         </div>
     )
-}//onSubmit={submitHandle} error={error}
+}//onSubmit={submitHandle} 
 
 export default Register
