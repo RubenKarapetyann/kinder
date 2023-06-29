@@ -1,9 +1,13 @@
-import Friend from "./components/Friend/Friend"
+import { FRIENDS_DROPDOWN } from "../../../constants/friends-constants"
+import DropDown from "../../usable-components/dropdown/DropDown"
+import ProfileListItem from "../../usable-components/profile/ProfileListItem"
 
 function Friends(){
     return (
         <>
-            <Friend/>
+            <ProfileListItem userName={"Ruben"}>
+                <DropDown list={FRIENDS_DROPDOWN}/>
+            </ProfileListItem>
         </>
     )
 }
