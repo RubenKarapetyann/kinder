@@ -81,6 +81,12 @@ app.get(LOGIN,async (req,res)=>{
 })
 
 
+app.get(LOG_OUT,(req,res)=>{
+    req.headers.authorization = null
+    console.log("logout");
+})
+
+
 
 app.get(AUTH,(req,res)=>{
     res.send({
