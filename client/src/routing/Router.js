@@ -1,14 +1,14 @@
 import { Navigate, Route, Routes, useLocation } from "react-router"
-import { LOGIN, HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, PROFILE, SETTINGS, LOG_OUT } from "../constants/routes-constants"
+import { LOGIN, HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, PROFILE, SETTINGS, LOG_OUT, REGISTER } from "../constants/routes-constants"
 import { lazy } from "react"
 import Header from "../components/header/Header"
 
 const Home = lazy(()=>import("../components/pages/home/Home"))
 const Friends = lazy(()=>import("../components/pages/friends/Friends"))
 const Login = lazy(()=>import("../components/pages/login/Login"))
+const Register = lazy(()=>import("../components/pages/register/Register"))
 
-
-//ete voroshes reduxov anes mainy tar app.js
+//ete voroshes reduxov anes headery tar app.js
 function Router(){
     const location = useLocation()
     return(
@@ -20,6 +20,7 @@ function Router(){
                 <Routes>
                     <Route path="*" element={<Navigate to={HOME}/>}/>
                     <Route path={LOGIN} element={<Login/>}/>
+                    <Route path={REGISTER} element={<Register/>}/>
                     <Route path={HOME} element={<Home/>}/>
                     <Route path={FRIENDS} element={<Friends/>}/>
                     <Route path={NOTIFICATIONS} element={<p>Notifications</p>}/>
