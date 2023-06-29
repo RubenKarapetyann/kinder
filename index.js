@@ -4,8 +4,39 @@ import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
 import bcrypt from "bcrypt"
+import fs from "fs"
 
 const app = express()
+const { Strategy:JwtStrategy, ExtractJwt } = passportJWT
+const jwtConfig = {
+    jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey : process.env.SESSION_SECRET
+}
+const generateToken = (user)=> {
+    const payload = {
+        sub : user.id
+    }
+
+    const token = jwt.sign(payload, jwtConfig.secretOrKey)
+    return token
+}
+
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(passport.initialize());
+
+passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
+    const users = fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' });
+    const user = users.find(val=>val.id===payload.sub)
+
+    if(user){
+        return done(null, user)
+    }else{
+        return done(null,false)
+    }
+}));
+
 
 app.get(REGISTER,(req,res)=>{
     res.send({
