@@ -1,13 +1,25 @@
 import express from "express"
-import { TEST } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH } from "./constants/routes-constants.js"
 
 const app = express()
 
-app.get(TEST,(req,res)=>{
+app.get(REGISTER,(req,res)=>{
     res.send({
-        type : "test"
+        type : "reg"
     })
 })
 
+app.get(LOGIN,(req,res)=>{
+    res.send({
+        type : "log"
+    })
+})
+
+
+app.get(AUTH,(req,res)=>{
+    res.send({
+        type : "auth"
+    })
+})
 
 app.listen(process.env.PORT)

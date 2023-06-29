@@ -1,1 +1,3 @@
-export const TEST = "/test"
+export const LOGIN = "/login"
+export const REGISTER = "/register"
+export const AUTH = "/auth"
