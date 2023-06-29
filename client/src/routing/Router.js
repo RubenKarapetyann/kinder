@@ -9,6 +9,7 @@ const Login = lazy(()=>import("../components/pages/login/Login"))
 const Register = lazy(()=>import("../components/pages/register/Register"))
 const Messages = lazy(()=>import("../components/pages/messages/Messages"))
 const Notifications = lazy(()=>import("../components/pages/notifications/Notifications"))
+const NewPost = lazy(()=>import("../components/pages/new-post/NewPost"))
 
 //ete voroshes reduxov anes headery tar app.js
 function Router(){
@@ -27,7 +28,7 @@ function Router(){
                     <Route path={FRIENDS} element={<Friends/>}/>
                     <Route path={NOTIFICATIONS} element={<Notifications/>}/>
                     <Route path={MESSAGES} element={<Messages/>}/>
-                    <Route path={NEW_POST} element={<p>new Post</p>}/>
+                    <Route path={NEW_POST} element={<NewPost/>}/>
                     <Route path={PROFILE} element={<p>Profile</p>}/>
                     <Route path={SETTINGS} element={<p>Settings</p>}/>
                     <Route path={LOG_OUT} element={<p>logout</p>}/>
