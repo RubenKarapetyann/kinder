@@ -1,5 +1,5 @@
-import { LOADING_START, LOADING_FINISH } from "../../../constants/register-slice-constants"
-import { loadingFinish, loadingStart } from "./registerActions"
+import { LOADING_START, LOADING_FINISH, ERROR_REG, CLEAR_ERROR } from "../../../constants/register-slice-constants"
+import { errorSeter, loadingFinish, loadingStart } from "./registerActions"
 
 function registerReducer(state={ loading : false, error : false },action){
     switch (action.type){
@@ -13,13 +13,23 @@ function registerReducer(state={ loading : false, error : false },action){
                 ...state,
                 loading : false
             }
+        case ERROR_REG:
+            return {
+                ...state,
+                error : action.payload.text
+            }
+        case CLEAR_ERROR:
+            return{
+                ...state,
+                error : false
+            }
         default:
             return state
     }
 }
 
 
-export const registerApi = (inputData)=>{
+export const registerApi = (inputData,navigate)=>{
     return (dispatch)=>{
         try{
             dispatch(loadingStart())
@@ -35,7 +45,11 @@ export const registerApi = (inputData)=>{
                 })
               }).then(res=>res.json()).then(result=>{
                 dispatch(loadingFinish())
-                console.log(result);
+                if(result.access){
+                    navigate("/login")
+                }else{
+                    dispatch(errorSeter(result.message))
+                }
               })
         }catch(err){
             dispatch(loadingFinish())

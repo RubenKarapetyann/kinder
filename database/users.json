@@ -38,5 +38,23 @@
     "posts": [],
     "frends": [],
     "favorites": []
+  },
+  {
+    "userName": "Elina",
+    "email": "gkarapety123an74@gmail.com",
+    "password": "$2b$10$TWOveuf4ELb9g750pfzyk.BHbb9Wd9NlBOqDdiQF8v3KMj28zEGmW",
+    "id": 0.4323736612648552,
+    "posts": [],
+    "frends": [],
+    "favorites": []
+  },
+  {
+    "userName": "werwefsdf",
+    "email": "gkarapetyan7esrdfgh4@gmail.com",
+    "password": "$2b$10$E2Dwv5QJM1i7nkX5NEIpV.KRmgyPflrYqU7CAet7fyg.54eUAjgbG",
+    "id": 0.8783095117823374,
+    "posts": [],
+    "frends": [],
+    "favorites": []
   }
 ]
