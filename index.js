@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -64,11 +64,22 @@ app.get(REGISTER,async (req,res)=>{
     }
 })
 
-app.get(LOGIN,(req,res)=>{
-    res.send({
-        type : "log"
-    })
+app.get(LOGIN,async (req,res)=>{
+    const { email, password } = req.body
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    const user = users.find(val=>val.email===email)
+
+    if(!user){
+        console.log("incorrect email");
+    }
+    if(!(await bcrypt.compare(password,user.password))){
+        console.log("incorrect password");
+    }
+    const token = generateToken(user)
+
+    console.log("you are in system");
 })
+
 
 
 app.get(AUTH,(req,res)=>{
