@@ -20,10 +20,21 @@ function Register(){
     const passwordChange = (e)=> setInputData(data=>({...data,password : e.target.value})) 
     const repeatPasswordChange = (e)=> setInputData(data=>({...data,repeatPassword : e.target.value})) 
 
+    const submitHandle =(e)=>{
+        e.preventDefault()
+        if(inputData.password.length < 8 && inputData.repeatPassword.length < 8){
+            setError("password cant be shorter 8 symbols")
+        }else if(inputData.password !== inputData.repeatPassword){
+            setError("passwords are different")
+        }else{
+            setError(false)
+        }
+    }
+    
     return(
         <div className="form-container">
             <FormTitle text={"Register"}/>
-            <form >
+            <form onSubmit={submitHandle} >
                 
                 <FormInput 
                     type={"text"} 
@@ -62,6 +73,6 @@ function Register(){
             </form>
         </div>
     )
-}//onSubmit={submitHandle} 
+}
 
 export default Register
