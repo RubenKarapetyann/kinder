@@ -4,9 +4,9 @@ import FormInput from "../../../usable-components/form/FormInput"
 import { useDispatch, useSelector } from "react-redux"
 import { registerApi } from "../../../../redux/reducers/registerSlice/registerReducer"
 import { useNavigate } from "react-router"
-import { errorClear } from "../../../../redux/reducers/registerSlice/registerActions"
+import { errorClear, errorSeter } from "../../../../redux/reducers/registerSlice/registerActions"
 
-
+import "../../login/css/Login.css"
 
 function RegisterLogic({ children }){
     const { loading, error } = useSelector(store=>store.register)
@@ -27,25 +27,26 @@ function RegisterLogic({ children }){
 
     useEffect(()=>{
         errorCleaning()
-    },[])
+    },[inputData])
 
     const submitHandle =(e)=>{
         e.preventDefault()
+        if(inputData.password.length < 8){
+            dispatch(errorSeter("password cant be shorter 8 symbols"))
+            return
+        }else if(inputData.password !== inputData.repeatPassword){
+            dispatch(errorSeter("passwords are different"))
+            return
+        }
         dispatch(registerApi(inputData,navigate))
-        // if(inputData.password.length < 8 && inputData.repeatPassword.length < 8){
-        //     setError("password cant be shorter 8 symbols")
-        // }else if(inputData.password !== inputData.repeatPassword){
-        //     setError("passwords are different")
-        // }else{
-        //     setError(false)
-        // }
     }
 
 
-    const emailChange = (e)=> setInputData(data=>({...data,email : e.target.value})) 
-    const nameChange = (e)=> setInputData(data=>({...data,name : e.target.value})) 
-    const passwordChange = (e)=> setInputData(data=>({...data,password : e.target.value})) 
-    const repeatPasswordChange = (e)=> setInputData(data=>({...data,repeatPassword : e.target.value})) 
+    const emailChange = e => setInputData(data=>({...data,email : e.target.value})) 
+    const nameChange = e => setInputData(data=>({...data,name : e.target.value})) 
+    const passwordChange = e => setInputData(data=>({...data,password : e.target.value})) 
+    const repeatPasswordChange = e => setInputData(data=>({...data,repeatPassword : e.target.value})) 
+
 
 
     return(
