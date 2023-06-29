@@ -38,10 +38,30 @@ passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
 }));
 
 
-app.get(REGISTER,(req,res)=>{
-    res.send({
-        type : "reg"
-    })
+app.get(REGISTER,async (req,res)=>{
+    try{
+        const {email, name, password} = req.body
+        const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+        const user = users.find(val=>val.email===email)
+        if(!user){
+            const hashedPassword = await bcrypt.hash(password, 10)
+            const newUser = {
+                userName : name,
+                email : email,
+                password : hashedPassword,
+                id : Math.random(),
+                posts : [],
+                frends : [],
+                favorites : []
+            }
+            users.push(newUser)
+            fs.writeFileSync("./database/users.json", JSON.stringify(users));
+        }else{
+            console.log("dont created");
+        }
+    }catch(err){
+        console.log(err)
+    }
 })
 
 app.get(LOGIN,(req,res)=>{
