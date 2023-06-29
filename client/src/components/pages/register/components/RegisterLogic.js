@@ -4,7 +4,6 @@ import FormInput from "../../../usable-components/form/FormInput"
 
 
 function RegisterLogic({ children }){
-    console.log(children);
     const [inputData,setInputData] = useState({
         name : "",
         email : "",
@@ -12,6 +11,7 @@ function RegisterLogic({ children }){
         repeatPassword : ""
     })
     const [error,setError] = useState(false)
+    const [loading,setLoading] = useState(false)
 
 
     const submitHandle =(e)=>{
@@ -30,6 +30,8 @@ function RegisterLogic({ children }){
     const nameChange = (e)=> setInputData(data=>({...data,name : e.target.value})) 
     const passwordChange = (e)=> setInputData(data=>({...data,password : e.target.value})) 
     const repeatPasswordChange = (e)=> setInputData(data=>({...data,repeatPassword : e.target.value})) 
+
+
     return(
         <div className="form-container">
             {children[0]}
@@ -66,8 +68,8 @@ function RegisterLogic({ children }){
                 />
                 <FormError error={error}/>
 
+                <button type="submit" className="btn btn-primary btn-block mb-4 form-btn" disabled={loading}>Sign up</button>
                 {children[1]}
-                {children[2]}
             </form>
         </div>
     )
