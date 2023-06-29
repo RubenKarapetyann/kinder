@@ -1,28 +1,32 @@
 import { useState } from "react"
 import FormError from "../../../usable-components/form/FormError"
 import FormInput from "../../../usable-components/form/FormInput"
+import { useDispatch, useSelector } from "react-redux"
+import { registerApi } from "../../../../redux/reducers/registerSlice/registerReducer"
+
 
 
 function RegisterLogic({ children }){
+    const { loading, error } = useSelector(store=>store.register)
+    const dispatch = useDispatch()
     const [inputData,setInputData] = useState({
         name : "",
         email : "",
         password : "",
         repeatPassword : ""
     })
-    const [error,setError] = useState(false)
-    const [loading,setLoading] = useState(false)
 
 
     const submitHandle =(e)=>{
         e.preventDefault()
-        if(inputData.password.length < 8 && inputData.repeatPassword.length < 8){
-            setError("password cant be shorter 8 symbols")
-        }else if(inputData.password !== inputData.repeatPassword){
-            setError("passwords are different")
-        }else{
-            setError(false)
-        }
+        dispatch(registerApi(inputData))
+        // if(inputData.password.length < 8 && inputData.repeatPassword.length < 8){
+        //     setError("password cant be shorter 8 symbols")
+        // }else if(inputData.password !== inputData.repeatPassword){
+        //     setError("passwords are different")
+        // }else{
+        //     setError(false)
+        // }
     }
 
 

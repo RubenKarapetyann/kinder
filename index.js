@@ -38,7 +38,7 @@ passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
 }));
 
 
-app.get(REGISTER,async (req,res)=>{
+app.post(REGISTER,async (req,res)=>{
     try{
         const {email, name, password} = req.body
         const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
@@ -55,16 +55,17 @@ app.get(REGISTER,async (req,res)=>{
                 favorites : []
             }
             users.push(newUser)
-            fs.writeFileSync("./database/users.json", JSON.stringify(users));
+            fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+            res.send({access : true})
         }else{
-            console.log("dont created");
+            res.send({access : false,message : "email already used"})
         }
     }catch(err){
-        console.log(err)
+        res.status(401).send({access : false,message : "something went wrong"})
     }
 })
 
-app.get(LOGIN,async (req,res)=>{
+app.post(LOGIN,async (req,res)=>{
     const { email, password } = req.body
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
     const user = users.find(val=>val.email===email)
