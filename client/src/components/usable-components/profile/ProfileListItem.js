@@ -1,6 +1,6 @@
 import ProfileTitle from "./ProfileTitle/ProfileTitle"
 
-const ProfileListItem = ({ children, userName, comment })=>{
+const ProfileListItem = ({ children, userName, comment, hr=true })=>{
     return(
         <>        
             <ProfileTitle userName={userName} comment={comment}>
@@ -8,7 +8,7 @@ const ProfileListItem = ({ children, userName, comment })=>{
                     {children}
                 </div>
             </ProfileTitle>
-            <hr/>
+            {hr ? <hr/> : null}
         </>
     )
 }
