@@ -1,5 +1,6 @@
 import { CLEAR_ERROR, ERROR_LOG, LOADING_FINISH, LOADING_START } from "../../../constants/login-slice-constants"
 import { HOME } from "../../../constants/routes-constants"
+import { setUser } from "../userSlice/UserActions"
 import { errorSeter, loadingFinish, loadingStart } from "./loginActions"
 
 function loginReducer(state={ loading : false, error : false },action){
@@ -48,6 +49,7 @@ export const loginApi = (inputData,navigate)=>{
                 if(result.access){
                     navigate("/"+HOME)
                     localStorage.setItem("jwtToken" , result.token)
+                    dispatch(setUser(result.user.name, result.user.email, result.user.id))
                 }else{
                     dispatch(errorSeter(result.message))
                 }

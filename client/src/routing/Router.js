@@ -2,6 +2,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router"
 import { LOGIN, HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, PROFILE, SETTINGS, LOG_OUT, REGISTER, CHAT, COMMENTS } from "../constants/routes-constants"
 import { lazy } from "react"
 import Header from "../components/header/Header"
+import { useSelector } from "react-redux"
 
 const Home = lazy(()=>import("../components/pages/home/Home"))
 const Friends = lazy(()=>import("../components/pages/friends/Friends"))
@@ -17,6 +18,8 @@ const Comments = lazy(()=>import("../components/pages/comments/Comments"))
 //ete voroshes reduxov anes headery tar app.js
 function Router(){
     const location = useLocation()
+    const user = useSelector(store=>store.user)
+    console.log(user);
     return(
         <>
             {location.pathname !== "/login" && 
