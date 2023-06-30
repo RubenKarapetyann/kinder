@@ -71,14 +71,14 @@ app.post(LOGIN,async (req,res)=>{
     const user = users.find(val=>val.email===email)
 
     if(!user){
-        console.log("incorrect email");
+        res.send({access : false, message : "incorrect email"})
     }
     if(!(await bcrypt.compare(password,user.password))){
-        console.log("incorrect password");
+        res.send({access : false, message : "incorrect password"})
     }
     const token = generateToken(user)
 
-    console.log("you are in system");
+    res.send({access : true, token })
 })
 
 

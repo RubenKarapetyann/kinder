@@ -4,7 +4,6 @@ import FormTitle from "../../usable-components/form/FormTitle"
 import RegisterLogic from "./components/RegisterLogic"
 
 
-//dont forget use it with children
 function Register(){
     return(
         <RegisterLogic>
