@@ -1,4 +1,5 @@
 import { LOADING_START, LOADING_FINISH, ERROR_REG, CLEAR_ERROR } from "../../../constants/register-slice-constants"
+import { LOGIN } from "../../../constants/routes-constants"
 import { errorSeter, loadingFinish, loadingStart } from "./registerActions"
 
 function registerReducer(state={ loading : false, error : false },action){
@@ -46,7 +47,7 @@ export const registerApi = (inputData,navigate)=>{
               }).then(res=>res.json()).then(result=>{
                 dispatch(loadingFinish())
                 if(result.access){
-                    navigate("/login")
+                    navigate("/"+LOGIN)
                 }else{
                     dispatch(errorSeter(result.message))
                 }
