@@ -1,0 +1,25 @@
+.message-input-container{
+    width: 100%;
+    height: 20px;
+    position: sticky;
+    bottom: 60px;
+    background-color: white;
+}
+.message-input-container::after{
+    content: "";
+    background-color: white;
+    width: 100%;
+    height: 30px;
+    position: fixed;
+    bottom: 0;
+    z-index: -1;
+}
+.message-input{
+    resize: none;
+}
+.message-input::-webkit-scrollbar{
+    width: 2px;
+}
+.message-input-inner-container{
+    display: flex;
+}
