@@ -4,10 +4,10 @@ import "./css/Profile.css"
 
 function Profile(){
     return(
-        <div class="profile-container">
+        <div className="profile-container">
         <ProfileDescription/>
         <hr/>
-        <div class="profile-posts-container">
+        <div className="profile-posts-container">
           <ProfilePost/>
         </div>
       </div>

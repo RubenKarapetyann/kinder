@@ -4,8 +4,8 @@ import ProfileInfoBoard from "../components/ProfileInfoBoard"
 const ProfileDescription = ()=>{
     return(
         <>
-            <div class="profile-row">
-            <div class="profile-avatar">
+            <div className="profile-row">
+            <div className="profile-avatar">
             <img 
                     src="https://ionicframework.com/docs/img/demos/avatar.svg" 
                     alt="mdo" 
@@ -14,15 +14,15 @@ const ProfileDescription = ()=>{
                     className="rounded-circle"
                 />
             </div>
-            <div class="profile-info-friends-posts">
+            <div className="profile-info-friends-posts">
 
                 <ProfileInfoBoard text={15} comment={"posts"}/>
 
                 <ProfileInfoBoard text={20} comment={"follow"}/>
             </div>
             </div>
-            <div class="profile-row">
-            <div class="profile-description">
+            <div className="profile-row">
+            <div className="profile-description">
                 <h3>user_name</h3>
                 <AnyText pClass={"profile-description-text"} text={"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non perspiciatis aliquam temporibus ab laborum animi assumenda, repellat natus nemo perferendis?"}/>
             </div>
