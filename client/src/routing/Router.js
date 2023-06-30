@@ -10,7 +10,7 @@ const Register = lazy(()=>import("../components/pages/register/Register"))
 const Messages = lazy(()=>import("../components/pages/messages/Messages"))
 const Notifications = lazy(()=>import("../components/pages/notifications/Notifications"))
 const NewPost = lazy(()=>import("../components/pages/new-post/NewPost"))
-
+const Settings = lazy(()=>import("../components/pages/settings/Settings"))
 //ete voroshes reduxov anes headery tar app.js
 function Router(){
     const location = useLocation()
@@ -30,7 +30,7 @@ function Router(){
                     <Route path={MESSAGES} element={<Messages/>}/>
                     <Route path={NEW_POST} element={<NewPost/>}/>
                     <Route path={PROFILE} element={<p>Profile</p>}/>
-                    <Route path={SETTINGS} element={<p>Settings</p>}/>
+                    <Route path={SETTINGS} element={<Settings/>}/>
                     <Route path={LOG_OUT} element={<p>logout</p>}/>
                 </Routes>
             </main>
