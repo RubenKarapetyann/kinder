@@ -9,14 +9,13 @@ function LoginLogic({ children }){
         password : "",
         rememberMe : false
     })
-    const [error,setError] = useState(false)
     const emailChange = (e)=> setInputData(data=>({...data,email : e.target.value})) 
     const passwordChange = (e)=> setInputData(data=>({...data,password : e.target.value})) 
     const rememberMeChange = (e)=> setInputData(data=>({...data,rememberMe : !data.rememberMe})) 
     const submitHandle =(e)=>{
         e.preventDefault()
         if(inputData.password.length < 8){
-            setError("incorrect password")
+            // setError("incorrect password")
         }
     }
     return(
@@ -44,7 +43,7 @@ function LoginLogic({ children }){
                     changeHandle={rememberMeChange} 
                 />
         
-                <FormError error={error}/>
+                <FormError/>
                 
                 <button type="submit" className="btn btn-primary btn-block mb-4 form-btn">Sign in</button>
                 {children[1]}
