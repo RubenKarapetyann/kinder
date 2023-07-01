@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -95,11 +95,18 @@ app.get(LOG_OUT,(req,res)=>{
 })
 
 
-
-app.get(AUTH,(req,res)=>{
-    res.send({
-        type : "auth"
-    })
+app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
+    const { id } = req.id
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    const user = users.find(val=>val.id===id)
+    console.log(user);
+    console.log(req);
+    // res.send({
+    //     isAuth : true,
+    //     name : req.user.name,
+    //     id : req.user.id,
+    //     email : req.user.email
+    // })
 })
 
 app.listen(process.env.PORT)

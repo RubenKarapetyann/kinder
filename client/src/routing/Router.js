@@ -18,8 +18,7 @@ const Comments = lazy(()=>import("../components/pages/comments/Comments"))
 //ete voroshes reduxov anes headery tar app.js
 function Router(){
     const location = useLocation()
-    const user = useSelector(store=>store.user)
-    console.log(user);
+    const { user } = useSelector(store=>store.user)
     return(
         <>
             {location.pathname !== "/login" && 
@@ -28,8 +27,8 @@ function Router(){
             <main className="container">
                 <Routes>
                     <Route path="*" element={<Navigate to={HOME}/>}/>
-                    <Route path={LOGIN} element={<Login/>}/>
-                    <Route path={REGISTER} element={<Register/>}/>
+                    <Route path={LOGIN} element={user.isAuth ? <Navigate to={HOME}/> : <Login/>}/>
+                    <Route path={REGISTER} element={user.isAuth ? <Navigate to={HOME}/> : <Register/>}/>
                     <Route path={HOME} element={<Home/>}/>
                     <Route path={FRIENDS} element={<Friends/>}/>
                     <Route path={NOTIFICATIONS} element={<Notifications/>}/>
