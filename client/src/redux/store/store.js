@@ -3,6 +3,7 @@ import thunk from "redux-thunk"
 import userReducer from "../reducers/userSlice/UserReducer"
 import registerReducer from "../reducers/registerSlice/registerReducer"
 import loginReducer from "../reducers/loginSlice/loginReducer"
+import homeReducer from "../reducers/homeSlice/homeReducer"
 
 
 
@@ -10,7 +11,8 @@ import loginReducer from "../reducers/loginSlice/loginReducer"
 const rootReducer = combineReducers({
     user : userReducer,
     register : registerReducer,
-    login : loginReducer
+    login : loginReducer,
+    home : homeReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
