@@ -1,69 +1,11 @@
-[
-  {
-    "userName": "Ruben",
-    "email": "ruben@gmail.com",
-    "password": "sagergehjrbiejrberbwe",
-    "id": "sdfusdf7sd6f87s76dfs84df84sfd8se4f",
-    "posts": [
-      {
-        "postId": "asdasfsdgdf"
-      }
-    ],
-    "frends": [
-      {
-        "friendId": "asrgedgerg",
-        "chatId": "sdgdfdfsdfsd"
-      }
-    ],
-    "favorites": [
-      {
-        "postId": "asnasfjnfjsdf"
-      }
-    ]
-  },
-  {
+{
+  "0.6145628391094977": {
     "userName": "Elina",
     "email": "gkarapetyan74@gmail.com",
-    "password": "$2b$10$8Crx.NBEqWYJM/FZFMsDSuZS1pPmYtJklNIcvfOVOL2/.MDkaxsyC",
-    "id": 0.31288322641536537,
-    "posts": [],
-    "frends": [],
-    "favorites": []
-  },
-  {
-    "userName": "Elina",
-    "email": "karapetyan74@gmail.com",
-    "password": "$2b$10$ryEgpywvuvfDTjyx7qu/JeToBxJHbMMfWchURdPkmZq6uCLiVnOPm",
-    "id": 0.025676689475696346,
-    "posts": [],
-    "frends": [],
-    "favorites": []
-  },
-  {
-    "userName": "werwefsdf",
-    "email": "garapetyan74@gmail.com",
-    "password": "$2b$10$ZllN21n3Xk7kDNdiJezEReepQsx8PlaGT9JHswVzT0BFDcXJAjgzO",
-    "id": 0.9760739896235342,
-    "posts": [],
-    "frends": [],
-    "favorites": []
-  },
-  {
-    "userName": "Elina",
-    "email": "4@gmail.com",
-    "password": "$2b$10$rjL1YU.yMNG7AT/o.J0vzOLWUi7dkRgnzRIbh2Jlzyg80vKAFGtfO",
-    "id": 0.41184371458740343,
-    "posts": [],
-    "frends": [],
-    "favorites": []
-  },
-  {
-    "userName": "Elina",
-    "email": "74@gmail.com",
-    "password": "$2b$10$26jQM1odqfT1NqMV7VtPr.M0E8Rsm4MZccKY9wvMztMcrRICmVA/u",
-    "id": 0.4963529194712837,
+    "password": "$2b$10$GWFjgu2v1TdlC0t6DB4iducbu2lWhjswzrQQ52Dd0lcCsf5XTzolm",
+    "id": 0.6145628391094977,
     "posts": [],
     "frends": [],
     "favorites": []
   }
-]
+}

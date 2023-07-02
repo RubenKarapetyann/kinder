@@ -28,7 +28,7 @@ app.use(passport.initialize());
 
 passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const user = users.find(val=>val.id===payload.sub)
+    const user = users[payload.sub]
 
     if(user){
         return done(null, user)
@@ -42,33 +42,35 @@ app.post(REGISTER,async (req,res)=>{
     try{
         const {email, name, password} = req.body
         const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-        const user = users.find(val=>val.email===email)
+        const user = Object.values(users).find(val=>val.email===email)
         if(!user){
             const hashedPassword = await bcrypt.hash(password, 10)
+            const id = Math.random()
             const newUser = {
                 userName : name,
                 email : email,
                 password : hashedPassword,
-                id : Math.random(),
+                id,
                 posts : [],
                 frends : [],
                 favorites : []
             }
-            users.push(newUser)
+            users[id] = newUser
             fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
             res.send({access : true})
         }else{
             res.send({access : false,message : "email already used"})
         }
     }catch(err){
-        res.status(401).send({access : false,message : "something went wrong"})
+        res.status(400).send({access : false,message : "something went wrong"})
     }
 })
 
 app.post(LOGIN,async (req,res)=>{
     const { email, password } = req.body
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const user = users.find(val=>val.email===email)
+    const user = Object.values(users).find(val=>val.email===email)
+
 
     if(!user){
         return res.send({access : false, message : "incorrect email"})
@@ -96,10 +98,10 @@ app.get(LOG_OUT,(req,res)=>{
 
 
 app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
-    // const { id } = req.id
-    const id = "sdfusdf7sd6f87s76dfs84df84sfd8se4f"
+    const { id } = req.user
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const user = users.find(val=>val.id===id)
+    const user = users[id]
+    // console.log(user);
     res.send({
         access : true,
         posts : []
