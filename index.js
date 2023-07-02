@@ -110,7 +110,8 @@ app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
             likes : posts[post.postId].likes,
             liked : posts[post.postId].likers[user.id],
             publicDate : posts[post.postId].publicDate,
-            auther : posts[post.postId].auther
+            auther : posts[post.postId].auther,
+            favorite : !!user.favorites.find(val=>val.id===post.id)
     })})
 
     console.log(userPosts);
@@ -118,6 +119,39 @@ app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     res.send({
         access : true,
         posts : [...userPosts]
+    })
+})
+
+
+
+app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
+    const user = req.user
+    const { postId, type } = req.body
+    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+
+
+    const post = posts[postId]
+
+    if(type === "like"){
+        if(post.likers[user.id]){
+            post.likers[user.id] = false
+            post.likes--
+        }else{
+            post.likers[user.id] = true
+            post.likes++
+        }
+    }else{
+        const post = user.favorites.find(val=>val.id === postId)
+        if(post){
+            user.favorites = user.favorites.filter(val=>val.id===postId)
+        }else{
+            user.favorites.push(postId)
+        }
+    }
+    console.log(posts);
+    fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
+    res.send({
+        access : true,
     })
 })
 

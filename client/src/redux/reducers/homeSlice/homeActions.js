@@ -1,4 +1,4 @@
-import { LOADING_FINISH, LOADING_START, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
+import { LOADING_FINISH, LOADING_START, POST_ACTIVE, POST_LIKE, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
 
 export const loadingStart = ()=>{
     return {
@@ -18,5 +18,12 @@ export const setHomePosts = (posts)=>{
         payload : {
             posts
         }
+    }
+}
+
+export const activePostAction = (type,postId)=>{
+    return  {
+        type : POST_ACTIVE,
+        payload : {type,postId}
     }
 }

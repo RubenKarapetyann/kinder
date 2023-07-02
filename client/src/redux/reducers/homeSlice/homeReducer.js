@@ -1,6 +1,6 @@
-import { LOADING_FINISH, LOADING_START, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
+import { LOADING_FINISH, LOADING_START, POST_ACTIVE, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { loadingFinish, loadingStart, setHomePosts } from "./homeActions"
+import { loadingFinish, loadingStart, setHomePosts, activePostAction } from "./homeActions"
 
 function homeReducer(state={ loading : false, posts : [] },action){
     switch (action.type){
@@ -19,6 +19,21 @@ function homeReducer(state={ loading : false, posts : [] },action){
                 ...state,
                 posts : action.payload.posts
             }
+        case POST_ACTIVE:
+            if(action.payload.type === "like"){
+                const newPosts = state.posts.map(val=>{
+                    if(val.postId === action.payload.id){
+                        val.liked = !val.liked
+                        val.likes = !val.liked ? --val.likes : ++val.likes
+                    }
+                    return val
+                })
+                return {
+                    ...state,
+                    posts : newPosts
+                } 
+            }
+            return state          
         default:
             return state
     }
@@ -38,8 +53,38 @@ export const getHomePosts = (navigate)=>{
                     },
                 }).then((res)=>res.json()).then(result=>{
                     dispatch(loadingFinish())
-                    console.log(result.posts);
                     dispatch(setHomePosts(result.posts))
+                })
+            }catch(err){
+                navigate("/"+HOME)
+            }
+        }else{
+            navigate("/"+LOGIN)
+        }
+    }
+}
+
+export const activePost = (navigate,postId,type)=>{
+    return (dispatch)=>{
+        const token = localStorage.getItem("jwtToken")
+        if(token){
+            try{
+                // dispatch(loadingStart())
+                fetch("/home",{
+                    method : 'POST',
+                    headers : {
+                        'Content-Type': 'application/json',
+                        "authorization" : "Bearer "+token
+                    },
+                    body : JSON.stringify({
+                        postId,
+                        type
+                    })
+                }).then((res)=>res.json()).then(result=>{
+                    // dispatch(loadingFinish())
+                    if(result.access){
+                        dispatch(activePostAction(type,postId))
+                    }
                 })
             }catch(err){
                 navigate("/"+HOME)

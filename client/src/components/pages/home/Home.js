@@ -18,7 +18,8 @@ function Home(){
         dispatch(getHomePosts(navigate))
     },[])
 
-    if(loading){<p>loading...</p>}
+    if(loading){<p>loading</p>}
+
 
     return(
         <div className="post">
@@ -31,6 +32,8 @@ function Home(){
                     autherAvatarImg={post.auther.avatraImg}
                     img={post.img}
                     liked={post.liked}
+                    postId={post.id}
+                    favorite={post.favorite}
                 />
             })}
         </div>

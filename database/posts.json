@@ -1,24 +1,24 @@
 {
-    "asjndasndangsidgsidfasn" : {
-        "postDescription" : "pretty summer",
-        "id" : "asjndasndangsidgsidfasn",
-        "img" : "https://picsum.photos/id/237/536/354",
-        "likes" : 84615,
-        "likers" : {
-            "0.6145628391094977" : true
-        },
-        "publicDate" : "50",
-        "auther" : {
-            "id" : "0.6145628391094977",
-            "userName" : "Elina",
-            "avatarImg" : "https://ionicframework.com/docs/img/demos/avatar.svg"
-        },
-        "comments" : [
-            {
-                "text" : "good",
-                "autherId" : "0.8713018945867141",
-                "likes" : 6181
-            }
-        ]
-    }
+  "asjndasndangsidgsidfasn": {
+    "postDescription": "pretty summer",
+    "id": "asjndasndangsidgsidfasn",
+    "img": "https://picsum.photos/id/237/536/354",
+    "likes": 1,
+    "likers": {
+      "0.6145628391094977": true
+    },
+    "publicDate": "50",
+    "auther": {
+      "id": "0.6145628391094977",
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": [
+      {
+        "text": "good",
+        "autherId": "0.8713018945867141",
+        "likes": 6181
+      }
+    ]
+  }
 }
