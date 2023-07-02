@@ -1,14 +1,16 @@
 import RateTools from "./components/RateTools"
-import comment from "../../../../../images/post-tools/comment.svg"
 import Like from "../../../../../images/post-tools/like"
 import Favorite from "../../../../../images/post-tools/favorite"
+import Comment from "../../../../../images/post-tools/comment"
+
+
 
 const PostTools = ({ liked })=>{
     return(
         <div className="post-tools">
             <RateTools divClass={"likecom"}>
                 <Like liked={liked}/>
-                <img src={comment} alt="comment"/>
+                <Comment/>
             </RateTools>
             <RateTools divClass={"favorite-div"}>
                 <Favorite/>
