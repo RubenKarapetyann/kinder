@@ -56,5 +56,14 @@
     "posts": [],
     "frends": [],
     "favorites": []
+  },
+  {
+    "userName": "Elina",
+    "email": "74@gmail.com",
+    "password": "$2b$10$26jQM1odqfT1NqMV7VtPr.M0E8Rsm4MZccKY9wvMztMcrRICmVA/u",
+    "id": 0.4963529194712837,
+    "posts": [],
+    "frends": [],
+    "favorites": []
   }
 ]

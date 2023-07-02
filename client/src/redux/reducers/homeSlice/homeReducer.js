@@ -1,6 +1,6 @@
-import { LOADING_FINISH, LOADING_START } from "../../../constants/home-slice-constants"
+import { LOADING_FINISH, LOADING_START, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { loadingFinish, loadingStart } from "./homeActions"
+import { loadingFinish, loadingStart, setHomePosts } from "./homeActions"
 
 function homeReducer(state={ loading : false, posts : null },action){
     switch (action.type){
@@ -14,14 +14,19 @@ function homeReducer(state={ loading : false, posts : null },action){
                 ...state,
                 loading : false
             }
+        case SET_HOME_POSTS:
+            return {
+                ...state,
+                posts : action.payload.posts
+            }
         default:
             return state
     }
 }
 
 export const getHomePosts = (navigate)=>{
-    const token = localStorage.getItem("jwtToken")
     return (dispatch)=>{
+        const token = localStorage.getItem("jwtToken")
         if(token){
             try{
                 dispatch(loadingStart())
@@ -29,21 +34,17 @@ export const getHomePosts = (navigate)=>{
                     method : 'GET',
                     headers : {
                         'Content-Type': 'application/json',
-                        "authorization" : "Barrer "+token
+                        "authorization" : "Bearer "+token
                     },
                 }).then((res)=>res.json()).then(result=>{
                     dispatch(loadingFinish())
-                    if(result.access){
-                        navigate("/"+HOME)
-                    }else{
-                        navigate("/"+LOGIN)
-                    }
+                    dispatch(setHomePosts(result.posts))
                 })
             }catch(err){
                 navigate("/"+HOME)
             }
         }else{
-            navigate("/"+HOME)
+            navigate("/"+LOGIN)
         }
     }
 }

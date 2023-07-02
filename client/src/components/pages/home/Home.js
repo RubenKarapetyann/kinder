@@ -9,7 +9,9 @@ import { getHomePosts } from "../../../redux/reducers/homeSlice/homeReducer"
 function Home(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const posts = useSelector(store=>store.home)
+    const { loading, posts } = useSelector(store=>store.home)
+
+    console.log(posts);
 
 
     useEffect(()=>{
@@ -17,6 +19,8 @@ function Home(){
             dispatch(getHomePosts(navigate))
         }
     },[])
+
+    if(loading){<p>loading...</p>}
 
     return(
         <div className="post">

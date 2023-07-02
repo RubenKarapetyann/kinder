@@ -27,7 +27,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(passport.initialize());
 
 passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
-    const users = fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' });
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
     const user = users.find(val=>val.id===payload.sub)
 
     if(user){
@@ -96,17 +96,14 @@ app.get(LOG_OUT,(req,res)=>{
 
 
 app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
-    const { id } = req.id
+    // const { id } = req.id
+    const id = "sdfusdf7sd6f87s76dfs84df84sfd8se4f"
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
     const user = users.find(val=>val.id===id)
-    console.log(user);
-    console.log(req);
-    // res.send({
-    //     isAuth : true,
-    //     name : req.user.name,
-    //     id : req.user.id,
-    //     email : req.user.email
-    // })
+    res.send({
+        access : true,
+        posts : []
+    })
 })
 
 app.listen(process.env.PORT)
