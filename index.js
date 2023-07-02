@@ -101,6 +101,7 @@ app.get(LOG_OUT,(req,res)=>{
 app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     const user = req.user
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
     const userPosts = user.posts.map(post=>{
         return ({
@@ -114,11 +115,24 @@ app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
             favorite : !!user.favorites.find(val=>val.id===post.id)
     })})
 
-    console.log(userPosts);
+    const friendsPost = user.friends.reduce((state,friend)=>{
+        return state.concat(...users[friend.friendId].posts.map(post=>{
+            return ({
+                postDescription : posts[post.postId].postDescription, 
+                id : posts[post.postId].id,
+                img : posts[post.postId].img,
+                likes : posts[post.postId].likes,
+                liked : posts[post.postId].likers[user.id],
+                publicDate : posts[post.postId].publicDate,
+                auther : posts[post.postId].auther,
+                favorite : !!user.favorites.find(val=>val.id===post.id)
+        })}))
+    },[])
+    
 
     res.send({
         access : true,
-        posts : [...userPosts]
+        posts : [...userPosts,...friendsPost]
     })
 })
 
@@ -141,14 +155,17 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
             post.likes++
         }
     }else{
-        const post = user.favorites.find(val=>val.id === postId)
+        const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+        const currentUser = users[user.id]
+        const post = currentUser.favorites.find(val=>val === postId)
         if(post){
-            user.favorites = user.favorites.filter(val=>val.id===postId)
+            currentUser.favorites = currentUser.favorites.filter(val=>val!==postId)
         }else{
-            user.favorites.push(postId)
+            currentUser.favorites.push(postId)
         }
+        users[user.id] = currentUser
+        fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
     }
-    console.log(posts);
     fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
     res.send({
         access : true,

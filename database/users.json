@@ -2,29 +2,53 @@
   "0.6145628391094977": {
     "userName": "Elina",
     "email": "gkarapetyan74@gmail.com",
-    "avatarImg" : "https://ionicframework.com/docs/img/demos/avatar.svg",
+    "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
     "password": "$2b$10$GWFjgu2v1TdlC0t6DB4iducbu2lWhjswzrQQ52Dd0lcCsf5XTzolm",
     "id": 0.6145628391094977,
-    "posts": [{
-      "postId" : "asjndasndangsidgsidfasn"
-    }],
-    "friends": [{
-      "friendId" : "0.8713018945867141",
-      "chatId" : ""
-    }],
-    "favorites": []
+    "posts": [
+      {
+        "postId": "asjndasndangsidgsidfasn"
+      }
+    ],
+    "friends": [
+      {
+        "friendId": "0.8713018945867141",
+        "chatId": ""
+      }
+    ],
+    "favorites": [
+      "rdtrfyghjklredtfvghj"
+    ]
   },
   "0.8713018945867141": {
     "userName": "Ruben",
     "email": "gkarapetyan@gmail.com",
-    "avatarImg" : "https://ionicframework.com/docs/img/demos/avatar.svg",
+    "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
     "password": "$2b$10$YeEXgGAUuPPLdXr8A2xts..XKEH7lW4Mkop3lWvCtj6deSM7.001m",
     "id": 0.8713018945867141,
+    "posts": [
+      {
+        "postId": "rdtrfyghjklredtfvghj"
+      }
+    ],
+    "friends": [
+      {
+        "friendId": "0.6145628391094977",
+        "chatId": ""
+      }
+    ],
+    "favorites": [
+      "asjndasndangsidgsidfasn"
+    ]
+  },
+  "0.5498439206038626": {
+    "userName": "werwefsdf",
+    "email": "rapetyan@gmail.com",
+    "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
+    "password": "$2b$10$0Y/w1v6BDB7MCawTiYWIIOBVwzRqLwQiV0cfzpI8pg5tIVs9e20G2",
+    "id": 0.5498439206038626,
     "posts": [],
-    "friends": [{
-      "friendId" : "0.6145628391094977",
-      "chatId" : ""
-    }],
+    "friends": [],
     "favorites": []
   }
 }

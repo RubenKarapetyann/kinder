@@ -22,7 +22,7 @@ function homeReducer(state={ loading : false, posts : [] },action){
         case POST_ACTIVE:
             if(action.payload.type === "like"){
                 const newPosts = state.posts.map(val=>{
-                    if(val.postId === action.payload.id){
+                    if(val.id === action.payload.postId){
                         val.liked = !val.liked
                         val.likes = !val.liked ? --val.likes : ++val.likes
                     }
@@ -32,8 +32,18 @@ function homeReducer(state={ loading : false, posts : [] },action){
                     ...state,
                     posts : newPosts
                 } 
-            }
-            return state          
+            }else{
+                const newPosts = state.posts.map(val=>{
+                    if(val.id === action.payload.postId){
+                        val.favorite = !val.favorite
+                    }
+                    return val
+                })
+                return {
+                    ...state,
+                    posts : newPosts
+                }
+            }          
         default:
             return state
     }
@@ -69,7 +79,6 @@ export const activePost = (navigate,postId,type)=>{
         const token = localStorage.getItem("jwtToken")
         if(token){
             try{
-                // dispatch(loadingStart())
                 fetch("/home",{
                     method : 'POST',
                     headers : {
@@ -81,7 +90,6 @@ export const activePost = (navigate,postId,type)=>{
                         type
                     })
                 }).then((res)=>res.json()).then(result=>{
-                    // dispatch(loadingFinish())
                     if(result.access){
                         dispatch(activePostAction(type,postId))
                     }
