@@ -1,9 +1,9 @@
 import "./ProfileTitle.css"
 
-const ProfileTitle = ({ userName, comment, children })=>{
+const ProfileTitle = ({ userName, comment, children, avatarImg="https://ionicframework.com/docs/img/demos/avatar.svg" })=>{
     return(
         <div className="profile-title-container">
-            <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="mdo" width="32" height="32" className="rounded-circle"/>
+            <img src={avatarImg} alt="mdo" width="32" height="32" className="rounded-circle"/>
             <div className="profile-title-info">
                 <div className="profile-title-info-container">
                     <span className="profile-title-username">{userName}</span>

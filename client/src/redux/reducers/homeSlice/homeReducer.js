@@ -2,7 +2,7 @@ import { LOADING_FINISH, LOADING_START, SET_HOME_POSTS } from "../../../constant
 import { HOME, LOGIN } from "../../../constants/routes-constants"
 import { loadingFinish, loadingStart, setHomePosts } from "./homeActions"
 
-function homeReducer(state={ loading : false, posts : null },action){
+function homeReducer(state={ loading : false, posts : [] },action){
     switch (action.type){
         case LOADING_START:
             return {
@@ -38,6 +38,7 @@ export const getHomePosts = (navigate)=>{
                     },
                 }).then((res)=>res.json()).then(result=>{
                     dispatch(loadingFinish())
+                    console.log(result.posts);
                     dispatch(setHomePosts(result.posts))
                 })
             }catch(err){

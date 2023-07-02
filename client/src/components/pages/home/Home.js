@@ -15,16 +15,23 @@ function Home(){
 
 
     useEffect(()=>{
-        if(posts === null){
-            dispatch(getHomePosts(navigate))
-        }
+        dispatch(getHomePosts(navigate))
     },[])
 
     if(loading){<p>loading...</p>}
 
     return(
         <div className="post">
-            <Post/>
+            {posts.map(post=>{
+                return <Post
+                    autherUserName={post.auther.userName}
+                    key={post.id}
+                    likes={post.likes}
+                    description={post.postDescription}
+                    autherAvatarImg={post.auther.avatraImg}
+                    img={post.img}
+                />
+            })}
         </div>
     )
 }

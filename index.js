@@ -49,10 +49,11 @@ app.post(REGISTER,async (req,res)=>{
             const newUser = {
                 userName : name,
                 email : email,
+                avatarImg : "https://ionicframework.com/docs/img/demos/avatar.svg",
                 password : hashedPassword,
                 id,
                 posts : [],
-                frends : [],
+                friends : [],
                 favorites : []
             }
             users[id] = newUser
@@ -98,13 +99,14 @@ app.get(LOG_OUT,(req,res)=>{
 
 
 app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
-    const { id } = req.user
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const user = users[id]
-    // console.log(user);
+    const user = req.user
+    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+
+
+    const userPosts = user.posts.map(post=>posts[post.postId])
     res.send({
         access : true,
-        posts : []
+        posts : [...userPosts]
     })
 })
 

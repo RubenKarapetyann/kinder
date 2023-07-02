@@ -3,26 +3,26 @@ import ProfileTitle from "../../../../usable-components/profile/ProfileTitle/Pro
 import PostImage from "../PostImage/PostImage"
 import PostTools from "../PostTools/PostTools"
 
-function Post(){
+function Post({ autherUserName, likes, description, autherAvatarImg, img  }){
     return(
         <>
             <div className="post-top-part">
-                <ProfileTitle userName={"Ruben"}/>
+                <ProfileTitle userName={autherUserName} avatarImg={autherAvatarImg}/>
                 {/* <div class="post-manu">
                     <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                 </div> */}
             </div>
-            <PostImage/>
+            <PostImage img={img}/>
             <PostTools/>
             <AnyText 
                 divClass={"post-likes-comments"} 
                 pClass={"post-likes"}
-                text={"1,238 likes"}
+                text={likes + " likes"}
             />
             <AnyText 
                 divClass={"post-description"} 
                 pClass={"post-description-text"}
-                text={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem quia impedit dolore sunt facilis temporibus tempore numquam laudantium. Unde, tempore."}
+                text={description}
             />
             <hr/>
         </>
