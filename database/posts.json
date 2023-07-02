@@ -4,6 +4,9 @@
         "id" : "asjndasndangsidgsidfasn",
         "img" : "https://picsum.photos/id/237/536/354",
         "likes" : 84615,
+        "likers" : {
+            "0.6145628391094977" : true
+        },
         "publicDate" : "50",
         "auther" : {
             "id" : "0.6145628391094977",

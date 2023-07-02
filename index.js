@@ -102,8 +102,19 @@ app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     const user = req.user
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
 
+    const userPosts = user.posts.map(post=>{
+        return ({
+            postDescription : posts[post.postId].postDescription, 
+            id : posts[post.postId].id,
+            img : posts[post.postId].img,
+            likes : posts[post.postId].likes,
+            liked : posts[post.postId].likers[user.id],
+            publicDate : posts[post.postId].publicDate,
+            auther : posts[post.postId].auther
+    })})
 
-    const userPosts = user.posts.map(post=>posts[post.postId])
+    console.log(userPosts);
+
     res.send({
         access : true,
         posts : [...userPosts]

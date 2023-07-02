@@ -30,6 +30,7 @@ function Home(){
                     description={post.postDescription}
                     autherAvatarImg={post.auther.avatraImg}
                     img={post.img}
+                    liked={post.liked}
                 />
             })}
         </div>
