@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -125,7 +125,7 @@ app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
                 liked : posts[post.postId].likers[user.id],
                 publicDate : posts[post.postId].publicDate,
                 auther : posts[post.postId].auther,
-                favorite : !!user.favorites.find(val=>val.id===post.id)
+                favorite : !!user.favorites.find(val=>val===post.postId)
         })}))
     },[])
     
@@ -169,6 +169,19 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
     res.send({
         access : true,
+    })
+})
+
+
+app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
+
+
+
+
+
+
+    res.send({
+        access : true
     })
 })
 
