@@ -51,3 +51,8 @@ body::-webkit-scrollbar-thumb{
       width: 3px;
   }
 }
+
+.link-without-styles{
+  text-decoration: none;
+  color:  black;
+}

@@ -3,13 +3,13 @@ import ProfileListItem from "../../usable-components/profile/ProfileListItem"
 import { useNavigate } from "react-router"
 import { useEffect } from "react"
 import { getMessagesList } from "../../../redux/reducers/messagesSlice/messagesReducer"
+import { Link } from "react-router-dom"
 
 function Messages(){
     const { messages, loading } = useSelector(store=>store.messages)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    console.log(messages);
     useEffect(()=>{
         dispatch(getMessagesList(navigate))
     },[])
@@ -18,9 +18,19 @@ function Messages(){
 
     return (
         <>
-            <ProfileListItem userName={"Ruben"} comment={"hello Nick!"}>
-                <span>5 min ago</span>
-            </ProfileListItem>
+            {messages.map(message=>{
+                return(
+                    <Link to={message.chatId} key={message.lastMessage.messageId} className="link-without-styles">
+                        <ProfileListItem 
+                            userName={message.sender.userName} 
+                            comment={message.lastMessage.message} 
+                            avatarImg={message.sender.avatarImg}
+                        >
+                            <span>{message.lastMessage.sendDate} min ago</span>
+                        </ProfileListItem>
+                    </Link>
+                )
+            })}
         </>
     )
 }

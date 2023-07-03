@@ -183,6 +183,7 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
         return {
             sender : currentChat.members.find(val=>val.id===friend.friendId),
             lastMessage : currentChat.messages[currentChat.messages.length-1],
+            chatId : friend.chatId
         }
     })
 

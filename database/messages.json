@@ -20,5 +20,28 @@
                 "sendDate" : 10
             }
         ]
+    },
+    "asdfvgrfbrfrdvdrfbrdfb" : {
+        "members" : [
+            {
+                "id" : "0.6145628391094977",
+                "userName" : "Elina",
+                "avatarImg" : "https://ionicframework.com/docs/img/demos/avatar.svg"
+            },
+            {
+                "id" : "0.4864148468727828",
+                "userName" : "Ashot",
+                "avatarImg" : "https://ionicframework.com/docs/img/demos/avatar.svg"
+            }
+        ],
+        "messages" : [
+            {
+                "message" : "asdasd",
+                "autherId" : "0.4864148468727828",
+                "messageId" : "asfvsdvsdfv",
+                "sendDate" : 20
+            }
+        ]
     }
 }
+

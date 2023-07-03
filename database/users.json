@@ -14,6 +14,10 @@
       {
         "friendId": "0.8713018945867141",
         "chatId": "asdasdasdasdasdasdasd"
+      },
+      {
+        "friendId": "0.4864148468727828",
+        "chatId": "asdfvgrfbrfrdvdrfbrdfb"
       }
     ],
     "favorites": [
@@ -49,6 +53,21 @@
     "id": 0.5498439206038626,
     "posts": [],
     "friends": [],
+    "favorites": []
+  },
+  "0.4864148468727828": {
+    "userName": "Ashot",
+    "email": "gkarapetyasdan74@gmail.com",
+    "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
+    "password": "$2b$10$GWFjgu2v1TdlC0t6DB4iducbu2lWhjswzrQQ52Dd0lcCsf5XTzolm",
+    "id": 0.4864148468727828,
+    "posts": [],
+    "friends": [
+      {
+        "friendId": "0.6145628391094977",
+        "chatId": "asdfvgrfbrfrdvdrfbrdfb"
+      }
+    ],
     "favorites": []
   }
 }
