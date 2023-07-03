@@ -179,11 +179,10 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
 
     const messagesList = friends.map(friend=>{
-        const currentChat = messages[friend.chatId].message
+        const currentChat = messages[friend.chatId]
         return {
             sender : currentChat.members.find(val=>val.id===friend.friendId),
-            lastMessage : currentChat[currentChat.lenght-1],
-            sendDate : currentChat[currentChat.lenght-1].sendDate
+            lastMessage : currentChat.messages[currentChat.messages.length-1],
         }
     })
 

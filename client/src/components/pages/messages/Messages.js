@@ -9,7 +9,7 @@ function Messages(){
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-
+    console.log(messages);
     useEffect(()=>{
         dispatch(getMessagesList(navigate))
     },[])
