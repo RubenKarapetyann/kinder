@@ -174,14 +174,22 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
 
 
 app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const { id, friends  } = req.user
+    const messages = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
 
 
-
-
-
+    const messagesList = friends.map(friend=>{
+        const currentChat = messages[friend.chatId].message
+        return {
+            sender : friend.friendId,
+            lastMessage : currentChat[currentChat.lenght-1],
+            sendDate : currentChat[currentChat.lenght-1].sendDate
+        }
+    })
 
     res.send({
-        access : true
+        access : true,
+        messagesList
     })
 })
 
