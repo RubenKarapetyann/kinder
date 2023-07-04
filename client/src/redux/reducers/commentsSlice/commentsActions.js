@@ -1,4 +1,4 @@
-import { LOADING_START, LOADING_FINISH, SET_COMMENTS_LIST } from "../../../constants/comments-slice-constants"
+import { LOADING_START, LOADING_FINISH, SET_COMMENTS_LIST, SET_NEW_COMMENT } from "../../../constants/comments-slice-constants"
 
 export const loadingStart = ()=>{
     return {
@@ -18,6 +18,15 @@ export const setCommentsList = (commentsList)=>{
         type : SET_COMMENTS_LIST,
         payload : {
             commentsList
+        }
+    }
+}
+
+export const setNewComment = (comment)=>{
+    return {
+        type : SET_NEW_COMMENT,
+        payload : {
+            comment
         }
     }
 }

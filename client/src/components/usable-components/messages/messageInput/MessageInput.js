@@ -1,5 +1,5 @@
 import "./MessageInput.css"
-const MessageInput =({ value, changeHandle, sendHandle })=>{
+const MessageInput =({ value, changeHandle, sendHandle, loading })=>{
     return(
         <div className="message-input-container">
             <hr/>
@@ -11,7 +11,7 @@ const MessageInput =({ value, changeHandle, sendHandle })=>{
                     value={value}
                     onChange={changeHandle}
                 ></textarea>
-                <button className="btn btn-primary" onClick={sendHandle}>Send</button>
+                <button className="btn btn-primary" disabled={loading} onClick={sendHandle}>Send</button>
             </div>
         </div>
     )

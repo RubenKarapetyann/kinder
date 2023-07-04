@@ -32,6 +32,54 @@
         "autherId": 0.6145628391094977,
         "likes": 0,
         "commentId": 0.136580036071982
+      },
+      {
+        "text": "Rubenasdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.8072645674582939
+      },
+      {
+        "text": "asdsdfrfewe",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.31379836303134745
+      },
+      {
+        "text": "asdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.8905829821221132
+      },
+      {
+        "text": "ewwed",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.6303672621541858
+      },
+      {
+        "text": "qwdqwd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.37822379597668054
+      },
+      {
+        "text": "asdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.3905802264191598
+      },
+      {
+        "text": "asdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.14254556485908343
+      },
+      {
+        "text": "Ruben you are programmer",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.6056566154266922
       }
     ]
   },
@@ -39,9 +87,9 @@
     "postDescription": "pasf",
     "id": "rdtrfyghjklredtfvghj",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 50,
+    "likes": 51,
     "likers": {
-      "0.6145628391094977": false
+      "0.6145628391094977": true
     },
     "publicDate": "45",
     "auther": {
@@ -55,6 +103,48 @@
         "autherId": "0.8713018945867141",
         "likes": 6181,
         "commentId": "rthrthrthrht"
+      },
+      {
+        "text": "asdasdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.12492433137498704
+      },
+      {
+        "text": "tuyn nkara",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.2758340638069938
+      },
+      {
+        "text": "shat lavna",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.29571411735125386
+      },
+      {
+        "text": "asdasdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.11852642926018087
+      },
+      {
+        "text": "sdfsdfsdf",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.9236488602703801
+      },
+      {
+        "text": "asdasdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.9962360039488249
+      },
+      {
+        "text": "asdasdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.05076348171222622
       }
     ]
   }

@@ -1,6 +1,6 @@
-import { LOADING_FINISH, LOADING_START, SET_COMMENTS_LIST } from "../../../constants/comments-slice-constants"
+import { LOADING_FINISH, LOADING_START, SET_COMMENTS_LIST, SET_NEW_COMMENT } from "../../../constants/comments-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { loadingFinish, loadingStart, setCommentsList } from "./commentsActions"
+import { loadingFinish, loadingStart, setCommentsList, setNewComment } from "./commentsActions"
 
 function commentsReducer(state={ loading : false, comments : [] },action){
     switch (action.type){
@@ -18,6 +18,11 @@ function commentsReducer(state={ loading : false, comments : [] },action){
             return {
                 ...state,
                 comments : action.payload.commentsList
+            } 
+        case SET_NEW_COMMENT:
+            return {
+                ...state,
+                comments : [...state.comments,action.payload.comment]
             }   
         default:
             return state
@@ -69,7 +74,7 @@ export const sendComment = (navigate,comment,postId)=>{
                     })
                 }).then(res=>res.json()).then(result=>{
                     if(result.access){
-                        // dispatch(setCommentsList(result.commentsList))
+                        dispatch(setNewComment(result.comment))
                     }
                     dispatch(loadingFinish())
                 })

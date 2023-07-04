@@ -5,7 +5,7 @@ import { getCommentsList } from "../../../../redux/reducers/commentsSlice/commen
 import { useNavigate, useParams } from "react-router"
 
 const CommentsBox = ()=>{
-    const { loading, comments } = useSelector(store=>store.comments)
+    const { comments } = useSelector(store=>store.comments)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { id:postId } = useParams()
@@ -14,7 +14,11 @@ const CommentsBox = ()=>{
         dispatch(getCommentsList(navigate,postId))
     },[])
     
-    if(loading){return<p>loading</p>}
+    // if(loading){return<div style={{
+    //     minHeight: "70vh"
+    // }}>loading</div>}
+
+
     return(
         <div style={{
             minHeight: "70vh"

@@ -217,7 +217,7 @@ app.get(COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
 
 app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const { id } = req.user
+    const { id, avatarImg, userName } = req.user
     const { comment,postId } = req.body
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
 
@@ -233,7 +233,11 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)
 
     res.send({
         access : true,
-        comment : newComment
+        comment : {
+            ...newComment,
+            avatarImg,
+            userName
+        }
     })
 })
 
