@@ -10,7 +10,7 @@ const CommentsBox = ()=>{
     const navigate = useNavigate()
     const { id:postId } = useParams()
 
-
+    console.log(comments);
     useEffect(()=>{
         dispatch(getCommentsList(navigate,postId))
     },[])
@@ -21,7 +21,10 @@ const CommentsBox = ()=>{
             minHeight: "70vh"
         }}>
             {comments.map(comment=>{
-                return <Message text={comment.text}/>
+                return <Message 
+                            text={comment.text}
+                            key={comment.commentId}
+                        />
             })}
         </div>
     )

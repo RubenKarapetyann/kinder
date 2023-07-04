@@ -16,9 +16,10 @@
     },
     "comments": [
       {
-        "text": "good",
+        "text": "asdasd",
         "autherId": "0.8713018945867141",
-        "likes": 6181
+        "likes": 6181,
+        "commentId" : "asdasdasdasd"
       }
     ]
   },
@@ -38,9 +39,10 @@
     },
     "comments": [
       {
-        "text": "good",
+        "text": "safasfafasfasf",
         "autherId": "0.8713018945867141",
-        "likes": 6181
+        "likes": 6181,
+        "commentId" : "rthrthrthrht"
       }
     ]
   }

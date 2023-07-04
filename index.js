@@ -200,19 +200,18 @@ app.get(COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    console.log(postId);
-    // const messagesList = friends.map(friend=>{
-    //     const currentChat = messages[friend.chatId]
-    //     return {
-    //         sender : currentChat.members.find(val=>val.id===friend.friendId),
-    //         lastMessage : currentChat.messages[currentChat.messages.length-1],
-    //         chatId : friend.chatId
-    //     }
-    // })
+    const comments = posts[postId].comments.map(comment=>{
+        const currentUser = users[comment.autherId]
+        return {
+            ...comment,
+            avatarImg : currentUser.avatarImg,
+            userName : currentUser.userName,
+        }
+    })
 
     res.send({
         access : true,
-        commentsList : []
+        commentsList : comments
     })
 })
 
