@@ -195,7 +195,7 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
 
 app.get(COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const { postId } = req.params
+    const { id:postId } = req.params
     const { id, friends  } = req.user
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
@@ -212,6 +212,7 @@ app.get(COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
     res.send({
         access : true,
+        commentsList : []
     })
 })
 
