@@ -5,6 +5,7 @@ import registerReducer from "../reducers/registerSlice/registerReducer"
 import loginReducer from "../reducers/loginSlice/loginReducer"
 import homeReducer from "../reducers/homeSlice/homeReducer"
 import messagesReducer from "../reducers/messagesSlice/messagesReducer"
+import commentsReducer from "../reducers/commentsSlice/commentsReducer"
 
 
 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     register : registerReducer,
     login : loginReducer,
     home : homeReducer,
-    messages : messagesReducer
+    messages : messagesReducer,
+    comments : commentsReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunk))
 

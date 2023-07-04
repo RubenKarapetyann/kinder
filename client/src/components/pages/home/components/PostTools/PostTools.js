@@ -1,8 +1,7 @@
 import RateTools from "./components/RateTools"
-import Favorite from "../../../../../images/post-tools/favorite"
 import Comment from "../../../../../images/post-tools/comment"
 import RateTool from "./components/RateTool"
-
+import { Link } from "react-router-dom"
 
 
 const PostTools = ({ liked,postId,favorite })=>{
@@ -10,7 +9,7 @@ const PostTools = ({ liked,postId,favorite })=>{
         <div className="post-tools">
             <RateTools divClass={"likecom"}>
                 <RateTool active={liked} type={"like"} postId={postId}/>
-                <Comment/>
+                <Link to={"/comments/"+postId}><Comment/></Link>
             </RateTools>
             <RateTools divClass={"favorite-div"}>
                 <RateTool active={favorite} type={"favorite"} postId={postId}/>

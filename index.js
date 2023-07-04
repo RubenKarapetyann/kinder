@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -192,5 +192,28 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
         messagesList
     })
 })
+
+
+app.get(COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const { postId } = req.params
+    const { id, friends  } = req.user
+    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+
+    console.log(postId);
+    // const messagesList = friends.map(friend=>{
+    //     const currentChat = messages[friend.chatId]
+    //     return {
+    //         sender : currentChat.members.find(val=>val.id===friend.friendId),
+    //         lastMessage : currentChat.messages[currentChat.messages.length-1],
+    //         chatId : friend.chatId
+    //     }
+    // })
+
+    res.send({
+        access : true,
+    })
+})
+
 
 app.listen(process.env.PORT)
