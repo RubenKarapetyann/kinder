@@ -1,13 +1,13 @@
 import ProfileTitle from "../../profile/ProfileTitle/ProfileTitle"
 import "./Message.css"
 
-const Message = ({ other=true, text })=>{
+const Message = ({ other=true, text, avatarImg, userName })=>{
     const className = other ? "other" : "you"
     return(
         <div className={"chat-message-container-"+className}>
             <div className="chat-sender-info">
            
-                {other ? <ProfileTitle userName={"first user"}/> : 
+                {other ? <ProfileTitle userName={userName} avatarImg={avatarImg}/> : 
                     <>
                         <span className="profile-title-username" style={{
                             marginRight : "5px",

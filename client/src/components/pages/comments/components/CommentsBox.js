@@ -10,7 +10,6 @@ const CommentsBox = ()=>{
     const navigate = useNavigate()
     const { id:postId } = useParams()
 
-    console.log(comments);
     useEffect(()=>{
         dispatch(getCommentsList(navigate,postId))
     },[])
@@ -24,10 +23,12 @@ const CommentsBox = ()=>{
                 return <Message 
                             text={comment.text}
                             key={comment.commentId}
+                            likes={comment.likes}
+                            userName={comment.userName}
+                            avatarImg={comment.avatarImg}
                         />
             })}
         </div>
     )
 }
-
 export default CommentsBox
