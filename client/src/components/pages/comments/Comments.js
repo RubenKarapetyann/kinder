@@ -1,4 +1,4 @@
-import MessageInput from "../../usable-components/messages/messageInput/MessageInput"
+import CommentInput from "./components/CommentInput"
 import CommentsBox from "./components/CommentsBox"
 import LeftArrow from "./components/LeftArrow"
 import "./css/Comments.css"
@@ -8,7 +8,7 @@ function Comments(){
         <>
             <LeftArrow/>
             <CommentsBox/>
-            <MessageInput/>
+            <CommentInput/>
         </>
     )   
 }

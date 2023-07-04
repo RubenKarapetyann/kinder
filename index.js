@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -212,6 +212,28 @@ app.get(COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
     res.send({
         access : true,
         commentsList : comments
+    })
+})
+
+
+app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const { id } = req.user
+    const { comment,postId } = req.body
+    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+
+    const newComment = {
+        text: comment,
+        autherId: id,
+        likes: 0,
+        commentId : Math.random()
+    }
+
+    posts[postId].comments.push(newComment)
+    fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
+
+    res.send({
+        access : true,
+        comment : newComment
     })
 })
 

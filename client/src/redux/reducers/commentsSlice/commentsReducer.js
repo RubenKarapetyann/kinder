@@ -51,6 +51,36 @@ export const getCommentsList = (navigate,postId)=>{
     }
 }
 
+export const sendComment = (navigate,comment,postId)=>{
+    return (dispatch)=>{
+        const token = localStorage.getItem("jwtToken")
+        if(token){
+            dispatch(loadingStart())
+            try{
+                fetch("/comments",{
+                    method : "POST",
+                    headers : {
+                        'Content-Type': 'application/json',
+                        "authorization" : "Bearer "+token
+                    },
+                    body : JSON.stringify({
+                        comment,
+                        postId
+                    })
+                }).then(res=>res.json()).then(result=>{
+                    if(result.access){
+                        // dispatch(setCommentsList(result.commentsList))
+                    }
+                    dispatch(loadingFinish())
+                })
+            }catch(err){
+                navigate("/"+HOME)
+            }
+        }else{
+            navigate("/"+LOGIN)
+        }
+    }
+}
 
 
 export default commentsReducer

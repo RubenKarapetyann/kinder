@@ -19,13 +19,19 @@
         "text": "asdasd",
         "autherId": "0.8713018945867141",
         "likes": 6181,
-        "commentId" : "asdasdasdasd"
+        "commentId": "asdasdasdasd"
       },
       {
         "text": "Tuyn",
         "autherId": "0.4864148468727828",
         "likes": 6181,
-        "commentId" : "sedfwaedfwe"
+        "commentId": "sedfwaedfwe"
+      },
+      {
+        "text": "Ruben",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "commentId": 0.136580036071982
       }
     ]
   },
@@ -48,7 +54,7 @@
         "text": "safasfafasfasf",
         "autherId": "0.8713018945867141",
         "likes": 6181,
-        "commentId" : "rthrthrthrht"
+        "commentId": "rthrthrthrht"
       }
     ]
   }
