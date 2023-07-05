@@ -2,7 +2,7 @@ import { LOADING_FINISH, LOADING_START, SET_COMMENTS_LIST, SET_NEW_COMMENT } fro
 import { HOME, LOGIN } from "../../../constants/routes-constants"
 import { loadingFinish, loadingStart, setCommentsList, setNewComment } from "./commentsActions"
 
-function commentsReducer(state={ loading : false, comments : [] },action){
+function commentsReducer(state={ loading : false, list : [] },action){
     switch (action.type){
         case LOADING_START:
             return {
@@ -17,12 +17,12 @@ function commentsReducer(state={ loading : false, comments : [] },action){
         case SET_COMMENTS_LIST:
             return {
                 ...state,
-                comments : action.payload.commentsList
+                list : action.payload.commentsList
             } 
         case SET_NEW_COMMENT:
             return {
                 ...state,
-                comments : [...state.comments,action.payload.comment]
+                list : [...state.list,action.payload.comment]
             }   
         default:
             return state

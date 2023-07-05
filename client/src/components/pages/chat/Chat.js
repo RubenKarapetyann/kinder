@@ -1,11 +1,11 @@
-import MessageInput from "../../usable-components/messages/messageInput/MessageInput"
-import ChatBox from "./components/ChatBox"
+import InputControl from "../../usable-components/messages/InputControl"
+import MessageBox from "../../usable-components/messages/MessageBox"
 
 function Chat(){
     return(
         <>
-            <ChatBox/>
-            <MessageInput/>
+            {/* <MessageBox type={"chat"}/> */}
+            <InputControl type={"chat"}/>
         </> 
     )
 }

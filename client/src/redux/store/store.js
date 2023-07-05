@@ -6,6 +6,7 @@ import loginReducer from "../reducers/loginSlice/loginReducer"
 import homeReducer from "../reducers/homeSlice/homeReducer"
 import messagesReducer from "../reducers/messagesSlice/messagesReducer"
 import commentsReducer from "../reducers/commentsSlice/commentsReducer"
+import chatReducer from "../reducers/chatSlice/chatReducer"
 
 
 
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     login : loginReducer,
     home : homeReducer,
     messages : messagesReducer,
-    comments : commentsReducer
+    comments : commentsReducer,
+    chat : chatReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
