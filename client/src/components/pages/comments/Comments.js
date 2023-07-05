@@ -1,4 +1,5 @@
-import CommentInput from "./components/CommentInput"
+import { sendComment } from "../../../redux/reducers/commentsSlice/commentsReducer"
+import InputControl from "../../usable-components/messages/InputControl"
 import CommentsBox from "./components/CommentsBox"
 import LeftArrow from "./components/LeftArrow"
 import "./css/Comments.css"
@@ -8,7 +9,7 @@ function Comments(){
         <>
             <LeftArrow/>
             <CommentsBox/>
-            <CommentInput/>
+            <InputControl type={"comments"} handle={sendComment}/>
         </>
     )   
 }

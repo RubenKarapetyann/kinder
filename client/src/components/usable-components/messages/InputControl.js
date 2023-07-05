@@ -1,20 +1,19 @@
 import { useState } from "react"
-import MessageInput from "../../../usable-components/messages/messageInput/MessageInput"
-import { sendComment } from "../../../../redux/reducers/commentsSlice/commentsReducer"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router"
+import MessageInput from "./messageInput/MessageInput"
 
-const CommentInput = ()=>{
+const InputControl = ({ handle,type })=>{
     const [value,setValue] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { id:postId } = useParams()
-    const loading = useSelector(store=>store.comments.loading)  
+    const { id } = useParams()
+    const loading = useSelector(store=>store[type].loading)  
 
 
     const changeHandle  = e =>setValue(e.target.value)
     const sendHandle = e =>{
-        dispatch(sendComment(navigate,value,postId))
+        dispatch(handle(navigate,value,id))
         setValue("")
     }
 
@@ -23,4 +22,4 @@ const CommentInput = ()=>{
     
 }
 
-export default CommentInput
+export default InputControl
