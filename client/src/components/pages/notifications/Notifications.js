@@ -3,7 +3,7 @@ import { FRIENDS_DROPDOWN } from "../../../constants/friends-constants"
 import DropDown from "../../usable-components/dropdown/DropDown"
 import Title from "../../usable-components/more/Title"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useNavigate } from "react-router"
 import { getNotifications } from "../../../redux/reducers/notificationsSlice/notificationsReducer"
 
@@ -11,7 +11,7 @@ function Notifications(){
     const notifications  = useSelector(store=>store.notifications.list)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
+    let prevDate = useRef({})
 
     useEffect(()=>{
         dispatch(getNotifications(navigate))
@@ -20,18 +20,28 @@ function Notifications(){
     return (
         <>
             {notifications.map(notification=>{
+                const currentDate = `${new Date(notification.date).getFullYear()}-${new Date(notification.date).getMonth()}-${new Date(notification.date).getDay()}`
+                prevDate.current = {
+                    prevDate : prevDate.current.currentDate,
+                    currentDate,
+                }
+                
                 return (
-                    <ProfileListItem 
-                        hr={false} 
-                        userName={notification.userName} 
-                        comment={notification.text}
-                        key={notification.id}
-                    >
-                        <DropDown list={FRIENDS_DROPDOWN}/>
-                    </ProfileListItem>
+                    <div key={notification.id}>
+                        { prevDate.current.prevDate !== currentDate ? <>
+                            <br/>
+                            <Title text={currentDate}/>
+                        </> : null}
+                        <ProfileListItem 
+                            hr={false} 
+                            userName={notification.userName} 
+                            comment={notification.text}
+                        >
+                            <DropDown list={FRIENDS_DROPDOWN}/>
+                        </ProfileListItem>
+                    </div>
                 )
             })}
-            {/* <Title text={new Date().getTime()}/> */}
             
         </>
 
