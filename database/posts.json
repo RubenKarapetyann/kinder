@@ -3,9 +3,9 @@
     "postDescription": "pretty summer",
     "id": "asjndasndangsidgsidfasn",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 0,
+    "likes": 1,
     "likers": {
-      "0.6145628391094977": false,
+      "0.6145628391094977": true,
       "0.8713018945867141": false
     },
     "publicDate": "50",
@@ -38,6 +38,18 @@
         "autherId": 0.6145628391094977,
         "likes": 0,
         "id": 0.33832793333828404
+      },
+      {
+        "text": "sdvsRUben",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.7676247097546569
+      },
+      {
+        "text": "asdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.5777184480164843
       }
     ]
   },
@@ -45,9 +57,9 @@
     "postDescription": "pasf",
     "id": "rdtrfyghjklredtfvghj",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 51,
+    "likes": 50,
     "likers": {
-      "0.6145628391094977": true
+      "0.6145628391094977": false
     },
     "publicDate": "45",
     "auther": {
@@ -79,6 +91,12 @@
         "autherId": 0.6145628391094977,
         "likes": 0,
         "id": 0.48952350082333496
+      },
+      {
+        "text": "asdasdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.03968841217261909
       }
     ]
   }

@@ -1,6 +1,7 @@
 import { LOADING_START, LOADING_FINISH, ERROR_REG, CLEAR_ERROR } from "../../../constants/register-slice-constants"
 import { LOGIN } from "../../../constants/routes-constants"
-import { errorSeter, loadingFinish, loadingStart } from "./registerActions"
+import { loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { errorSeter } from "./registerActions"
 
 function registerReducer(state={ loading : false, error : false },action){
     switch (action.type){
@@ -33,7 +34,7 @@ function registerReducer(state={ loading : false, error : false },action){
 export const registerApi = (inputData,navigate)=>{
     return (dispatch)=>{
         try{
-            dispatch(loadingStart())
+            dispatch(loadingStart(LOADING_START))
             fetch("/register", {
                 method: 'POST',
                 headers: {
@@ -45,7 +46,7 @@ export const registerApi = (inputData,navigate)=>{
                     password : inputData.password
                 })
               }).then(res=>res.json()).then(result=>{
-                dispatch(loadingFinish())
+                dispatch(loadingFinish(LOADING_FINISH))
                 if(result.access){
                     navigate("/"+LOGIN)
                 }else{
@@ -53,7 +54,7 @@ export const registerApi = (inputData,navigate)=>{
                 }
               })
         }catch(err){
-            dispatch(loadingFinish())
+            dispatch(loadingFinish(LOADING_FINISH))
         }
     }
 }

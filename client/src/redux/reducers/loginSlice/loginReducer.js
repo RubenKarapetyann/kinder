@@ -1,7 +1,8 @@
 import { CLEAR_ERROR, ERROR_LOG, LOADING_FINISH, LOADING_START } from "../../../constants/login-slice-constants"
 import { HOME } from "../../../constants/routes-constants"
+import { loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setUser } from "../userSlice/UserActions"
-import { errorSeter, loadingFinish, loadingStart } from "./loginActions"
+import { errorSeter } from "./loginActions"
 
 function loginReducer(state={ loading : false, error : false },action){
     switch (action.type){
@@ -33,7 +34,7 @@ function loginReducer(state={ loading : false, error : false },action){
 export const loginApi = (inputData,navigate)=>{
     return (dispatch)=>{
         try{
-            dispatch(loadingStart())
+            dispatch(loadingStart(LOADING_START))
             fetch("/login",{
                 method : 'POST',
                 headers : {
@@ -45,7 +46,7 @@ export const loginApi = (inputData,navigate)=>{
                     rememberMe : inputData.rememberMe
                 })
             }).then((res)=>res.json()).then(result=>{
-                dispatch(loadingFinish())
+                dispatch(loadingFinish(LOADING_FINISH))
                 if(result.access){
                     navigate("/"+HOME)
                     localStorage.setItem("jwtToken" , result.token)
@@ -55,7 +56,7 @@ export const loginApi = (inputData,navigate)=>{
                 }
             })
         }catch(err){
-            dispatch(loadingFinish())
+            dispatch(loadingFinish(LOADING_FINISH))
         }
     }
 }

@@ -1,6 +1,7 @@
 import { LOADING_FINISH, LOADING_START, POST_ACTIVE, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { loadingFinish, loadingStart, setHomePosts, activePostAction } from "./homeActions"
+import { loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { setHomePosts, activePostAction } from "./homeActions"
 
 function homeReducer(state={ loading : false, posts : [] },action){
     switch (action.type){
@@ -54,7 +55,7 @@ export const getHomePosts = (navigate)=>{
         const token = localStorage.getItem("jwtToken")
         if(token){
             try{
-                dispatch(loadingStart())
+                dispatch(loadingStart(LOADING_START))
                 fetch("/home",{
                     method : 'GET',
                     headers : {
@@ -62,7 +63,7 @@ export const getHomePosts = (navigate)=>{
                         "authorization" : "Bearer "+token
                     },
                 }).then((res)=>res.json()).then(result=>{
-                    dispatch(loadingFinish())
+                    dispatch(loadingFinish(LOADING_FINISH))
                     dispatch(setHomePosts(result.posts))
                 })
             }catch(err){

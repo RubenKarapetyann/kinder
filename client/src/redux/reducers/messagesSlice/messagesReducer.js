@@ -1,6 +1,7 @@
 import { LOADING_FINISH, LOADING_START, SET_MESSAGES_LIST } from "../../../constants/messages-slice-constants"
-import { loadingFinish, loadingStart, setMessagesList } from "./messagesActions"
+import { setMessagesList } from "./messagesActions"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
+import { loadingFinish, loadingStart } from "../../../utils/api-helper"
 function messagesReducer(state={ messages : [], loading : false }, action){
     switch(action.type){
         case LOADING_START:
@@ -27,7 +28,7 @@ export const getMessagesList = (navigate)=>{
     return (dispatch)=>{
         const token = localStorage.getItem("jwtToken")
         if(token){
-            dispatch(loadingStart())
+            dispatch(loadingStart(LOADING_START))
             try{
                 fetch("/messages",{
                     method : "GET",
@@ -39,7 +40,7 @@ export const getMessagesList = (navigate)=>{
                     if(result.access){
                         dispatch(setMessagesList(result.messagesList))
                     }
-                    dispatch(loadingFinish())
+                    dispatch(loadingFinish(LOADING_FINISH))
                 })
             }catch(err){
                 navigate("/"+HOME)

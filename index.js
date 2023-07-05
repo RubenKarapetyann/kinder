@@ -257,7 +257,6 @@ app.get(CHAT,passport.authenticate("jwt", {session : false}),(req,res)=>{
         }
     })
 
-    console.log(messages);
 
     res.send({
         access : true,

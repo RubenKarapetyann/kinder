@@ -15,9 +15,15 @@
         "messages" : [
             {
                 "text" : "barev",
-                "autherId" : "0.6145628391094977",
+                "autherId" : "0.8713018945867141",
                 "id" : "absibasdujasdi",
                 "sendDate" : 10
+            },
+            {
+                "text" : "sdfsdf",
+                "autherId" : "0.6145628391094977",
+                "id" : "gfbdrfgdrgdrfgdrf",
+                "sendDate" : 20
             }
         ]
     },

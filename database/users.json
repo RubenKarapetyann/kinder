@@ -69,5 +69,15 @@
       }
     ],
     "favorites": []
+  },
+  "0.20070158160560503": {
+    "userName": "Elina",
+    "email": "gk4@gmail.com",
+    "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
+    "password": "$2b$10$CkTYlefAFgfABhbYTg6iFOzX99JHEp80x7F3cudbdk85JHXQ9XaCC",
+    "id": 0.20070158160560503,
+    "posts": [],
+    "friends": [],
+    "favorites": []
   }
 }

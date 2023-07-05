@@ -20,7 +20,7 @@ function Messages(){
         <>
             {messages.map(message=>{
                 return(
-                    <Link to={message.chatId} key={message.lastMessage.messageId} className="link-without-styles">
+                    <Link to={message.chatId} key={message.lastMessage.id} className="link-without-styles">
                         <ProfileListItem 
                             userName={message.sender.userName} 
                             comment={message.lastMessage.message} 

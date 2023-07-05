@@ -1,7 +1,7 @@
 import { LOADING_FINISH, LOADING_START, SET_COMMENTS_LIST, SET_NEW_COMMENT } from "../../../constants/comments-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { getList, getToken, listSeter } from "../../../utils/api-helper"
-import { loadingFinish, loadingStart, setNewComment } from "./commentsActions"
+import { getList, getToken, listSeter, loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { setNewComment } from "./commentsActions"
 
 function commentsReducer(state={ loading : false, list : [] },action){
     switch (action.type){
@@ -38,7 +38,7 @@ export const sendComment = (navigate,comment,postId)=>{
     return (dispatch)=>{
         const token = localStorage.getItem("jwtToken")
         if(token){
-            dispatch(loadingStart())
+            dispatch(loadingStart(LOADING_START))
             try{
                 fetch("/comments",{
                     method : "POST",
@@ -54,7 +54,7 @@ export const sendComment = (navigate,comment,postId)=>{
                     if(result.access){
                         dispatch(setNewComment(result.comment))
                     }
-                    dispatch(loadingFinish())
+                    dispatch(loadingFinish(LOADING_FINISH))
                 })
             }catch(err){
                 navigate("/"+HOME)
