@@ -5,6 +5,7 @@ import passport from "passport"
 import passportJWT from "passport-jwt"
 import bcrypt from "bcrypt"
 import fs from "fs"
+import { NOTIFICATIONS_TYPES } from "./constants/notifications-constants.js"
 
 const app = express()
 const { Strategy:JwtStrategy, ExtractJwt } = passportJWT
@@ -274,7 +275,8 @@ app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=
         return {
             ...notification,
             avatarImg : currentUser.avatarImg,
-            userName : currentUser.userName 
+            userName : currentUser.userName ,
+            text : NOTIFICATIONS_TYPES.notification.type
         }
     })
 
