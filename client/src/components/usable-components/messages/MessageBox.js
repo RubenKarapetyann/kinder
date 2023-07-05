@@ -9,6 +9,7 @@ const MessageBox = ({ handle, type })=>{
     const navigate = useNavigate()
     const { id } = useParams()
 
+
     useEffect(()=>{
         dispatch(handle(navigate,id))
     },[])

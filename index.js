@@ -211,7 +211,7 @@ app.get(COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
     res.send({
         access : true,
-        commentsList : comments
+        list : comments
     })
 })
 
