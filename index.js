@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -54,7 +54,8 @@ app.post(REGISTER,async (req,res)=>{
                 id,
                 posts : [],
                 friends : [],
-                favorites : []
+                favorites : [],
+                notifications : []
             }
             users[id] = newUser
             fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
@@ -264,6 +265,24 @@ app.get(CHAT,passport.authenticate("jwt", {session : false}),(req,res)=>{
     })
 })
 
+app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const user = req.user
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
+    const notifications = user.notifications.map(notification=>{
+        const currentUser = users[notification.autherId]
+        return {
+            ...notification,
+            avatarImg : currentUser.avatarImg,
+            userName : currentUser.userName 
+        }
+    })
+
+
+    res.send({
+        access : true,
+        list : notifications
+    })
+})
 
 app.listen(process.env.PORT)

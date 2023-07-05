@@ -22,7 +22,15 @@
     ],
     "favorites": [
       "asjndasndangsidgsidfasn"
-    ]
+    ],
+    "notifcations" : [
+      {
+        "id" : "asdasnasfiasdasd",
+        "autherId" : 0.8713018945867141,
+        "date" : 10,
+        "type" : "like"
+    }
+  ]
   },
   "0.8713018945867141": {
     "userName": "Ruben",
@@ -43,7 +51,9 @@
     ],
     "favorites": [
       "asjndasndangsidgsidfasn"
-    ]
+    ],
+    "notifcations" : []
+
   },
   "0.5498439206038626": {
     "userName": "werwefsdf",
@@ -68,7 +78,9 @@
         "chatId": "asdfvgrfbrfrdvdrfbrdfb"
       }
     ],
-    "favorites": []
+    "favorites": [],
+    "notifcations" : []
+
   },
   "0.20070158160560503": {
     "userName": "Elina",
@@ -78,6 +90,8 @@
     "id": 0.20070158160560503,
     "posts": [],
     "friends": [],
-    "favorites": []
+    "favorites": [],
+    "notifcations" : []
+
   }
 }

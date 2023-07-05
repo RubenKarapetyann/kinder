@@ -6,7 +6,7 @@ import Title from "../../usable-components/more/Title"
 function Notifications(){
     return (
         <>
-            <Title text={"Today"}/>
+            <Title text={new Date().getTime()}/>
             <ProfileListItem hr={false} userName={"Ruben"} comment={"Nick send you friend request"}>
                 <DropDown list={FRIENDS_DROPDOWN}/>
             </ProfileListItem>
