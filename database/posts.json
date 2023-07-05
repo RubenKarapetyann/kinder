@@ -50,6 +50,18 @@
         "autherId": 0.6145628391094977,
         "likes": 0,
         "id": 0.5777184480164843
+      },
+      {
+        "text": "rgbrgbrfgbrfgb",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.2920260271717916
+      },
+      {
+        "text": "tuyn",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.31588902323521606
       }
     ]
   },
@@ -57,9 +69,9 @@
     "postDescription": "pasf",
     "id": "rdtrfyghjklredtfvghj",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 50,
+    "likes": 51,
     "likers": {
-      "0.6145628391094977": false
+      "0.6145628391094977": true
     },
     "publicDate": "45",
     "auther": {

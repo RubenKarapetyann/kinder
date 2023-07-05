@@ -23,14 +23,26 @@
     "favorites": [
       "asjndasndangsidgsidfasn"
     ],
-    "notifcations" : [
+    "notifications": [
       {
-        "id" : "asdasnasfiasdasd",
-        "autherId" : 0.8713018945867141,
-        "date" : 10,
-        "type" : "like"
-    }
-  ]
+        "id": "asdasnasfiasdasd",
+        "autherId": 0.8713018945867141,
+        "date": 10,
+        "type": "like"
+      },
+      {
+        "id": 0.12901053596891354,
+        "autherId": 0.6145628391094977,
+        "date": 1688588773894,
+        "type": "like"
+      },
+      {
+        "id": 0.14826263793252492,
+        "autherId": 0.6145628391094977,
+        "date": 1688589098213,
+        "type": "comment"
+      }
+    ]
   },
   "0.8713018945867141": {
     "userName": "Ruben",
@@ -52,8 +64,14 @@
     "favorites": [
       "asjndasndangsidgsidfasn"
     ],
-    "notifcations" : []
-
+    "notifications": [
+      {
+        "id": 0.2653581492488848,
+        "autherId": 0.6145628391094977,
+        "date": 1688588759024,
+        "type": "like"
+      }
+    ]
   },
   "0.5498439206038626": {
     "userName": "werwefsdf",
@@ -79,8 +97,7 @@
       }
     ],
     "favorites": [],
-    "notifcations" : []
-
+    "notifications": []
   },
   "0.20070158160560503": {
     "userName": "Elina",
@@ -91,7 +108,6 @@
     "posts": [],
     "friends": [],
     "favorites": [],
-    "notifcations" : []
-
+    "notifications": []
   }
 }

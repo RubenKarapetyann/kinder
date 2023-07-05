@@ -144,7 +144,7 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     const user = req.user
     const { postId, type } = req.body
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
-
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
     const post = posts[postId]
 
@@ -155,9 +155,14 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
         }else{
             post.likers[user.id] = true
             post.likes++
+            users[post.auther.id].notifications = [...users[post.auther.id].notifications, {
+                id : Math.random(),
+                autherId : user.id,
+                date : new Date().getTime(),
+                type : "like"
+            }]
         }
     }else{
-        const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
         const currentUser = users[user.id]
         const post = currentUser.favorites.find(val=>val === postId)
         if(post){
@@ -166,8 +171,8 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
             currentUser.favorites.push(postId)
         }
         users[user.id] = currentUser
-        fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
     }
+    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
     fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
     res.send({
         access : true,
@@ -198,7 +203,7 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
 app.get(COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const { id:postId } = req.params
-    const { id, friends  } = req.user
+    // const { id, friends  } = req.user
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
@@ -222,6 +227,7 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)
     const { id, avatarImg, userName } = req.user
     const { comment,postId } = req.body
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
     const newComment = {
         text: comment,
@@ -230,8 +236,16 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)
         id : Math.random()
     }
 
-    posts[postId].comments.push(newComment)
+    const post = posts[postId]
+    post.comments.push(newComment)
+    users[post.auther.id].notifications = [...users[post.auther.id].notifications, {
+        id : Math.random(),
+        autherId : id,
+        date : new Date().getTime(),
+        type : "comment"
+    }]
     fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
+    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
 
     res.send({
         access : true,
@@ -276,10 +290,9 @@ app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=
             ...notification,
             avatarImg : currentUser.avatarImg,
             userName : currentUser.userName ,
-            text : NOTIFICATIONS_TYPES.notification.type
+            text : NOTIFICATIONS_TYPES[notification.type]
         }
     })
-
 
     res.send({
         access : true,
