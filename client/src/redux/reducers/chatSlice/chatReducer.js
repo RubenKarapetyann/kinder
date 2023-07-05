@@ -1,4 +1,5 @@
-import { LOADING_START , LOADING_FINISH} from "../../../constants/chat-slice-constants"
+import { LOADING_START , LOADING_FINISH, SET_CHAT_LIST} from "../../../constants/chat-slice-constants"
+import { getList, listSeter, loadingFinish, loadingStart } from "../../../utils/api-helper"
 
 
 function chatReducer(state={ loading : false, list : [] },action){
@@ -13,9 +14,20 @@ function chatReducer(state={ loading : false, list : [] },action){
                 ...state,
                 loading : false
             }
+        case SET_CHAT_LIST:
+            return {
+                ...state,
+                list : action.payload.list
+            }
         default:
             return state
     }
 }
+
+export const getChatList = (navigate,id)=>{
+    return getList(navigate,"chat",id,listSeter,loadingStart,loadingFinish,SET_CHAT_LIST,LOADING_START,LOADING_FINISH)
+}
+
+
 
 export default chatReducer

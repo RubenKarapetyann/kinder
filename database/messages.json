@@ -14,9 +14,9 @@
         ],
         "messages" : [
             {
-                "message" : "barev",
+                "text" : "barev",
                 "autherId" : "0.6145628391094977",
-                "messageId" : "absibasdujasdi",
+                "id" : "absibasdujasdi",
                 "sendDate" : 10
             }
         ]
@@ -36,9 +36,9 @@
         ],
         "messages" : [
             {
-                "message" : "asdasd",
+                "text" : "asdasd",
                 "autherId" : "0.4864148468727828",
-                "messageId" : "asfvsdvsdfv",
+                "id" : "asfvsdvsdfv",
                 "sendDate" : 20
             }
         ]

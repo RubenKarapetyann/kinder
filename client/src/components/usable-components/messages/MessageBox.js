@@ -21,7 +21,7 @@ const MessageBox = ({ handle, type })=>{
             {list.map(item=>{
                 return <Message 
                             text={item.text}
-                            key={item.commentId}
+                            key={item.id}
                             likes={item.likes}
                             userName={item.userName}
                             avatarImg={item.avatarImg}

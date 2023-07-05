@@ -4,20 +4,20 @@ import { HOME, LOGIN } from "../constants/routes-constants"
 export const getToken = ()=>localStorage.getItem("jwtToken")
     
 
-export const getList = (navigate,route,id,listSeter,loadingStart,loadingFinish)=>{
+export const getList = (navigate,route,id,listSeter,loadingStart,loadingFinish,LIST_SET,LOADING_START,LOADING_FINISH)=>{
     return (dispatch)=>{
         const token = localStorage.getItem("jwtToken")
         if(token){
-            dispatch(loadingStart())
+            dispatch(loadingStart(LOADING_START))
             try{
                 fetch(`/${route}/`+id,{
                     method : "GET",
                     headers : getHeaders(token)
                 }).then(res=>res.json()).then(result=>{
                     if(result.access){
-                        dispatch(listSeter(result.list))
+                        dispatch(listSeter(LIST_SET,result.list))
                     }
-                    dispatch(loadingFinish())
+                    dispatch(loadingFinish(LOADING_FINISH))
                 })
             }catch(err){
                 navigate("/"+HOME)
@@ -38,5 +38,14 @@ export const loadingStart = (LOADING_START)=>{
 export const loadingFinish = (LOADING_FINISH)=>{
     return {
         type : LOADING_FINISH
+    }
+}
+
+export const listSeter = (type,list)=>{
+    return {
+        type,
+        payload : {
+            list
+        }
     }
 }

@@ -13,15 +13,6 @@ export const loadingFinish = ()=>{
 }
 
 
-export const setCommentsList = (commentsList)=>{
-    return {
-        type : SET_COMMENTS_LIST,
-        payload : {
-            commentsList
-        }
-    }
-}
-
 export const setNewComment = (comment)=>{
     return {
         type : SET_NEW_COMMENT,

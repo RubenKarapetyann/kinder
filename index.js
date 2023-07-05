@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -225,7 +225,7 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)
         text: comment,
         autherId: id,
         likes: 0,
-        commentId : Math.random()
+        id : Math.random()
     }
 
     posts[postId].comments.push(newComment)
@@ -240,6 +240,31 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)
         }
     })
 })
+
+
+
+app.get(CHAT,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const { id:chatId } = req.params
+    const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+
+    const messages = chat[chatId].messages.map(message=>{
+        const currentUser = users[message.autherId]
+        return {
+            ...message,
+            avatarImg : currentUser.avatarImg,
+            userName : currentUser.userName,
+        }
+    })
+
+    console.log(messages);
+
+    res.send({
+        access : true,
+        list : messages
+    })
+})
+
 
 
 app.listen(process.env.PORT)

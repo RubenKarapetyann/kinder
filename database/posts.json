@@ -16,112 +16,28 @@
     },
     "comments": [
       {
-        "text": "asdasd",
-        "autherId": "0.8713018945867141",
-        "likes": 6181,
-        "commentId": "asdasdasdasd"
+        "text": "asdasdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.3519753179813705
       },
       {
-        "text": "Tuyn",
-        "autherId": "0.4864148468727828",
-        "likes": 6181,
-        "commentId": "sedfwaedfwe"
+        "text": "asdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.2139045885345563
       },
       {
         "text": "Ruben",
         "autherId": 0.6145628391094977,
         "likes": 0,
-        "commentId": 0.136580036071982
-      },
-      {
-        "text": "Rubenasdasd",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.8072645674582939
-      },
-      {
-        "text": "asdsdfrfewe",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.31379836303134745
+        "id": 0.990531798795325
       },
       {
         "text": "asdasd",
         "autherId": 0.6145628391094977,
         "likes": 0,
-        "commentId": 0.8905829821221132
-      },
-      {
-        "text": "ewwed",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.6303672621541858
-      },
-      {
-        "text": "qwdqwd",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.37822379597668054
-      },
-      {
-        "text": "asdasd",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.3905802264191598
-      },
-      {
-        "text": "asdasd",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.14254556485908343
-      },
-      {
-        "text": "Ruben you are programmer",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.6056566154266922
-      },
-      {
-        "text": "hahahahahahaha",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.08856609382281344
-      },
-      {
-        "text": "aaaaa",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.5238816677308558
-      },
-      {
-        "text": "Ruben",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.9680890377138389
-      },
-      {
-        "text": "ahahahaha",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.8920483404714232
-      },
-      {
-        "text": "fgggg",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.7688251128076227
-      },
-      {
-        "text": "afafafafafaf",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.22288983574756238
-      },
-      {
-        "text": "hahahahahah",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.5526029572600994
+        "id": 0.33832793333828404
       }
     ]
   },
@@ -144,73 +60,25 @@
         "text": "safasfafasfasf",
         "autherId": "0.8713018945867141",
         "likes": 6181,
-        "commentId": "rthrthrthrht"
-      },
-      {
-        "text": "asdasdasd",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.12492433137498704
-      },
-      {
-        "text": "tuyn nkara",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.2758340638069938
-      },
-      {
-        "text": "shat lavna",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.29571411735125386
-      },
-      {
-        "text": "asdasdasd",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.11852642926018087
-      },
-      {
-        "text": "sdfsdfsdf",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.9236488602703801
-      },
-      {
-        "text": "asdasdasd",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.9962360039488249
-      },
-      {
-        "text": "asdasdasd",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.05076348171222622
-      },
-      {
-        "text": "i cho?",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.1862030465268243
-      },
-      {
-        "text": "asdasdasd",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.3452797012710973
-      },
-      {
-        "text": "dfefbfcbdgnrfgndrfbdfgtb",
-        "autherId": 0.6145628391094977,
-        "likes": 0,
-        "commentId": 0.2252942217288212
+        "id": "rthrthrthrht"
       },
       {
         "text": "bbbbbbbbbbbbbbbbbbbbb",
         "autherId": 0.6145628391094977,
         "likes": 0,
-        "commentId": 0.741224661263024
+        "id": 0.741224661263024
+      },
+      {
+        "text": "asdasdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.12042525799319526
+      },
+      {
+        "text": "asdasdasdasdasdasd",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.48952350082333496
       }
     ]
   }
