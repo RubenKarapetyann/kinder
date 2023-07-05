@@ -27,3 +27,16 @@ export const getList = (navigate,route,id,listSeter,loadingStart,loadingFinish)=
         }
     }
 }
+
+
+export const loadingStart = (LOADING_START)=>{
+    return {
+        type : LOADING_START
+    }
+}
+
+export const loadingFinish = (LOADING_FINISH)=>{
+    return {
+        type : LOADING_FINISH
+    }
+}
