@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useRef } from "react"
 import { useNavigate } from "react-router"
 import { getNotifications } from "../../../redux/reducers/notificationsSlice/notificationsReducer"
+import { MESSAGES, PROFILE } from "../../../constants/routes-constants"
 
 function Notifications(){
     const notifications  = useSelector(store=>store.notifications.list)
@@ -25,7 +26,13 @@ function Notifications(){
                     prevDate : prevDate.current.currentDate,
                     currentDate,
                 }
-                
+                // const NOTIFICATIONS_DROPDOWN = [
+                //     {
+                //         id : Math.random(),
+                //         displayName : "Profile",
+                //         routeName : PROFILE+"/"+notification.autherId
+                //     }
+                // ]  add there dropdown if you want
                 return (
                     <div key={notification.id}>
                         { prevDate.current.prevDate !== currentDate ? <>
@@ -37,7 +44,7 @@ function Notifications(){
                             userName={notification.userName} 
                             comment={notification.text}
                         >
-                            <DropDown list={FRIENDS_DROPDOWN}/>
+                            {/* <DropDown list={NOTIFICATIONS_DROPDOWN}/> */}
                         </ProfileListItem>
                     </div>
                 )
