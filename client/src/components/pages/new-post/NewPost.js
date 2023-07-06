@@ -11,7 +11,7 @@ function NewPost(){
     return(
         <div className="posting-container">
             <div className="mb-3">
-                <label for="formFile" className="form-label"></label>
+                <label htmlFor="formFile" className="form-label"></label>
                 <input className="form-control" type="file" id="formFile" ref={fileLoaderRef}/>
             </div>
             <FormInput name={"Description"} type={"text"} value={value} changeHandle={changeHandle}/>

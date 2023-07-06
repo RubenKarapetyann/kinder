@@ -6,6 +6,8 @@ import passportJWT from "passport-jwt"
 import bcrypt from "bcrypt"
 import fs from "fs"
 import { NOTIFICATIONS_TYPES } from "./constants/notifications-constants.js"
+import multer from "multer"
+const upload = multer({ dest : "database/images/" })
 
 const app = express()
 const { Strategy:JwtStrategy, ExtractJwt } = passportJWT
