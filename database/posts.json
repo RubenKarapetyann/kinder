@@ -85,7 +85,127 @@
       "userName": "Ruben",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
+    "comments": []
+  },
+  "0.22165746943960563": {
+    "postDescription": "hahahah",
+    "id": 0.22165746943960563,
+    "img": "post.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688684669793,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
+  },
+  "0.7840082418684835": {
+    "postDescription": "bhahahahahahahahahah",
+    "id": 0.7840082418684835,
+    "img": "post.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688684811683,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
+  },
+  "0.45362862468430354": {
+    "postDescription": "like pls",
+    "id": 0.45362862468430354,
+    "img": "post.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688684864269,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
+  },
+  "0.986902839647966": {
+    "postDescription": "hello",
+    "id": 0.986902839647966,
+    "img": "post.jpg",
+    "likes": 1,
+    "likers": {
+      "0.6145628391094977": true
+    },
+    "publicDate": 1688685440262,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
     "comments": [
+      {
+        "text": "adad",
+        "autherId": 0.6145628391094977,
+        "likes": 0,
+        "id": 0.13308221013499777
+      }
     ]
+  },
+  "0.9014035860925647": {
+    "postDescription": "bbbb",
+    "id": 0.9014035860925647,
+    "img": "post.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688685567685,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
+  },
+  "0.9024997057468311": {
+    "postDescription": "bbbbbb",
+    "id": 0.9024997057468311,
+    "img": "post.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688685646077,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
+  },
+  "0.19459817818402114": {
+    "postDescription": "car",
+    "id": 0.19459817818402114,
+    "img": "post.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688685748741,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
+  },
+  "0.1949238494806922": {
+    "postDescription": "ahahah",
+    "id": 0.1949238494806922,
+    "img": "post.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688685844569,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
   }
 }

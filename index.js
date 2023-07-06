@@ -15,7 +15,7 @@ const storageConfig = multer.diskStorage({
         cb(null, "./database/images");
     },
     filename: (req, file, cb) =>{
-        cb(null, file.originalname);
+        cb(null, `${Math.random()}_${new Date().getTime()}.jpg`);
     }
 });
 
@@ -129,7 +129,7 @@ app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
             liked : posts[post.postId].likers[user.id],
             publicDate : posts[post.postId].publicDate,
             auther : posts[post.postId].auther,
-            favorite : !!user.favorites.find(val=>val.id===post.id)
+            favorite : !!user.favorites.find(val=>val===post.postId)
     })})
 
     const friendsPost = user.friends.reduce((state,friend)=>{
@@ -317,8 +317,32 @@ app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=
 
 
 app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single("file"),(req,res)=>{
-    console.log(req.body,req.file)
-    
+    const user = req.user
+
+    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+
+
+    const postId = Math.random()
+    posts[postId] = {
+        postDescription: req.body.description,
+        id: postId,
+        img: req.file.originalname,
+        likes: 0,
+        likers: {},
+        publicDate: new Date().getTime(),
+        auther: {
+            id: user.id,
+            userName : user.userName,
+            avatarImg : user.avatarImg
+        },
+        comments: []  
+    }
+    users[user.id].posts.push({postId})
+
+    fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
+    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+
     res.send({
         access : true
     })
