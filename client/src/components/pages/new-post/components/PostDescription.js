@@ -25,11 +25,11 @@ const PostDescription = ({ children, file })=>{
             setLoading(true)
             fetch("/newpost",{
                 headers : {
-                    'Content-Type': 'multipart/form-data',
+                    // 'Content-Type': 'multipart/form-data',
                     "authorization" : "Bearer "+token
                 },
                 method : "POST",
-                body : formData
+                body : formData.current
             }).then(res=>res.json()).then(result=>{
                 if(result.access){
                     navigate("/"+HOME)

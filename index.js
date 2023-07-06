@@ -7,7 +7,20 @@ import bcrypt from "bcrypt"
 import fs from "fs"
 import { NOTIFICATIONS_TYPES } from "./constants/notifications-constants.js"
 import multer from "multer"
-const upload = multer({ dest : "database/images/" })
+
+
+
+const storageConfig = multer.diskStorage({
+    destination: (req, file, cb) =>{
+        cb(null, "./database/images");
+    },
+    filename: (req, file, cb) =>{
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage : storageConfig })
+
 
 const app = express()
 const { Strategy:JwtStrategy, ExtractJwt } = passportJWT
@@ -303,8 +316,9 @@ app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=
 })
 
 
-app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single("post.jpg"),(req,res)=>{
-    console.log(req.user,req.body)
+app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single("file"),(req,res)=>{
+    console.log(req.body,req.file)
+    
     res.send({
         access : true
     })

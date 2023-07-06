@@ -16,6 +16,7 @@ function NewPost(){
                 className="form-control" 
                 type="file" 
                 id="formFile" 
+                name="file"
             />
             {(handle,loading)=><button className="btn btn-primary" onClick={handle} disabled={loading}>Post</button>}
         </PostDescription>
