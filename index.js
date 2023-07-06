@@ -303,8 +303,8 @@ app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=
 })
 
 
-app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single("postImg"),(req,res)=>{
-
+app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single("post.jpg"),(req,res)=>{
+    console.log(req.user,req.body)
     res.send({
         access : true
     })
