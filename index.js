@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -301,5 +301,14 @@ app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=
         list : notifications
     })
 })
+
+
+app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single("postImg"),(req,res)=>{
+
+    res.send({
+        access : true
+    })
+})
+
 
 app.listen(process.env.PORT)
