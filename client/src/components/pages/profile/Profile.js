@@ -16,7 +16,7 @@ function Profile(){
     dispatch(getProfile(navigate,id))
   },[])
 
-  // console.log(profile);
+
 
   if(loading){return<p>loading...</p>}
   return(

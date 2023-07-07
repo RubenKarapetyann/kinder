@@ -42,6 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(express.static("./database/images"))
+app.use('/profile', express.static('./database/images'));
 
 passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
@@ -355,8 +356,10 @@ app.get(PROFILE,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
     const { id } = req.params
+    const user = req.user
 
 
+    const isFriend = user.friends.find(friend=>friend.friendId === id) || id === user.id
     const currentUser = users[id]
     const profile = {
         auther : {
@@ -367,10 +370,10 @@ app.get(PROFILE,passport.authenticate("jwt", {session : false}),(req,res)=>{
             friendsCount : currentUser.friends.length,
             postsCount : currentUser.posts.length
         },
-        posts : currentUser.posts.map(post=>({
+        posts : isFriend ? currentUser.posts.map(post=>({
             postId : post.postId,
             img : posts[post.postId].img
-        }))
+        })) : []
     }
 
     res.send({

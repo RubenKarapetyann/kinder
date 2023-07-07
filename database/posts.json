@@ -251,5 +251,21 @@
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     "comments": []
+  },
+  "0.8217597629345303": {
+    "postDescription": "joystick",
+    "id": 0.8217597629345303,
+    "img": "0.29241893472565117_1688768398603.jpg",
+    "likes": 1,
+    "likers": {
+      "0.6145628391094977": true
+    },
+    "publicDate": 1688768398616,
+    "auther": {
+      "id": "0.6145628391094977",
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
   }
 }
