@@ -351,7 +351,7 @@ app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single(
 })
 
 
-app.listen(PROFILE,passport.authenticate("jwt", {session : false}),(req,res)=>{
+app.get(PROFILE,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
     const { id } = req.params
