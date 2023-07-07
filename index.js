@@ -329,7 +329,7 @@ app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single(
     posts[postId] = {
         postDescription: req.body.description,
         id: postId,
-        img: req.file.originalname,
+        img: req.file.filename,
         likes: 0,
         likers: {},
         publicDate: new Date().getTime(),

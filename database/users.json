@@ -2,7 +2,7 @@
   "0.6145628391094977": {
     "userName": "Elina",
     "email": "gkarapetyan74@gmail.com",
-    "description" : "hello i am Ruben",
+    "description": "hello i am Ruben",
     "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
     "password": "$2b$10$GWFjgu2v1TdlC0t6DB4iducbu2lWhjswzrQQ52Dd0lcCsf5XTzolm",
     "id": 0.6145628391094977,
@@ -11,22 +11,7 @@
         "postId": "asjndasndangsidgsidfasn"
       },
       {
-        "postId": 0.45362862468430354
-      },
-      {
-        "postId": 0.986902839647966
-      },
-      {
-        "postId": 0.9014035860925647
-      },
-      {
-        "postId": 0.9024997057468311
-      },
-      {
-        "postId": 0.19459817818402114
-      },
-      {
-        "postId": 0.1949238494806922
+        "postId": 0.21268094472632537
       }
     ],
     "friends": [
@@ -41,7 +26,8 @@
     ],
     "favorites": [
       0.45362862468430354,
-      0.986902839647966
+      0.986902839647966,
+      0.21268094472632537
     ],
     "notifications": [
       {
@@ -79,6 +65,12 @@
         "autherId": 0.6145628391094977,
         "date": 1688685470153,
         "type": "comment"
+      },
+      {
+        "id": 0.883923074877988,
+        "autherId": 0.6145628391094977,
+        "date": 1688763450587,
+        "type": "like"
       }
     ]
   },

@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import { getProfile } from "../../../redux/reducers/profileSlice/profileReducer"
 
 function Profile(){
-  const { profile, loading } = useSelector(store=>store.profile)
+  const loading = useSelector(store=>store.profile.loading)
   const { id } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()

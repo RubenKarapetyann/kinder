@@ -11,8 +11,6 @@ function Home(){
     const navigate = useNavigate()
     const { loading, posts } = useSelector(store=>store.home)
 
-    console.log(posts);
-
 
     useEffect(()=>{
         dispatch(getHomePosts(navigate))

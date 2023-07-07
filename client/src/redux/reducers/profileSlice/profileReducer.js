@@ -3,7 +3,7 @@ import { HOME, LOGIN } from "../../../constants/routes-constants"
 import { loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setProfile } from "./profileActions"
 
-function profileReducer(state={ loading : false, profile : {} }, action){
+function profileReducer(state={ loading : false, profile : {auther : {}, posts : []} }, action){
     switch(action.type){
         case LOADING_START:
             return {

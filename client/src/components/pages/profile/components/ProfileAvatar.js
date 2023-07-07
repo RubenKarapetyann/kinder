@@ -1,8 +1,8 @@
-const ProfileAvatar = ()=>{
+const ProfileAvatar = ({ avatarImg })=>{
     return (
         <div className="profile-avatar">
             <img 
-                    src="https://ionicframework.com/docs/img/demos/avatar.svg" 
+                    src={avatarImg}
                     alt="mdo" 
                     width={100} 
                     height={100} 

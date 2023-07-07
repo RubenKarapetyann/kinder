@@ -207,5 +207,49 @@
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     "comments": []
+  },
+  "0.7016423932105864": {
+    "postDescription": "avto",
+    "id": 0.7016423932105864,
+    "img": "post.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688763091482,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
+  },
+  "0.08286938467703431": {
+    "postDescription": "vbnm",
+    "id": 0.08286938467703431,
+    "img": "post.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688763337702,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
+  },
+  "0.21268094472632537": {
+    "postDescription": "bhahahahahahhaah",
+    "id": 0.21268094472632537,
+    "img": "0.07360515610167262_1688763443690.jpg",
+    "likes": 1,
+    "likers": {
+      "0.6145628391094977": true
+    },
+    "publicDate": 1688763443698,
+    "auther": {
+      "id": 0.6145628391094977,
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
   }
 }
