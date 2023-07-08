@@ -9,6 +9,7 @@ const DropDownItemList = ({ list })=>{
                     name={item.displayName}
                     hr={item.hr}
                     key={item.id}
+                    icon={item.icon}
                 />
             })}
         </ul>

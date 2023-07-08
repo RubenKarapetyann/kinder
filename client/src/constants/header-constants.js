@@ -3,6 +3,7 @@ import friendsIcon from "../images/tabs/friends.svg"
 import homeIcon from "../images/tabs/home.svg"
 import notificationsIcon from "../images/tabs/notifications.svg"
 import messagesIcon from "../images/tabs/messages.svg"
+import { FaCog, FaPlus, FaSignOutAlt, FaUser } from "react-icons/fa"
 
 export const HEADER_ITEMS = [
     {
@@ -35,17 +36,20 @@ export const HEADER_DROPDOWN = [
     {
         id : Math.random(),
         displayName : "New Post",
-        routeName : NEW_POST
+        routeName : NEW_POST,
+        icon : <FaPlus/>
     },
     {
         id : Math.random(),
         displayName : "Settings",
-        routeName : SETTINGS
+        routeName : SETTINGS,
+        icon : <FaCog/>
     },
     {
         id : Math.random(),
         displayName : "Profile",
-        routeName : PROFILE
+        routeName : PROFILE,
+        icon : <FaUser/>
     },
     {
         id : Math.random(),
@@ -54,7 +58,8 @@ export const HEADER_DROPDOWN = [
     {
         id : Math.random(),
         displayName : "Sign out",
-        routeName : LOG_OUT
+        routeName : LOG_OUT,
+        icon : <FaSignOutAlt/>
     },
 
 ]
