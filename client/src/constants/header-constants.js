@@ -63,3 +63,5 @@ export const HEADER_DROPDOWN = [
     },
 
 ]
+
+export const NEED_SEARCH = [FRIENDS, MESSAGES]
