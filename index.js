@@ -403,4 +403,13 @@ app.get(FRIENDS,passport.authenticate("jwt", {session : false}),(req,res)=>{
     })
 })
 
+app.delete(FRIENDS+"/:id",passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const { id } = req.params
+
+
+    res.send({
+        access : true
+    })
+})
+
 app.listen(process.env.PORT)

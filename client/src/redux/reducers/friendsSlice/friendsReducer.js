@@ -1,5 +1,6 @@
 import { getHeaders } from "../../../constants/api-constants"
 import { LOADING_START, LOADING_FINISH, SET_FRIENDS_LIST, DELETE_FRIEND } from "../../../constants/friends-slice-constants"
+import { HOME, LOGIN } from "../../../constants/routes-constants"
 import { getList, listSeter, loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { deleteFriend } from "./friendsActions"
 
@@ -36,9 +37,27 @@ export const getFriends = (navigate)=>{
     return getList(navigate,"friends","",listSeter,loadingStart,loadingFinish,SET_FRIENDS_LIST,LOADING_START,LOADING_FINISH)
 }
 
-export const deleteFriendById = (id)=>{
-    console.log(id)
-
+export const deleteFriendById = (navigate,id)=>{
+    return (dispatch)=>{
+        const token = localStorage.getItem("jwtToken")
+        if(token){
+            dispatch(loadingStart(LOADING_START))
+            try{
+                fetch("/friends/"+id,{
+                    method : "DELETE",
+                    headers : getHeaders(token)
+                }).then(res=>res.json()).then(result=>{
+                    // if(result.access){
+                    // }
+                    dispatch(loadingFinish(LOADING_FINISH))
+                })
+            }catch(err){
+                navigate("/"+HOME)
+            }
+        }else{
+            navigate("/"+LOGIN)
+        }
+    }
 }
 
 export default friendsReducer
