@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { getFriends } from "../../../redux/reducers/friendsSlice/friendsReducer"
 import { useNavigate } from "react-router"
 import Friend from "./components/Friend"
+import AddNewFriendBtn from "./components/AddNewFriendBtn"
+
 
 function Friends(){
     const { loading, list } = useSelector(store=>store.friends)
@@ -26,7 +28,7 @@ function Friends(){
                             chatId={friend.chatId}
                         />
             })}
-            
+            <AddNewFriendBtn/>
         </>
     )
 }

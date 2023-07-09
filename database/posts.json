@@ -75,9 +75,9 @@
     "postDescription": "pasf",
     "id": "rdtrfyghjklredtfvghj",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 51,
+    "likes": 50,
     "likers": {
-      "0.6145628391094977": true
+      "0.6145628391094977": false
     },
     "publicDate": "45",
     "auther": {
