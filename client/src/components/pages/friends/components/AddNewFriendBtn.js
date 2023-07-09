@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom"
 import "../css/Friends.css"
 import { FaUserPlus } from "react-icons/fa"
+import { ADD_FRIEND } from "../../../../constants/routes-constants"
 
 
 const AddNewFriendBtn =()=>{
     return(
-        <div className="add-new-friend-btn"><FaUserPlus/></div>
+        <Link className="add-new-friend-btn link-without-styles" to={ADD_FRIEND}><FaUserPlus/></Link>
     )
 }
 export default AddNewFriendBtn
