@@ -11,6 +11,7 @@ import notificationsReducer from "../reducers/notificationsSlice/notificationsRe
 import profileReducer from "../reducers/profileSlice/profileReducer"
 import friendsReducer from "../reducers/friendsSlice/friendsReducer"
 import addFriendReducer from "../reducers/addFriendSlice/addFriendReducer"
+import postReducer from "../reducers/postSlice/postReducer"
 
 
 
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
     notifications : notificationsReducer,
     profile : profileReducer,
     friends : friendsReducer,
-    addfriend : addFriendReducer
+    addfriend : addFriendReducer,
+    post : postReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
