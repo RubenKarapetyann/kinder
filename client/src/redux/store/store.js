@@ -9,6 +9,7 @@ import commentsReducer from "../reducers/commentsSlice/commentsReducer"
 import chatReducer from "../reducers/chatSlice/chatReducer"
 import notificationsReducer from "../reducers/notificationsSlice/notificationsReducer"
 import profileReducer from "../reducers/profileSlice/profileReducer"
+import friendsReducer from "../reducers/friendsSlice/friendsReducer"
 
 
 
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     comments : commentsReducer,
     chat : chatReducer,
     notifications : notificationsReducer,
-    profile : profileReducer
+    profile : profileReducer,
+    friends : friendsReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
