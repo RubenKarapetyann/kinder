@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS, POST } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -421,6 +421,29 @@ app.delete(FRIENDS+"/:id",passport.authenticate("jwt", {session : false}),(req,r
 
     res.send({
         access : true
+    })
+})
+
+app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const { id } = req.params
+    const user = req.user
+    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    const currentPost = posts[id]
+
+    const post = {
+        postDescription : currentPost.postDescription, 
+        id : currentPost.id,
+        img : currentPost.img,
+        likes : currentPost.likes,
+        liked : currentPost.likers[user.id],
+        publicDate : currentPost.publicDate,
+        auther : currentPost.auther,
+        favorite : !!user.favorites.find(val=>val===post.postId)
+    }
+
+    res.send({
+        access : true,
+        post
     })
 })
 
