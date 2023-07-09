@@ -438,7 +438,7 @@ app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
         liked : currentPost.likers[user.id],
         publicDate : currentPost.publicDate,
         auther : currentPost.auther,
-        favorite : !!user.favorites.find(val=>val===post.postId)
+        favorite : !!user.favorites.find(val=>val===currentPost.postId)
     }
 
     res.send({
