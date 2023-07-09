@@ -5,7 +5,7 @@ import SearchDecoration from "./components/SearchDecoration"
 import "./css/AddFriend.css"
 
 function AddFriend(){
-    const { list, loading } = useSelector(store=>store.addFriend)
+    const { list, loading } = useSelector(store=>store.addfriend)
 
     useEffect(()=>{
 

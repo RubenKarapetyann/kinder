@@ -1,4 +1,4 @@
-import { HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, SETTINGS, PROFILE, LOG_OUT } from "../constants/routes-constants"
+import { HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, SETTINGS, PROFILE, LOG_OUT, ADD_FRIEND } from "../constants/routes-constants"
 import friendsIcon from "../images/tabs/friends.svg"
 import homeIcon from "../images/tabs/home.svg"
 import notificationsIcon from "../images/tabs/notifications.svg"
@@ -64,4 +64,4 @@ export const HEADER_DROPDOWN = [
 
 ]
 
-export const NEED_SEARCH = [FRIENDS, MESSAGES]
+export const NEED_SEARCH = [FRIENDS, MESSAGES, ADD_FRIEND]

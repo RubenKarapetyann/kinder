@@ -26,7 +26,7 @@ const rootReducer = combineReducers({
     notifications : notificationsReducer,
     profile : profileReducer,
     friends : friendsReducer,
-    addFriend : addFriendReducer
+    addfriend : addFriendReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
