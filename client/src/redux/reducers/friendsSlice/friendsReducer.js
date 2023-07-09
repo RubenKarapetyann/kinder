@@ -1,4 +1,4 @@
-import { LOADING_START, LOADING_FINISH, SET_FRIENDS_LIST } from "../../../constants/friends-slice-constants"
+import { LOADING_START, LOADING_FINISH, SET_FRIENDS_LIST, DELETE_FRIEND } from "../../../constants/friends-slice-constants"
 import { getList, listSeter, loadingFinish, loadingStart } from "../../../utils/api-helper"
 
 
@@ -18,6 +18,11 @@ function friendsReducer(state={ loading : false, list : [] },action){
             return {
                 ...state,
                 list : action.payload.list
+            }
+        case DELETE_FRIEND:
+            return {
+                ...state,
+                list : state.list.filter(item=>item.id!==action.payload.id)
             }
         default:
             return state
