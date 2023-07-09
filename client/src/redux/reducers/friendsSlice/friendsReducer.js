@@ -1,4 +1,5 @@
-import { LOADING_START, LOADING_FINISH } from "../../../constants/friends-slice-constants"
+import { LOADING_START, LOADING_FINISH, SET_FRIENDS_LIST } from "../../../constants/friends-slice-constants"
+import { getList, listSeter, loadingFinish, loadingStart } from "../../../utils/api-helper"
 
 
 function friendsReducer(state={ loading : false, list : [] },action){
@@ -13,9 +14,21 @@ function friendsReducer(state={ loading : false, list : [] },action){
                 ...state,
                 loading : false
             }
+        case SET_FRIENDS_LIST:
+            return {
+                ...state,
+                list : action.payload.list
+            }
         default:
             return state
     }
 }
+
+
+export const getFriends = (navigate)=>{
+    return getList(navigate,"friends","",listSeter,loadingStart,loadingFinish,SET_FRIENDS_LIST,LOADING_START,LOADING_FINISH)
+}
+
+
 
 export default friendsReducer
