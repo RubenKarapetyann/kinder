@@ -1,10 +1,8 @@
 import { useEffect } from "react"
-import { FRIENDS_DROPDOWN } from "../../../constants/friends-constants"
-import DropDown from "../../usable-components/dropdown/DropDown"
-import ProfileListItem from "../../usable-components/profile/ProfileListItem"
 import { useDispatch, useSelector } from "react-redux"
 import { getFriends } from "../../../redux/reducers/friendsSlice/friendsReducer"
 import { useNavigate } from "react-router"
+import Friend from "./components/Friend"
 
 function Friends(){
     const { loading, list } = useSelector(store=>store.friends)
@@ -20,11 +18,12 @@ function Friends(){
     return (
         <>
             {list.map(friend=>{
-                return (
-                    <ProfileListItem userName={"Ruben"}>
-                        <DropDown list={FRIENDS_DROPDOWN}/>
-                    </ProfileListItem>
-                )
+                return <Friend 
+                            userName={friend.userName}
+                            avatarImg={friend.avatarImg}
+                            key={friend.id}
+                            id={friend.id}
+                        />
             })}
             
         </>
