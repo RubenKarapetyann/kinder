@@ -1,5 +1,5 @@
 import { FaPaperPlane, FaTrash, FaUser } from "react-icons/fa"
-import { PROFILE, MESSAGES } from "./routes-constants"
+import { MESSAGES } from "./routes-constants"
 
 export const FRIENDS_DROPDOWN = (id,chatId,handle,navigate,dispatch)=>([
     {

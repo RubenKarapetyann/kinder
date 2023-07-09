@@ -47,8 +47,9 @@ export const deleteFriendById = (navigate,id)=>{
                     method : "DELETE",
                     headers : getHeaders(token)
                 }).then(res=>res.json()).then(result=>{
-                    // if(result.access){
-                    // }
+                    if(result.access){
+                        dispatch(deleteFriend(id))
+                    }
                     dispatch(loadingFinish(LOADING_FINISH))
                 })
             }catch(err){
