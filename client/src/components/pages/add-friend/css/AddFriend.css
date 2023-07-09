@@ -1,0 +1,18 @@
+.search-decoration-container{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+}
+
+.search-decoration-icon{
+    font-size: 130px;
+}
+
+.search-decoration-text{
+    font-size: 40px;
+    text-align: center;
+}

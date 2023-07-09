@@ -1,6 +1,8 @@
 import { useEffect } from "react"
 import Friend from "./components/Friend"
 import { useSelector } from "react-redux"
+import SearchDecoration from "./components/SearchDecoration"
+import "./css/AddFriend.css"
 
 function AddFriend(){
     const { list, loading } = useSelector(store=>store.addFriend)
@@ -13,9 +15,14 @@ function AddFriend(){
 
     if(loading){return<p>loading...</p>}
     return (
-        <p>
-            <Friend userName={"Ruben"}/>
-        </p>
+        <>
+            {!list.length && <SearchDecoration/>}
+            {list.map(user=>{
+                return <Friend
+                    userName={user.userName}
+                />
+            })}
+        </>
     )
 }
 
