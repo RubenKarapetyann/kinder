@@ -23,6 +23,7 @@ function Friends(){
                             avatarImg={friend.avatarImg}
                             key={friend.id}
                             id={friend.id}
+                            chatId={friend.chatId}
                         />
             })}
             

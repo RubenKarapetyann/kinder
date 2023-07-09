@@ -1,17 +1,17 @@
 import { FaPaperPlane, FaTrash, FaUser } from "react-icons/fa"
 import { PROFILE, MESSAGES } from "./routes-constants"
 
-export const FRIENDS_DROPDOWN = [
+export const FRIENDS_DROPDOWN = (id,chatId)=>([
     {
         id : Math.random(),
         displayName : "Message",
-        routeName : PROFILE,
+        routeName : `/${MESSAGES}/${chatId}`,
         icon : <FaPaperPlane/>
     },
     {
         id : Math.random(),
         displayName : "Profile",
-        routeName : MESSAGES,
+        routeName : `/profile/${id}`,
         icon : <FaUser/>
     },
     {
@@ -24,4 +24,4 @@ export const FRIENDS_DROPDOWN = [
         routeName : "",
         icon : <FaTrash/>
     },
-]
+])

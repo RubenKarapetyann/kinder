@@ -392,7 +392,8 @@ app.get(FRIENDS,passport.authenticate("jwt", {session : false}),(req,res)=>{
         return ({
             id : friend.friendId,
             avatarImg : currentFriend.avatarImg,
-            userName : currentFriend.userName
+            userName : currentFriend.userName,
+            chatId : friend.chatId
         })
     })
 
