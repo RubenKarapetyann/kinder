@@ -43,6 +43,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(express.static("./database/images"))
 app.use('/profile', express.static('./database/images'));
+app.use('/post', express.static('./database/images'));
 
 passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
