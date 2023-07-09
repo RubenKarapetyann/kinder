@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import Friend from "./components/Friend"
 
 function AddFriend(){
 
@@ -10,7 +11,7 @@ function AddFriend(){
 
     return (
         <p>
-            add friends
+            <Friend userName={"Ruben"}/>
         </p>
     )
 }
