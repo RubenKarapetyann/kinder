@@ -1,7 +1,15 @@
+import { useEffect } from "react"
+import { useParams } from "react-router"
 
 function Post (){
+    const { id } = useParams()
+
+    useEffect(()=>{
+
+    },[])
+
     return (
-        <>post</>
+        <>{id}</>
     )
 }
 
