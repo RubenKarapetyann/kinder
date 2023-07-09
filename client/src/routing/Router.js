@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from "react-router"
-import { LOGIN, HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, PROFILE, SETTINGS, LOG_OUT, REGISTER, CHAT, COMMENTS, ADD_FRIEND } from "../constants/routes-constants"
+import { LOGIN, HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, PROFILE, SETTINGS, LOG_OUT, REGISTER, CHAT, COMMENTS, ADD_FRIEND, POST } from "../constants/routes-constants"
 import { lazy } from "react"
 import Header from "../components/header/Header"
 import { useSelector } from "react-redux"
@@ -16,6 +16,7 @@ const Profile = lazy(()=>import("../components/pages/profile/Profile"))
 const Chat = lazy(()=>import("../components/pages/chat/Chat"))
 const Comments = lazy(()=>import("../components/pages/comments/Comments"))
 const AddFriend = lazy(()=>import("../components/pages/add-friend/AddFriend"))
+const Post = lazy(()=>import("../components/pages/post/Post"))
 
 //ete voroshes reduxov anes headery tar app.js
 function Router(){
@@ -42,6 +43,7 @@ function Router(){
                     <Route path={CHAT} element={<Chat/>}/>
                     <Route path={COMMENTS} element={<Comments/>}/>
                     <Route path={ADD_FRIEND} element={<AddFriend/>}/>
+                    <Route path={POST} element={<Post/>}/>
                 </Routes>
             </main>
         </>
