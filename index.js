@@ -383,8 +383,22 @@ app.get(PROFILE,passport.authenticate("jwt", {session : false}),(req,res)=>{
 })
 
 app.get(FRIENDS,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const user = req.user
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+
+
+    const friends = users[user.id].friends.map(friend=>{
+        const currentFriend = users[friend.friendId]
+        return ({
+            id : friend.friendId,
+            avatarImg : currentFriend.avatarImg,
+            userName : currentFriend.userName
+        })
+    })
+
     res.send({
-        access : true
+        access : true,
+        list : friends
     })
 })
 
