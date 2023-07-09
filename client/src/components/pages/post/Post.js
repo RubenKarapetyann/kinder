@@ -18,7 +18,15 @@ function Post (){
     if(loading){return<p>loading</p>}
     return (
         <SinglePost
-
+            autherUserName={post.auther.userName}
+            key={post.id}
+            likes={post.likes}
+            description={post.postDescription}
+            autherAvatarImg={post.auther.avatraImg}
+            img={post.img}
+            liked={post.liked}
+            postId={post.id}
+            favorite={post.favorite}
         />
     )
 }
