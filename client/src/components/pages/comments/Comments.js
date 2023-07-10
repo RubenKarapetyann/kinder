@@ -1,8 +1,8 @@
 import { getCommentsList, sendComment } from "../../../redux/reducers/commentsSlice/commentsReducer"
 import InputControl from "../../usable-components/messages/InputControl"
 import MessageBox from "../../usable-components/messages/MessageBox"
-import LeftArrow from "./components/LeftArrow"
-import "./css/Comments.css"
+import LeftArrow from "../../usable-components/more/LeftArrow"
+
 
 function Comments(){
     return(

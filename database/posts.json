@@ -74,6 +74,12 @@
         "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.5850677941605593
+      },
+      {
+        "text": "bffgfg",
+        "autherId": "0.6145628391094977",
+        "likes": 0,
+        "id": 0.2742037549206007
       }
     ]
   },
@@ -256,7 +262,20 @@
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
-    "comments": []
+    "comments": [
+      {
+        "text": "hahaha",
+        "autherId": "0.6145628391094977",
+        "likes": 0,
+        "id": 0.6108354332607393
+      },
+      {
+        "text": "vvv",
+        "autherId": "0.6145628391094977",
+        "likes": 0,
+        "id": 0.19300036524182906
+      }
+    ]
   },
   "0.8217597629345303": {
     "postDescription": "joystick",
@@ -272,6 +291,13 @@
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
-    "comments": []
+    "comments": [
+      {
+        "text": "hahahah",
+        "autherId": "0.6145628391094977",
+        "likes": 0,
+        "id": 0.532695559432758
+      }
+    ]
   }
 }

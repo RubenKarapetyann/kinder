@@ -6,7 +6,11 @@ const LeftArrow = ()=>{
     const navigate = useNavigate()
     const backArrowHandle = ()=>navigate(-1)
     return(
-        <div className="back-arrow">
+        <div style={{
+            marginBottom: "15px",
+            cursor: "pointer",
+            width: "fit-content"
+        }}>
             <p onClick={backArrowHandle}><FaArrowLeft/></p>
         </div>
     )

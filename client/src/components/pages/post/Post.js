@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router"
 import { getPost } from "../../../redux/reducers/postSlice/postReducer"
 import SinglePost from "../home/components/Post/Post"
 import "../home/css/Home.css"
+import LeftArrow from "../../usable-components/more/LeftArrow"
 
 function Post (){
     const { id } = useParams()
@@ -17,17 +18,21 @@ function Post (){
 
     if(loading){return<p>loading</p>}
     return (
-        <SinglePost
-            autherUserName={post.auther.userName}
-            key={post.id}
-            likes={post.likes}
-            description={post.postDescription}
-            autherAvatarImg={post.auther.avatraImg}
-            img={post.img}
-            liked={post.liked}
-            postId={post.id}
-            favorite={post.favorite}
-        />
+        <>
+            <LeftArrow/>
+            <SinglePost
+                autherUserName={post.auther.userName}
+                key={post.id}
+                likes={post.likes}
+                description={post.postDescription}
+                autherAvatarImg={post.auther.avatraImg}
+                img={post.img}
+                liked={post.liked}
+                postId={post.id}
+                favorite={post.favorite}
+            />
+        </>
+        
     )
 }
 
