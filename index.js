@@ -448,6 +448,14 @@ app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
     })
 })
 
+app.get(AUTH,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    res.send({
+        isAuth : true,
+        name : req.user.userName,
+        email : req.user.email,
+        id : req.user.id
+    })
+})
 
 
 app.listen(process.env.PORT)
