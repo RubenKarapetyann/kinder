@@ -1,7 +1,7 @@
-import AnyText from "../../../../usable-components/more/AnyText"
-import ProfileTitle from "../../../../usable-components/profile/ProfileTitle/ProfileTitle"
-import PostImage from "../PostImage/PostImage"
-import PostTools from "../PostTools/PostTools"
+import AnyText from "../more/AnyText"
+import ProfileTitle from "../profile/ProfileTitle/ProfileTitle"
+import PostImage from "./PostImage"
+import PostTools from "./PostTools/PostTools"
 
 function Post({ autherUserName, likes, description, autherAvatarImg, img, liked, postId, favorite }){
     return(

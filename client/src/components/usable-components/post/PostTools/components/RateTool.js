@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux"
-import Favorite from "../../../../../../images/post-tools/favorite"
-import Like from "../../../../../../images/post-tools/like"
-import { activePost } from "../../../../../../redux/reducers/homeSlice/homeReducer"
+import Favorite from "../../../../../images/post-tools/favorite"
+import Like from "../../../../../images/post-tools/like"
 import { useNavigate } from "react-router"
+import { activePost } from "../../../../../redux/reducers/homeSlice/homeReducer"
 
 const RateTool = ({ active,type,postId })=>{
     const dispatch = useDispatch()

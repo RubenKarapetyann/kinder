@@ -1,5 +1,5 @@
 import RateTools from "./components/RateTools"
-import Comment from "../../../../../images/post-tools/comment"
+import Comment from "../../../../images/post-tools/comment"
 import RateTool from "./components/RateTool"
 import { Link } from "react-router-dom"
 

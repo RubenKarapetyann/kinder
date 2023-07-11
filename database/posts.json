@@ -252,9 +252,9 @@
     "postDescription": "bhahahahahahhaah",
     "id": 0.21268094472632537,
     "img": "0.07360515610167262_1688763443690.jpg",
-    "likes": 0,
+    "likes": 1,
     "likers": {
-      "0.6145628391094977": false
+      "0.6145628391094977": true
     },
     "publicDate": 1688763443698,
     "auther": {
@@ -299,5 +299,19 @@
         "id": 0.532695559432758
       }
     ]
+  },
+  "0.4351839619729243": {
+    "postDescription": "top gear",
+    "id": 0.4351839619729243,
+    "img": "0.9221474536938459_1688982331074.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1688982331081,
+    "auther": {
+      "id": "0.6145628391094977",
+      "userName": "Elina",
+      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    "comments": []
   }
 }

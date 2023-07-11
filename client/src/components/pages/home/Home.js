@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
-import Post from "./components/Post/Post"
-
 import "./css/Home.css"
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
 import { getHomePosts } from "../../../redux/reducers/homeSlice/homeReducer"
+import Post from "../../usable-components/post/Post"
 
 function Home(){
     const dispatch = useDispatch()
