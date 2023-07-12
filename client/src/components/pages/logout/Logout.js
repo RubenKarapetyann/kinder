@@ -9,8 +9,9 @@ function Logout(){
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        dispatch(userLogout())
+        dispatch(userLogout(navigate))
     },[])
+
 
     return (
         <p>loading...</p>

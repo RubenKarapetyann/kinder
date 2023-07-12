@@ -1,6 +1,7 @@
 import { getHeaders } from "../../../constants/api-constants"
+import { LOGIN } from "../../../constants/routes-constants"
 import { LOG_OUT, SET_USER } from "../../../constants/user-slice-constants"
-import { setUser } from "./UserActions"
+import { logoutUser, setUser } from "./UserActions"
 
 function userReducer(state={user : {isAuth : false}}, action){
     switch(action.type){
@@ -41,15 +42,18 @@ export const checkAuthentication = ()=>{
     }
 }
 
-export const userLogout = ()=> {
+export const userLogout = (navigate)=> {
     return (dispatch)=>{
         const token = localStorage.getItem("jwtToken")
         try{
             fetch("/logout",{
                 headers : getHeaders(token)
             }).then(res=>res.json()).then(result=>{
-                console.log(result);
-                // dispatch(setUser(result.name,result.email,result.id))
+                if(result.access){
+                    localStorage.setItem("jwtToken", null)
+                    dispatch(logoutUser())
+                    navigate("/"+LOGIN)
+                }
             })
         }catch(err){
             console.log(err);

@@ -1,4 +1,4 @@
-import { SET_USER } from "../../../constants/user-slice-constants"
+import { LOG_OUT, SET_USER } from "../../../constants/user-slice-constants"
 
 export const setUser = (name,email,id)=>{
     return {
@@ -8,5 +8,11 @@ export const setUser = (name,email,id)=>{
             email,
             id
         }
+    }
+}
+
+export const logoutUser = ()=>{
+    return {
+        type : LOG_OUT
     }
 }
