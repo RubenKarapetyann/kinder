@@ -115,7 +115,9 @@ app.post(LOGIN,async (req,res)=>{
 
 app.get(LOG_OUT,(req,res)=>{
     req.headers.authorization = null
-    console.log("logout");
+    res.send({
+        access : true
+    })
 })
 
 
