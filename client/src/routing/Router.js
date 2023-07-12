@@ -17,6 +17,7 @@ const Chat = lazy(()=>import("../components/pages/chat/Chat"))
 const Comments = lazy(()=>import("../components/pages/comments/Comments"))
 const AddFriend = lazy(()=>import("../components/pages/add-friend/AddFriend"))
 const Post = lazy(()=>import("../components/pages/post/Post"))
+const Logout = lazy(()=>import("../components/pages/logout/Logout"))
 
 //ete voroshes reduxov anes headery tar app.js
 function Router(){
@@ -39,7 +40,7 @@ function Router(){
                     <Route path={NEW_POST} element={<NewPost/>}/>
                     <Route path={PROFILE} element={<Profile/>}/>
                     <Route path={SETTINGS} element={<Settings/>}/>
-                    <Route path={LOG_OUT} element={<p>logout</p>}/>
+                    <Route path={LOG_OUT} element={<Logout/>}/>
                     <Route path={CHAT} element={<Chat/>}/>
                     <Route path={COMMENTS} element={<Comments/>}/>
                     <Route path={ADD_FRIEND} element={<AddFriend/>}/>
