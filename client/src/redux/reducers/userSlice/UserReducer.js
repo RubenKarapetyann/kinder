@@ -1,5 +1,5 @@
 import { getHeaders } from "../../../constants/api-constants"
-import { SET_USER } from "../../../constants/user-slice-constants"
+import { LOG_OUT, SET_USER } from "../../../constants/user-slice-constants"
 import { setUser } from "./UserActions"
 
 function userReducer(state={user : {isAuth : false}}, action){
@@ -12,6 +12,13 @@ function userReducer(state={user : {isAuth : false}}, action){
                     name : action.payload.name,
                     email : action.payload.email,
                     id : action.payload.id
+                }
+            }
+        case LOG_OUT:
+            return {
+                ...state,
+                user : {
+                    isAuth : false
                 }
             }
         default:
@@ -27,6 +34,22 @@ export const checkAuthentication = ()=>{
                 headers : getHeaders(token)
             }).then(res=>res.json()).then(result=>{
                 dispatch(setUser(result.name,result.email,result.id))
+            })
+        }catch(err){
+            console.log(err);
+        }
+    }
+}
+
+export const userLogout = ()=> {
+    return (dispatch)=>{
+        const token = localStorage.getItem("jwtToken")
+        try{
+            fetch("/logout",{
+                headers : getHeaders(token)
+            }).then(res=>res.json()).then(result=>{
+                console.log(result);
+                // dispatch(setUser(result.name,result.email,result.id))
             })
         }catch(err){
             console.log(err);
