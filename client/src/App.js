@@ -1,26 +1,25 @@
 import './App.css';
-import { useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
 import Router from './routing/Router';
 import { BrowserRouter } from "react-router-dom"
-import { Suspense, useEffect } from 'react';
-import { checkAuthentication } from './redux/reducers/userSlice/UserReducer';
-
+import { Suspense } from 'react';
+import store from "./redux/store/store"
+import CheckAuthentication from './components/usable-components/authentication/CheckAuthentication';
 
 //headeri nkarelu erkrord dzevy reduxov info talna chmoranas y.Davitic harcnes 
 //+ reduxin hasnes pordzi anes
 function App() {
-  const dispatch = useDispatch()
-
-  useEffect(()=>{
-    dispatch(checkAuthentication())
-  },[])
 
 
   return (
     <BrowserRouter>
-      <Suspense fallback={"loading..."}>
-        <Router/>
-      </Suspense>
+      <Provider store={store}>
+        <CheckAuthentication>
+            <Suspense fallback={"loading..."}>
+              <Router/>
+            </Suspense>
+        </CheckAuthentication>
+      </Provider>    
     </BrowserRouter>
   );
 }
