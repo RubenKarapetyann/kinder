@@ -8,7 +8,9 @@ import { getProfile } from "../../../redux/reducers/profileSlice/profileReducer"
 
 function Profile(){
   const loading = useSelector(store=>store.profile.loading)
-  const { id } = useParams()
+  const user = useSelector(store=>store.user.user)
+  const { id:userId } = useParams()
+  const id = userId ? userId : user.id
   const navigate = useNavigate()
   const dispatch = useDispatch()
 

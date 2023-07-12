@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from "react-router"
-import { LOGIN, HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, PROFILE, SETTINGS, LOG_OUT, REGISTER, CHAT, COMMENTS, ADD_FRIEND, POST } from "../constants/routes-constants"
+import { LOGIN, HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, PROFILE, SETTINGS, LOG_OUT, REGISTER, CHAT, COMMENTS, ADD_FRIEND, POST, MY_PROFILE } from "../constants/routes-constants"
 import { lazy } from "react"
 import Header from "../components/header/Header"
 import { useSelector } from "react-redux"
@@ -44,6 +44,7 @@ function Router(){
                     <Route path={COMMENTS} element={<Comments/>}/>
                     <Route path={ADD_FRIEND} element={<AddFriend/>}/>
                     <Route path={POST} element={<Post/>}/>
+                    <Route path={MY_PROFILE} element={<Profile/>}/>
                 </Routes>
             </main>
         </>

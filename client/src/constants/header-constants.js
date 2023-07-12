@@ -1,4 +1,4 @@
-import { HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, SETTINGS, PROFILE, LOG_OUT, ADD_FRIEND } from "../constants/routes-constants"
+import { HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, SETTINGS, LOG_OUT, ADD_FRIEND, MY_PROFILE } from "../constants/routes-constants"
 import friendsIcon from "../images/tabs/friends.svg"
 import homeIcon from "../images/tabs/home.svg"
 import notificationsIcon from "../images/tabs/notifications.svg"
@@ -48,7 +48,7 @@ export const HEADER_DROPDOWN = [
     {
         id : Math.random(),
         displayName : "Profile",
-        routeName : PROFILE,
+        routeName : MY_PROFILE,
         icon : <FaUser/>
     },
     {
