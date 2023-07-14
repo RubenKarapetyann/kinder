@@ -24,6 +24,16 @@ function chatReducer(state={ loading : false, list : [] },action){
     }
 }
 
+
+export const sendMessage = (navigate,value,id,socket)=>{
+    return (dispatch,getState)=>{
+        socket.current.emit("message:add",{
+            text : value,
+            autherId : getState().user.user.id,
+        })
+    }
+}
+
 export const getChatList = (navigate,id)=>{
     return getList(navigate,"chat",id,listSeter,loadingStart,loadingFinish,SET_CHAT_LIST,LOADING_START,LOADING_FINISH)
 }
