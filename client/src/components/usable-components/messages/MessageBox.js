@@ -5,7 +5,7 @@ import Message from "./message/Message"
 
 const MessageBox = ({ handle, type })=>{
     const list = useSelector(store=>store[type].list)
-    const userId = useSelector(store=>store.user.user)
+    const { id:userId } = useSelector(store=>store.user.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { id } = useParams()

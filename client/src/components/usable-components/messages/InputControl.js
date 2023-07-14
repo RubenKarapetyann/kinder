@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router"
 import MessageInput from "./messageInput/MessageInput"
 
-const InputControl = ({ handle,type })=>{
+const InputControl = ({ handle,type,socket })=>{
     const [value,setValue] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -13,7 +13,7 @@ const InputControl = ({ handle,type })=>{
 
     const changeHandle  = e =>setValue(e.target.value)
     const sendHandle = e =>{
-        dispatch(handle(navigate,value,id))
+        dispatch(handle(navigate,value,id,socket))
         setValue("")
     }
 
