@@ -7,6 +7,8 @@ import bcrypt from "bcrypt"
 import fs from "fs"
 import { NOTIFICATIONS_TYPES } from "./constants/notifications-constants.js"
 import multer from "multer"
+import http from "http"
+import { Server } from "socket.io" 
 
 
 
@@ -23,6 +25,14 @@ const upload = multer({ storage : storageConfig })
 
 
 const app = express()
+const server = http.createServer(app)
+const io = new Server(server,{
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+})
+
 const { Strategy:JwtStrategy, ExtractJwt } = passportJWT
 const jwtConfig = {
     jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -460,4 +470,37 @@ app.get(AUTH,passport.authenticate("jwt", {session : false}),(req,res)=>{
 })
 
 
-app.listen(process.env.PORT)
+io.on("connection",(socket)=>{
+    console.log("user connected")
+    const { roomId } = socket.handshake.query
+    socket.roomId = roomId
+    socket.join(roomId)
+
+    const sendMessage = (message)=>{
+        io.in(socket.roomId).emit('message:add', message)
+    }
+
+    const addMessage = (message)=>{
+        const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+        const newMessage = {
+            text : message.text,
+            autherId : message.autherId,
+            id : `${Math.random()}-"message"`,
+            sendDate : new Date().getTime()
+        }
+        chat[roomId].messages.push(newMessage)
+        sendMessage(newMessage)
+        fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
+    }
+
+    // socket.on('message:get', getMessages)
+    socket.on('message:add', addMessage)
+    // socket.on('message:remove', removeMessage)
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected')
+        socket.leave(roomId)
+    })
+})
+
+server.listen(process.env.PORT)
