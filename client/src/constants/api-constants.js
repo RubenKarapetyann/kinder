@@ -4,3 +4,5 @@ export const getHeaders = (token)=>{
         "authorization" : "Bearer "+token
     }
 }
+
+export const SERVER_URL = "http://localhost:5000"

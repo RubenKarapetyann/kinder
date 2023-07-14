@@ -1,53 +1,82 @@
 {
-    "asdasdasdasdasdasdasd" : {
-        "members" : [
-            {
-                "id" : "0.6145628391094977",
-                "userName" : "Elina",
-                "avatarImg" : "https://ionicframework.com/docs/img/demos/avatar.svg"
-            },
-            {
-                "id" : "0.8713018945867141",
-                "userName" : "Ruben",
-                "avatarImg" : "https://ionicframework.com/docs/img/demos/avatar.svg"
-            }
-        ],
-        "messages" : [
-            {
-                "text" : "barev",
-                "autherId" : "0.8713018945867141",
-                "id" : "absibasdujasdi",
-                "sendDate" : 10
-            },
-            {
-                "text" : "sdfsdf",
-                "autherId" : "0.6145628391094977",
-                "id" : "gfbdrfgdrgdrfgdrf",
-                "sendDate" : 20
-            }
-        ]
-    },
-    "asdfvgrfbrfrdvdrfbrdfb" : {
-        "members" : [
-            {
-                "id" : "0.6145628391094977",
-                "userName" : "Elina",
-                "avatarImg" : "https://ionicframework.com/docs/img/demos/avatar.svg"
-            },
-            {
-                "id" : "0.4864148468727828",
-                "userName" : "Ashot",
-                "avatarImg" : "https://ionicframework.com/docs/img/demos/avatar.svg"
-            }
-        ],
-        "messages" : [
-            {
-                "text" : "asdasd",
-                "autherId" : "0.4864148468727828",
-                "id" : "asfvsdvsdfv",
-                "sendDate" : 20
-            }
-        ]
-    }
+  "asdasdasdasdasdasdasd": {
+    "members": [
+      {
+        "id": "0.6145628391094977",
+        "userName": "Elina",
+        "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      },
+      {
+        "id": "0.8713018945867141",
+        "userName": "Ruben",
+        "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      }
+    ],
+    "messages": [
+      {
+        "text": "barev",
+        "autherId": "0.8713018945867141",
+        "id": "absibasdujasdi",
+        "sendDate": 10
+      },
+      {
+        "text": "sdfsdf",
+        "autherId": "0.6145628391094977",
+        "id": "gfbdrfgdrgdrfgdrf",
+        "sendDate": 20
+      },
+      {
+        "text": "hello",
+        "autherId": "0.6145628391094977",
+        "id": "0.5564669334830106-\"message\"",
+        "sendDate": 1689372966002
+      },
+      {
+        "text": "hi\n",
+        "autherId": "0.6145628391094977",
+        "id": "0.9692588902141415-\"message\"",
+        "sendDate": 1689372971826
+      },
+      {
+        "text": "darov",
+        "autherId": "0.6145628391094977",
+        "id": "0.5931671210091085-\"message\"",
+        "sendDate": 1689373221464
+      },
+      {
+        "text": "asasd",
+        "autherId": "0.6145628391094977",
+        "id": "0.9051218350730617-\"message\"",
+        "sendDate": 1689373225977
+      }
+    ]
+  },
+  "asdfvgrfbrfrdvdrfbrdfb": {
+    "members": [
+      {
+        "id": "0.6145628391094977",
+        "userName": "Elina",
+        "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      },
+      {
+        "id": "0.4864148468727828",
+        "userName": "Ashot",
+        "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      }
+    ],
+    "messages": [
+      {
+        "text": "asdasd",
+        "autherId": "0.4864148468727828",
+        "id": "asfvsdvsdfv",
+        "sendDate": 20
+      },
+      {
+        "text": "hi",
+        "autherId": "0.6145628391094977",
+        "id": "0.10941757026824228-\"message\"",
+        "sendDate": 1689372999249
+      }
+    ]
+  }
 }
-
