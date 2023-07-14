@@ -1,4 +1,4 @@
-import { LOADING_START , LOADING_FINISH, SET_CHAT_LIST} from "../../../constants/chat-slice-constants"
+import { LOADING_START , LOADING_FINISH, SET_CHAT_LIST, ADD_MESSAGE} from "../../../constants/chat-slice-constants"
 import { getList, listSeter, loadingFinish, loadingStart } from "../../../utils/api-helper"
 
 
@@ -18,6 +18,11 @@ function chatReducer(state={ loading : false, list : [] },action){
             return {
                 ...state,
                 list : action.payload.list
+            }
+        case ADD_MESSAGE:
+            return {
+                ...state,
+                list : [...state.list, action.payload.message]
             }
         default:
             return state
