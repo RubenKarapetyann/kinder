@@ -5,7 +5,7 @@ import "./css/AddFriend.css"
 
 function AddFriend(){
     const { list, loading } = useSelector(store=>store.addfriend)
-
+    console.log(list);
  
     if(loading){return<p>loading...</p>}
     return (

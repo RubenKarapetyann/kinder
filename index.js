@@ -10,6 +10,7 @@ import multer from "multer"
 import http from "http"
 import { Server } from "socket.io" 
 import { OTHER_SEND } from "./constants/user-status-constants.js"
+import { getUserStatus } from "./utils/getUserStatus.js"
 
 
 
@@ -529,6 +530,23 @@ app.get(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
             list : filteredList
         })
     }
+
+    for (let i in users){
+        if(new RegExp(search,"i").test(users[i].userName) && user.id !== users[i].id){
+            const currentUser = users[i]
+            const status = getUserStatus(user.friendRequests.otherToMe,user.friendRequests.meToOther,user.friends,currentUser.id)
+            filteredList.push({
+                id : currentUser.id,
+                avatarImg : currentUser.avatarImg,
+                userName : currentUser.userName,
+                status
+            })
+        }
+    }
+    res.send({
+        access : true,
+        list : filteredList
+    })
 
 })
 
