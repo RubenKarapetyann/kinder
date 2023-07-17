@@ -9,7 +9,7 @@ import { NOTIFICATIONS_TYPES } from "./constants/notifications-constants.js"
 import multer from "multer"
 import http from "http"
 import { Server } from "socket.io" 
-import { NOT_FRIENDS, OTHER_SEND, USER_STATUS_TRANSFORM } from "./constants/user-status-constants.js"
+import { NOT_FRIENDS, OTHER_SEND, USER_STATUS_TRANSFORM, YOU_SEND } from "./constants/user-status-constants.js"
 import { getUserStatus } from "./utils/getUserStatus.js"
 
 
@@ -609,6 +609,14 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
             type: "friend-requests-access"
         })
         fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
+    }else if(req.body.status === YOU_SEND){
+        currentUser.friendRequests.meToOther = currentUser.friendRequests.meToOther.filter(req=>req.id !== otherUser.id)
+        otherUser.friendRequests.otherToMe = currentUser.friendRequests.otherToMe.filter(req=>req.id !== currentUser.id)
+        otherUser.notifications = otherUser.notifications.filter(notification=>{
+            if(notification.type !== "friend-requests" && notification.autherId !== currentUser.id){
+                return notification
+            }
+        })
     }
 
     fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
