@@ -216,7 +216,16 @@
         "date": 1689067540223,
         "type": "like"
       }
-    ]
+    ],
+    "friendRequests": {
+      "meToOther": [],
+      "otherToMe": [
+        {
+          "id":"0.5498439206038626",
+          "date": 1689590232505
+        }
+      ]
+    }
   },
   "0.8713018945867141": {
     "userName": "Ruben",
@@ -251,7 +260,11 @@
         "date": 1688669187424,
         "type": "comment"
       }
-    ]
+    ],
+    "friendRequests": {
+      "meToOther": [],
+      "otherToMe": []
+    }
   },
   "0.5498439206038626": {
     "userName": "werwefsdf",
@@ -261,7 +274,17 @@
     "id": 0.5498439206038626,
     "posts": [],
     "friends": [],
-    "favorites": []
+    "favorites": [],
+    "notifications": [],
+    "friendRequests": {
+      "meToOther": [
+        {
+          "id": "0.6145628391094977",
+          "date": 1689590232505
+        }
+      ],
+      "otherToMe": []
+    }
   },
   "0.4864148468727828": {
     "userName": "Ashot",
@@ -277,7 +300,11 @@
       }
     ],
     "favorites": [],
-    "notifications": []
+    "notifications": [],
+    "friendRequests": {
+      "meToOther": [],
+      "otherToMe": []
+    }
   },
   "0.20070158160560503": {
     "userName": "Elina",
@@ -288,6 +315,10 @@
     "posts": [],
     "friends": [],
     "favorites": [],
-    "notifications": []
+    "notifications": [],
+    "friendRequests": {
+      "meToOther": [],
+      "otherToMe": []
+    }
   }
 }

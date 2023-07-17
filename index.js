@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS, POST } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS, POST, ADD_FRIEND } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -9,6 +9,7 @@ import { NOTIFICATIONS_TYPES } from "./constants/notifications-constants.js"
 import multer from "multer"
 import http from "http"
 import { Server } from "socket.io" 
+import { OTHER_SEND } from "./constants/user-status-constants.js"
 
 
 
@@ -85,7 +86,11 @@ app.post(REGISTER,async (req,res)=>{
                 posts : [],
                 friends : [],
                 favorites : [],
-                notifications : []
+                notifications : [],
+                friendRequests : {
+                    meToOther : [],
+                    otherToMe : []
+                }
             }
             users[id] = newUser
             fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
@@ -501,6 +506,30 @@ io.on("connection",(socket)=>{
         console.log('User disconnected')
         socket.leave(roomId)
     })
+})
+
+app.get(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const user = req.user
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    let filteredList  = []
+    const search = req.query.search
+
+    if(search === ""){
+        filteredList = user.friendRequests.otherToMe.map(user=>{
+            const currentUser = users[user.id]
+            return { 
+                id : currentUser.id,
+                avatarImg : currentUser.avatarImg,
+                userName : currentUser.userName,
+                status : OTHER_SEND
+            }
+        })
+        return res.send({
+            access : true,
+            list : filteredList
+        })
+    }
+
 })
 
 server.listen(process.env.PORT)
