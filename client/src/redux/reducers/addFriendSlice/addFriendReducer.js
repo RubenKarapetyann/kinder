@@ -1,4 +1,4 @@
-import { LOADING_START, LOADING_FINISH } from "../../../constants/add-friend-slice-constants"
+import { LOADING_START, LOADING_FINISH, LIST_SET, SET_STATUS } from "../../../constants/add-friend-slice-constants"
 import { getHeaders } from "../../../constants/api-constants"
 import { LOGIN } from "../../../constants/routes-constants"
 import { loadingFinish, loadingStart } from "../../../utils/api-helper"
@@ -16,6 +16,16 @@ function addFriendReducer(state={ loading : false, list : [] },action){
             return {
                 ...state,
                 loading : false
+            }
+        case LIST_SET:
+            return {
+                ...state,
+                list : action.payload.list
+            }
+        case SET_STATUS:
+            return {
+                ...state,
+                list : state.list.map(user=>user.id === action.payload.id ? (user.status=action.payload.status) && user : user)
             }
         default:
             return state
