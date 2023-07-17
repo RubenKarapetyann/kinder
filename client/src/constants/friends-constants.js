@@ -27,11 +27,11 @@ export const FRIENDS_DROPDOWN = (id,chatId,handle,navigate,dispatch)=>([
     },
 ])
 
-export const GET_USER_STATUS = (handle,id,dispatch)=>{
+export const GET_USER_STATUS = (handle,id,dispatch,navigate)=>{
     return {
         [FRIENDS] : <span className="big-icon"><FaUsers/></span>,
-        [NOT_FRIENDS] : <span onClick={()=>dispatch(handle(id,NOT_FRIENDS))} className="big-icon"><FaUserPlus/></span>,
-        [OTHER_SEND] : <span onClick={()=>dispatch(handle(id,OTHER_SEND))} className="big-icon"><FaUserCheck/></span>,
-        [YOU_SEND] : <span onClick={()=>dispatch(handle(id,YOU_SEND))} className="big-icon"><FaUserTimes/></span>
+        [NOT_FRIENDS] : <span onClick={()=>dispatch(handle(id,NOT_FRIENDS,navigate))} className="big-icon"><FaUserPlus/></span>,
+        [OTHER_SEND] : <span onClick={()=>dispatch(handle(id,OTHER_SEND,navigate))} className="big-icon"><FaUserCheck/></span>,
+        [YOU_SEND] : <span onClick={()=>dispatch(handle(id,YOU_SEND,navigate))} className="big-icon"><FaUserTimes/></span>
     }
 }

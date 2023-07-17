@@ -28,6 +28,10 @@
       {
         "friendId": "0.4864148468727828",
         "chatId": "asdfvgrfbrfrdvdrfbrdfb"
+      },
+      {
+        "friendId": "0.5498439206038626",
+        "chatId": "chat-0.7461246347276194"
       }
     ],
     "favorites": [
@@ -219,12 +223,7 @@
     ],
     "friendRequests": {
       "meToOther": [],
-      "otherToMe": [
-        {
-          "id":"0.5498439206038626",
-          "date": 1689590232505
-        }
-      ]
+      "otherToMe": []
     }
   },
   "0.8713018945867141": {
@@ -271,18 +270,25 @@
     "email": "rapetyan@gmail.com",
     "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
     "password": "$2b$10$0Y/w1v6BDB7MCawTiYWIIOBVwzRqLwQiV0cfzpI8pg5tIVs9e20G2",
-    "id": 0.5498439206038626,
+    "id": "0.5498439206038626",
     "posts": [],
-    "friends": [],
+    "friends": [
+      {
+        "friendId": "0.6145628391094977",
+        "chatId": "chat-0.7461246347276194"
+      }
+    ],
     "favorites": [],
-    "notifications": [],
+    "notifications": [
+      {
+        "id": 0.11964194481785828,
+        "autherId": "0.6145628391094977",
+        "date": 1689628956616,
+        "type": "friend-requests-access"
+      }
+    ],
     "friendRequests": {
-      "meToOther": [
-        {
-          "id": "0.6145628391094977",
-          "date": 1689590232505
-        }
-      ],
+      "meToOther": [],
       "otherToMe": []
     }
   },
@@ -311,7 +317,7 @@
     "email": "gk4@gmail.com",
     "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
     "password": "$2b$10$CkTYlefAFgfABhbYTg6iFOzX99JHEp80x7F3cudbdk85JHXQ9XaCC",
-    "id": 0.20070158160560503,
+    "id": "0.20070158160560503",
     "posts": [],
     "friends": [],
     "favorites": [],

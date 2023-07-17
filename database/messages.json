@@ -90,5 +90,20 @@
         "sendDate": 1689372999249
       }
     ]
+  },
+  "chat-0.7461246347276194": {
+    "members": [
+      {
+        "id": "0.6145628391094977",
+        "userName": "Elina",
+        "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      },
+      {
+        "id": "0.5498439206038626",
+        "userName": "werwefsdf",
+        "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      }
+    ],
+    "messages": []
   }
 }
