@@ -574,6 +574,41 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
             id : otherUser.id,
             date : currentDate
         })
+    }else if(req.body.status === OTHER_SEND){
+        const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+        const chatId = "chat-"+Math.random()
+        chat[chatId] = {
+            members: [
+                {
+                  id: currentUser.id,
+                  userName: currentUser.userName,
+                  avatarImg: currentUser.avatarImg
+                },
+                {
+                  id: otherUser.id,
+                  userName: otherUser.userName,
+                  avatarImg: otherUser.avatarImg
+                }
+              ],
+            messages : []
+        }
+        currentUser.friends.push({
+            friendId : otherUser.id,
+            chatId
+        })
+        otherUser.friends.push({
+            friendId : currentUser.id,
+            chatId
+        })
+        otherUser.friendRequests.meToOther = otherUser.friendRequests.meToOther.filter(req=>req.id !== currentUser.id)
+        currentUser.friendRequests.otherToMe = currentUser.friendRequests.otherToMe.filter(req=>req.id !== otherUser.id)
+        otherUser.notifications.push({
+            id: Math.random(),
+            autherId: currentUser.id,
+            date: currentDate,
+            type: "friend-requests-access"
+        })
+        fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
     }
 
     fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
