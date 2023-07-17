@@ -226,7 +226,7 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
         const currentChat = messages[friend.chatId]
         return {
             sender : currentChat.members.find(val=>val.id===friend.friendId),
-            lastMessage : currentChat.messages[currentChat.messages.length-1],
+            lastMessage : currentChat.messages[currentChat.messages.length-1] || {},
             chatId : friend.chatId
         }
     })

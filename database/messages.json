@@ -104,6 +104,13 @@
         "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
       }
     ],
-    "messages": []
+    "messages": [
+      {
+        "text": "hbjn",
+        "autherId": "0.6145628391094977",
+        "id": "0.9412383097642298-\"message\"",
+        "sendDate": 1689629813871
+      }
+    ]
   }
 }
