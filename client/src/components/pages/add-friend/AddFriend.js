@@ -8,7 +8,7 @@ function AddFriend(){
     const { list, loading } = useSelector(store=>store.addfriend)
 
     useEffect(()=>{
-
+ 
     },[])
 
  
