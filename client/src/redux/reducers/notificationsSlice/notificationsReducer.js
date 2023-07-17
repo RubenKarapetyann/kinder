@@ -1,5 +1,5 @@
 import { LOADING_FINISH, LOADING_START, SET_NOTIFICATIONS_LIST } from "../../../constants/notifications-slice-constants"
-import { getList, listSeter, loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { getList } from "../../../utils/api-helper"
 
 
 function notificationsReducer(state={ list : [], loading : false }, action){
@@ -25,7 +25,7 @@ function notificationsReducer(state={ list : [], loading : false }, action){
 }
 
 export const getNotifications = (navigate)=>{
-    return getList(navigate,"notifications","",listSeter,loadingStart,loadingFinish,SET_NOTIFICATIONS_LIST,LOADING_START,LOADING_FINISH)
+    return getList(navigate,"notifications","",SET_NOTIFICATIONS_LIST,LOADING_START,LOADING_FINISH)
 }
 
 

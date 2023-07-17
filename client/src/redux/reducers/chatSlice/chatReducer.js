@@ -1,5 +1,5 @@
 import { LOADING_START , LOADING_FINISH, SET_CHAT_LIST, ADD_MESSAGE} from "../../../constants/chat-slice-constants"
-import { getList, listSeter, loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { getList } from "../../../utils/api-helper"
 
 
 function chatReducer(state={ loading : false, list : [] },action){
@@ -40,7 +40,7 @@ export const sendMessage = (navigate,value,id,socket)=>{
 }
 
 export const getChatList = (navigate,id)=>{
-    return getList(navigate,"chat",id,listSeter,loadingStart,loadingFinish,SET_CHAT_LIST,LOADING_START,LOADING_FINISH)
+    return getList(navigate,"chat",id,SET_CHAT_LIST,LOADING_START,LOADING_FINISH)
 }
 
 

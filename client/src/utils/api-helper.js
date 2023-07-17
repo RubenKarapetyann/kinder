@@ -3,8 +3,7 @@ import { HOME, LOGIN } from "../constants/routes-constants"
 
 export const getToken = ()=>localStorage.getItem("jwtToken")
     
-
-export const getList = (navigate,route,id,listSeter,loadingStart,loadingFinish,LIST_SET,LOADING_START,LOADING_FINISH)=>{
+export const getList = (navigate,route,id,LIST_SET,LOADING_START,LOADING_FINISH)=>{
     return (dispatch)=>{
         const token = localStorage.getItem("jwtToken")
         if(token){
@@ -21,6 +20,7 @@ export const getList = (navigate,route,id,listSeter,loadingStart,loadingFinish,L
                 })
             }catch(err){
                 navigate("/"+HOME)
+                dispatch(loadingFinish(LOADING_FINISH))
             }
         }else{
             navigate("/"+LOGIN)

@@ -1,6 +1,6 @@
 import { LOADING_FINISH, LOADING_START, SET_COMMENTS_LIST, SET_NEW_COMMENT } from "../../../constants/comments-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { getList, getToken, listSeter, loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { getList, loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setNewComment } from "./commentsActions"
 
 function commentsReducer(state={ loading : false, list : [] },action){
@@ -31,7 +31,7 @@ function commentsReducer(state={ loading : false, list : [] },action){
 }
 
 export const getCommentsList = (navigate,id)=>{
-    return getList(navigate,"comments",id,listSeter,loadingStart,loadingFinish,SET_COMMENTS_LIST,LOADING_START,LOADING_FINISH)
+    return getList(navigate,"comments",id,SET_COMMENTS_LIST,LOADING_START,LOADING_FINISH)
 }
 
 export const sendComment = (navigate,comment,postId)=>{
