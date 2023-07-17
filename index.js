@@ -9,7 +9,7 @@ import { NOTIFICATIONS_TYPES } from "./constants/notifications-constants.js"
 import multer from "multer"
 import http from "http"
 import { Server } from "socket.io" 
-import { OTHER_SEND } from "./constants/user-status-constants.js"
+import { OTHER_SEND, USER_STATUS_TRANSFORM } from "./constants/user-status-constants.js"
 import { getUserStatus } from "./utils/getUserStatus.js"
 
 
@@ -549,5 +549,24 @@ app.get(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
     })
 
 })
+
+
+
+app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    const currentUser = users[req.user.id]
+    const otherUser = users[req.body.id]
+    const currentDate = new Date().getTime()
+
+
+    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    res.send({
+        access : true,
+        status : USER_STATUS_TRANSFORM[req.body.status],
+        id : otherUser.id
+    })
+})
+
+
 
 server.listen(process.env.PORT)
