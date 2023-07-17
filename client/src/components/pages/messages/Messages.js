@@ -29,7 +29,7 @@ function Messages(){
                             comment={message.lastMessage.text} 
                             avatarImg={message.sender.avatarImg}
                         >
-                            <span>{getHowLongItsBeen(message.lastMessage.sendDate)} min ago</span>
+                            <span>{getHowLongItsBeen(message.lastMessage.sendDate)}</span>
                         </ProfileListItem>
                     </Link>
                 )
