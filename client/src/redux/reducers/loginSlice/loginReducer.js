@@ -50,7 +50,7 @@ export const loginApi = (inputData,navigate)=>{
                 if(result.access){
                     navigate("/"+HOME)
                     localStorage.setItem("jwtToken" , result.token)
-                    dispatch(setUser(result.user.name, result.user.email, result.user.id))
+                    dispatch(setUser(result.user))
                 }else{
                     dispatch(errorSeter(result.message))
                 }

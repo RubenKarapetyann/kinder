@@ -9,10 +9,7 @@ function userReducer(state={user : {isAuth : false}}, action){
             return {
                 ...state,
                 user : {
-                    isAuth : true,
-                    name : action.payload.name,
-                    email : action.payload.email,
-                    id : action.payload.id
+                    ...action.payload.user
                 }
             }
         case LOG_OUT:
@@ -34,7 +31,7 @@ export const checkAuthentication = ()=>{
             fetch("/auth",{
                 headers : getHeaders(token)
             }).then(res=>res.json()).then(result=>{
-                dispatch(setUser(result.name,result.email,result.id))
+                dispatch(setUser(result))
             })
         }catch(err){
             console.log(err);

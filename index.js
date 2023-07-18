@@ -124,7 +124,9 @@ app.post(LOGIN,async (req,res)=>{
     res.send({access : true, token, user : { 
         name : user.userName,
         email : user.email,
-        id : user.id
+        id : user.id,
+        avatarImg : user.avatarImg,
+        description : user.description
     }})
 })
 
@@ -471,7 +473,9 @@ app.get(AUTH,passport.authenticate("jwt", {session : false}),(req,res)=>{
         isAuth : true,
         name : req.user.userName,
         email : req.user.email,
-        id : req.user.id
+        id : req.user.id,
+        avatarImg : req.user.avatarImg,
+        description : req.user.description
     })
 })
 
