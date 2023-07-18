@@ -17,55 +17,55 @@
     "comments": [
       {
         "text": "asdasdasd",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.3519753179813705
       },
       {
         "text": "asdasd",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.2139045885345563
       },
       {
         "text": "Ruben",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.990531798795325
       },
       {
         "text": "asdasd",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.33832793333828404
       },
       {
         "text": "sdvsRUben",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.7676247097546569
       },
       {
         "text": "asdasd",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.5777184480164843
       },
       {
         "text": "rgbrgbrfgbrfgb",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.2920260271717916
       },
       {
         "text": "tuyn",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.31588902323521606
       },
       {
         "text": "hahahaha\n",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.6183595778049864
       },
@@ -107,7 +107,7 @@
     "likers": {},
     "publicDate": 1688684669793,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
@@ -121,7 +121,7 @@
     "likers": {},
     "publicDate": 1688684811683,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
@@ -135,7 +135,7 @@
     "likers": {},
     "publicDate": 1688684864269,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
@@ -151,14 +151,14 @@
     },
     "publicDate": 1688685440262,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     "comments": [
       {
         "text": "adad",
-        "autherId": 0.6145628391094977,
+        "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.13308221013499777
       }
@@ -172,7 +172,7 @@
     "likers": {},
     "publicDate": 1688685567685,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
@@ -186,7 +186,7 @@
     "likers": {},
     "publicDate": 1688685646077,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
@@ -200,7 +200,7 @@
     "likers": {},
     "publicDate": 1688685748741,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
@@ -214,7 +214,7 @@
     "likers": {},
     "publicDate": 1688685844569,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
@@ -228,7 +228,7 @@
     "likers": {},
     "publicDate": 1688763091482,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
@@ -242,7 +242,7 @@
     "likers": {},
     "publicDate": 1688763337702,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
@@ -258,7 +258,7 @@
     },
     "publicDate": 1688763443698,
     "auther": {
-      "id": 0.6145628391094977,
+      "id": "0.6145628391094977",
       "userName": "Elina",
       "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
     },

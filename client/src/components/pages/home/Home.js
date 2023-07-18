@@ -26,7 +26,7 @@ function Home(){
                     key={post.id}
                     likes={post.likes}
                     description={post.postDescription}
-                    autherAvatarImg={post.auther.avatraImg}
+                    autherAvatarImg={post.auther.avatarImg}
                     img={post.img}
                     liked={post.liked}
                     postId={post.id}

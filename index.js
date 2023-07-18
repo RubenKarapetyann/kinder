@@ -57,6 +57,7 @@ app.use(express.static("./database/images"))
 app.use('/profile', express.static('./database/images'));
 app.use('/post', express.static('./database/images'));
 app.use(SETTINGS, express.static('./database/images'));
+app.use(POST_COMMENTS, express.static('./database/images'));
 
 passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
@@ -146,27 +147,39 @@ app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
     const userPosts = user.posts.map(post=>{
+        const currentPost = posts[post.postId]
+        const currentUser = users[currentPost.auther.id]
         return ({
-            postDescription : posts[post.postId].postDescription, 
-            id : posts[post.postId].id,
-            img : posts[post.postId].img,
-            likes : posts[post.postId].likes,
-            liked : posts[post.postId].likers[user.id],
-            publicDate : posts[post.postId].publicDate,
-            auther : posts[post.postId].auther,
+            postDescription : currentPost.postDescription, 
+            id : currentPost.id,
+            img : currentPost.img,
+            likes : currentPost.likes,
+            liked : currentPost.likers[user.id],
+            publicDate : currentPost.publicDate,
+            auther : {
+                id : currentUser.id,
+                userName : currentUser.userName,
+                avatarImg : currentUser.avatarImg
+            },
             favorite : !!user.favorites.find(val=>val===post.postId)
     })})
 
     const friendsPost = user.friends.reduce((state,friend)=>{
         return state.concat(...users[friend.friendId].posts.map(post=>{
+            const currentPost = posts[post.postId]
+            const currentUser = users[currentPost.auther.id]
             return ({
-                postDescription : posts[post.postId].postDescription, 
-                id : posts[post.postId].id,
-                img : posts[post.postId].img,
-                likes : posts[post.postId].likes,
-                liked : posts[post.postId].likers[user.id],
-                publicDate : posts[post.postId].publicDate,
-                auther : posts[post.postId].auther,
+                postDescription : currentPost.postDescription, 
+                id : currentPost.id,
+                img : currentPost.img,
+                likes : currentPost.likes,
+                liked : currentPost.likers[user.id],
+                publicDate : currentPost.publicDate,
+                auther : {
+                    id : currentUser.id,
+                    userName : currentUser.userName,
+                    avatarImg : currentUser.avatarImg
+                },
                 favorite : !!user.favorites.find(val=>val===post.postId)
         })}))
     },[])
@@ -223,12 +236,18 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
 app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const { id, friends  } = req.user
     const messages = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
-
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
     const messagesList = friends.map(friend=>{
         const currentChat = messages[friend.chatId]
+        const { id:currentUserId } = currentChat.members.find(val=>val.id===friend.friendId)
+        const currentUser = users[currentUserId]
         return {
-            sender : currentChat.members.find(val=>val.id===friend.friendId),
+            sender : {
+                id: currentUserId,
+                userName: currentUser.userName,
+                avatarImg: currentUser.avatarImg
+            },
             lastMessage : currentChat.messages[currentChat.messages.length-1] || {},
             chatId : friend.chatId
         }
@@ -273,13 +292,13 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)
         text: comment,
         autherId: id,
         likes: 0,
-        id : Math.random()
+        id : `comment_${Math.random()}`
     }
 
     const post = posts[postId]
     post.comments.push(newComment)
     users[post.auther.id].notifications = [...users[post.auther.id].notifications, {
-        id : Math.random(),
+        id : `notification_${Math.random()}`,
         autherId : id,
         date : new Date().getTime(),
         type : "comment"
@@ -348,7 +367,7 @@ app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single(
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
 
-    const postId = Math.random()
+    const postId = `post_${Math.random()}`
     posts[postId] = {
         postDescription: req.body.description,
         id: postId,
@@ -357,9 +376,7 @@ app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single(
         likers: {},
         publicDate: new Date().getTime(),
         auther: {
-            id: user.id,
-            userName : user.userName,
-            avatarImg : user.avatarImg
+            id: user.id
         },
         comments: []  
     }
