@@ -1,13 +1,24 @@
+import { SETTINGS_ARR } from "../../../constants/settings-constants"
 import Title from "../../usable-components/more/Title"
-import ProfileListItem from "../../usable-components/profile/ProfileListItem"
-import { FaChevronRight } from "react-icons/fa"
+import { useSelector } from "react-redux"
+import SettingItem from "./components/SettingItem"
+import { Link, Outlet } from "react-router-dom"
+
 function Settings(){
+    const { user } = useSelector(store=>store.user)
     return(
         <>
-            <Title text={"Log Out"}/>
-            <ProfileListItem hr={false} userName={"logout"}>
-                <FaChevronRight/>
-            </ProfileListItem>
+            {SETTINGS_ARR(user.avatarImg).map(setting=>{
+                if(setting.type === "title"){
+                    return <span key={setting.id}><br/><Title text={setting.title}/></span>
+                }
+                return <Link to={setting.routeName} key={setting.id} className="link-without-styles"><SettingItem 
+                    title={setting.title} 
+                    current={user[setting.takeFromUser]} 
+                    icon={setting.icon}
+                /></Link>
+            })}
+            <Outlet/>
         </>
     )
 }
