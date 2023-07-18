@@ -636,6 +636,16 @@ app.post(SETTINGS,passport.authenticate("jwt", {session : false}),upload.single(
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
     const currentUser = users[req.user.id]
+        
+    if(req.body.title === "name"){
+        currentUser.userName = req.body.setting
+    }else if(req.body.title === "description"){
+        currentUser.description = req.body.setting
+    }else{
+        currentUser.avatarImg = req.file.filename
+    }
+
+
 
     fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
     res.send({
