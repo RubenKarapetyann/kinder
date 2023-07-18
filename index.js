@@ -450,7 +450,9 @@ app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const { id } = req.params
     const user = req.user
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
     const currentPost = posts[id]
+    const currentUser = users[currentPost.auther.id]
 
     const post = {
         postDescription : currentPost.postDescription, 
@@ -459,7 +461,11 @@ app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
         likes : currentPost.likes,
         liked : currentPost.likers[user.id],
         publicDate : currentPost.publicDate,
-        auther : currentPost.auther,
+        auther : {
+            id : currentUser.id,
+            userName : currentUser.userName,
+            avatarImg : currentUser.avatarImg
+        },
         favorite : !!user.favorites.find(val=>val===currentPost.postId)
     }
 
@@ -585,14 +591,10 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
         chat[chatId] = {
             members: [
                 {
-                  id: currentUser.id,
-                  userName: currentUser.userName,
-                  avatarImg: currentUser.avatarImg
+                  id: currentUser.id
                 },
                 {
-                  id: otherUser.id,
-                  userName: otherUser.userName,
-                  avatarImg: otherUser.avatarImg
+                  id: otherUser.id
                 }
               ],
             messages : []
