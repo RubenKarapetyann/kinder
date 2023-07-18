@@ -12,6 +12,7 @@ import profileReducer from "../reducers/profileSlice/profileReducer"
 import friendsReducer from "../reducers/friendsSlice/friendsReducer"
 import addFriendReducer from "../reducers/addFriendSlice/addFriendReducer"
 import postReducer from "../reducers/postSlice/postReducer"
+import settingsReducer from "../reducers/settingsSlice/settingsReducer"
 
 
 
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
     profile : profileReducer,
     friends : friendsReducer,
     addfriend : addFriendReducer,
-    post : postReducer
+    post : postReducer,
+    settings : settingsReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
