@@ -3,6 +3,8 @@ import { LOGIN, HOME, FRIENDS, NOTIFICATIONS, MESSAGES, NEW_POST, PROFILE, SETTI
 import { lazy } from "react"
 import Header from "../components/header/Header"
 import { useSelector } from "react-redux"
+import { SETTINGS_ROUTES } from "../constants/settings-constants"
+import WindowWithCloseButton from "../components/usable-components/window/window-with-close-btn/WindowWithCloseButton"
 
 const Home = lazy(()=>import("../components/pages/home/Home"))
 const Friends = lazy(()=>import("../components/pages/friends/Friends"))
@@ -39,7 +41,15 @@ function Router(){
                     <Route path={MESSAGES} element={<Messages/>}/>
                     <Route path={NEW_POST} element={<NewPost/>}/>
                     <Route path={PROFILE} element={<Profile/>}/>
-                    <Route path={SETTINGS} element={<Settings/>}/>
+                    <Route path={SETTINGS+"/*"} element={<Settings/>}>
+                        {SETTINGS_ROUTES().map(setting=>{
+                                return <Route 
+                                    path={setting.title} 
+                                    element={<WindowWithCloseButton title={setting.title}>{setting.element}</WindowWithCloseButton>} 
+                                    key={setting.id} 
+                                />
+                            })}
+                    </Route>
                     <Route path={LOG_OUT} element={<Logout/>}/>
                     <Route path={CHAT} element={<Chat/>}/>
                     <Route path={COMMENTS} element={<Comments/>}/>
