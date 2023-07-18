@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS, POST, ADD_FRIEND } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS, POST, ADD_FRIEND, SETTINGS } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -631,6 +631,25 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
     })
 })
 
+
+app.post(SETTINGS,passport.authenticate("jwt", {session : false}),upload.single("setting"),(req,res)=>{
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+
+    const currentUser = users[req.user.id]
+
+    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    res.send({
+        access : true,
+        user : {
+            isAuth : true,
+            name : currentUser.userName,
+            email : currentUser.email,
+            id : currentUser.id,
+            avatarImg : currentUser.avatarImg,
+            description : currentUser.description
+        }
+    })
+})
 
 
 server.listen(process.env.PORT)
