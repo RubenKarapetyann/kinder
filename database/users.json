@@ -224,6 +224,18 @@
         "autherId": "0.6145628391094977",
         "date": 1689635368228,
         "type": "like"
+      },
+      {
+        "id": "notification_0.8134895712843644",
+        "autherId": "0.6145628391094977",
+        "date": 1689723298955,
+        "type": "comment"
+      },
+      {
+        "id": "notification_0.9570378294668469",
+        "autherId": 0.8713018945867141,
+        "date": 1689723499584,
+        "type": "comment"
       }
     ],
     "friendRequests": {
@@ -234,7 +246,7 @@
   "0.8713018945867141": {
     "userName": "Ruben",
     "email": "gkarapetyan@gmail.com",
-    "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
+    "avatarImg": "0.36920198776519_1689723524633.jpg",
     "password": "$2b$10$YeEXgGAUuPPLdXr8A2xts..XKEH7lW4Mkop3lWvCtj6deSM7.001m",
     "id": 0.8713018945867141,
     "posts": [

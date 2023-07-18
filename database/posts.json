@@ -10,9 +10,7 @@
     },
     "publicDate": "50",
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": [
       {
@@ -80,6 +78,18 @@
         "autherId": "0.6145628391094977",
         "likes": 0,
         "id": 0.2742037549206007
+      },
+      {
+        "text": "mmm",
+        "autherId": "0.6145628391094977",
+        "likes": 0,
+        "id": "comment_0.648477000753606"
+      },
+      {
+        "text": "hello\n",
+        "autherId": 0.8713018945867141,
+        "likes": 0,
+        "id": "comment_0.07832245636114354"
       }
     ]
   },
@@ -93,9 +103,7 @@
     },
     "publicDate": "45",
     "auther": {
-      "id": "0.8713018945867141",
-      "userName": "Ruben",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.8713018945867141"
     },
     "comments": []
   },
@@ -121,9 +129,7 @@
     "likers": {},
     "publicDate": 1688684811683,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": []
   },
@@ -135,9 +141,7 @@
     "likers": {},
     "publicDate": 1688684864269,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": []
   },
@@ -151,9 +155,7 @@
     },
     "publicDate": 1688685440262,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": [
       {
@@ -172,9 +174,7 @@
     "likers": {},
     "publicDate": 1688685567685,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": []
   },
@@ -186,9 +186,7 @@
     "likers": {},
     "publicDate": 1688685646077,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": []
   },
@@ -200,9 +198,7 @@
     "likers": {},
     "publicDate": 1688685748741,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": []
   },
@@ -214,9 +210,7 @@
     "likers": {},
     "publicDate": 1688685844569,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": []
   },
@@ -228,9 +222,7 @@
     "likers": {},
     "publicDate": 1688763091482,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": []
   },
@@ -242,9 +234,7 @@
     "likers": {},
     "publicDate": 1688763337702,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": []
   },
@@ -258,9 +248,7 @@
     },
     "publicDate": 1688763443698,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": [
       {
@@ -287,9 +275,7 @@
     },
     "publicDate": 1688768398616,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": [
       {
@@ -308,9 +294,7 @@
     "likers": {},
     "publicDate": 1688982331081,
     "auther": {
-      "id": "0.6145628391094977",
-      "userName": "Elina",
-      "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg"
+      "id": "0.6145628391094977"
     },
     "comments": []
   }

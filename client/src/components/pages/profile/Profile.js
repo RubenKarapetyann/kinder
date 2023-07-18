@@ -5,6 +5,7 @@ import ProfilePostsList from "./components/ProfilePostsList"
 import { useNavigate, useParams } from "react-router"
 import { useEffect } from "react"
 import { getProfile } from "../../../redux/reducers/profileSlice/profileReducer"
+import { HOME } from "../../../constants/routes-constants"
 
 function Profile(){
   const loading = useSelector(store=>store.profile.loading)
@@ -15,7 +16,11 @@ function Profile(){
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    dispatch(getProfile(navigate,id))
+    if(id){
+      dispatch(getProfile(navigate,id))
+    }else{
+      navigate("/"+HOME)
+    }
   },[])
 
 

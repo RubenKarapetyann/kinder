@@ -54,10 +54,11 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(express.static("./database/images"))
+app.use('/comments', express.static('./database/images'));
 app.use('/profile', express.static('./database/images'));
 app.use('/post', express.static('./database/images'));
 app.use(SETTINGS, express.static('./database/images'));
-app.use(POST_COMMENTS, express.static('./database/images'));
+app.use(MESSAGES, express.static('./database/images'));
 
 passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
@@ -84,7 +85,7 @@ app.post(REGISTER,async (req,res)=>{
                 email : email,
                 avatarImg : "https://ionicframework.com/docs/img/demos/avatar.svg",
                 password : hashedPassword,
-                description : "",
+                description : "no bio yet",
                 id,
                 posts : [],
                 friends : [],

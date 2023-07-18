@@ -13,7 +13,7 @@ const Message = ({ other=true, text, avatarImg, userName })=>{
                             marginRight : "5px",
                             fontWeight: "600"
                         }}>{"you"}</span>
-                        <ProfileTitle/>
+                        <ProfileTitle avatarImg={avatarImg}/>
                     </>
                     
                 }

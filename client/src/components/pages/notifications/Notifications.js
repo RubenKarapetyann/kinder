@@ -40,6 +40,7 @@ function Notifications(){
                             <Title text={currentDate}/>
                         </> : null}
                         <ProfileListItem 
+                            avatarImg={notification.avatarImg}
                             hr={false} 
                             userName={notification.userName} 
                             comment={notification.text}
