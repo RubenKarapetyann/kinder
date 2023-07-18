@@ -1,9 +1,9 @@
 {
   "0.6145628391094977": {
-    "userName": "Ruben",
+    "userName": "Ruben1",
     "email": "gkarapetyan74@gmail.com",
-    "description": "no bio yet",
-    "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
+    "description": "carera creater",
+    "avatarImg": "0.8214652947526766_1689714881167.jpg",
     "password": "$2b$10$GWFjgu2v1TdlC0t6DB4iducbu2lWhjswzrQQ52Dd0lcCsf5XTzolm",
     "id": "0.6145628391094977",
     "posts": [
@@ -36,8 +36,7 @@
     ],
     "favorites": [
       0.45362862468430354,
-      0.986902839647966,
-      "asjndasndangsidgsidfasn"
+      0.986902839647966
     ],
     "notifications": [
       {

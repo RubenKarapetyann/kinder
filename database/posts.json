@@ -3,9 +3,9 @@
     "postDescription": "pretty summer",
     "id": "asjndasndangsidgsidfasn",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 1,
+    "likes": 0,
     "likers": {
-      "0.6145628391094977": true,
+      "0.6145628391094977": false,
       "0.8713018945867141": false
     },
     "publicDate": "50",

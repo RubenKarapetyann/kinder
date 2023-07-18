@@ -40,7 +40,6 @@ const PostDescription = ({ children, file })=>{
             setLoading(false)
             navigate("/"+HOME)
         }
-        console.log(formData.current.get("file"),formData.current.get("description"))
     }
 
     return(
