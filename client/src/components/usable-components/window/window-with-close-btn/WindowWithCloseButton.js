@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router"
+import "./WindowWithCloseButton.css"
 
 const WindowWithCloseButton = ({ children, title }) =>{
     const navigate = useNavigate()
