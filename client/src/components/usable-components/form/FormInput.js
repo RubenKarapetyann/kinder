@@ -1,4 +1,4 @@
-const FormInput = ({ name, type, value, changeHandle })=>{
+const FormInput = ({ name, type, value, changeHandle, placeholder })=>{
     return(
         <div className="form-outline mb-4">
             <label className="form-label" htmlFor={name}>{name}</label>
@@ -9,6 +9,7 @@ const FormInput = ({ name, type, value, changeHandle })=>{
                 required
                 value={value}
                 onChange={changeHandle}
+                placeholder={placeholder}
             />
         </div>
     )

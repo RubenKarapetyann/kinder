@@ -4,12 +4,8 @@ const ProfileTitle = ({ userName, comment, children, avatarImg="https://ionicfra
     return(
         <div className="profile-title-container">
             {middleware(
-                <img 
-                    src={avatarImg} 
-                    alt="mdo" width="32" 
-                    height="32" 
-                    className="rounded-circle"
-                />
+                typeof avatarImg === "object" ? <span className="rounded-circle">{avatarImg}</span> : 
+                <img src={avatarImg} alt="mdo" width="32" height="32" className="rounded-circle"/>
             )}
             <div className="profile-title-info">
                 <div className="profile-title-info-container">

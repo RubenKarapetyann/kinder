@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const ProfileImg = ({ route, side=32 })=>{
+const ProfileImg = ({ route, side=32, avatarImg })=>{
     return (
         <Link 
             to={route} 
@@ -9,7 +9,7 @@ const ProfileImg = ({ route, side=32 })=>{
             aria-expanded="false"
         >
             <img 
-                src="https://ionicframework.com/docs/img/demos/avatar.svg" 
+                src={avatarImg}
                 alt="mdo" 
                 width={side} 
                 height={side} 
