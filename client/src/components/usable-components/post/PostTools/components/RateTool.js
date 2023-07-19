@@ -4,11 +4,11 @@ import Like from "../../../../../images/post-tools/like"
 import { useNavigate } from "react-router"
 import { activePost } from "../../../../../redux/reducers/homeSlice/homeReducer"
 
-const RateTool = ({ active,type,postId })=>{
+const RateTool = ({ active,type,postId,isSingle })=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const activeHandle = ()=>{
-        dispatch(activePost(navigate,postId,type))
+        dispatch(activePost(navigate,postId,type,isSingle))
     }
     return (
         <div onClick={activeHandle}>

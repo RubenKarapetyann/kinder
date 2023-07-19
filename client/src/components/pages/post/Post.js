@@ -30,6 +30,7 @@ function Post (){
                 liked={post.liked}
                 postId={post.id}
                 favorite={post.favorite}
+                isSingle
             />
         </>
         

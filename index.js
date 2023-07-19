@@ -228,8 +228,27 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     }
     fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
     fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
+
+
+    const currentUser = users[user.id]
+    const backPost = {
+        postDescription : post.postDescription, 
+        id : post.id,
+        img : post.img,
+        likes : post.likes,
+        liked : post.likers[user.id],
+        publicDate : post.publicDate,
+        auther : {
+            id : currentUser.id,
+            userName : currentUser.userName,
+            avatarImg : currentUser.avatarImg
+        },
+        favorite : !!currentUser.favorites.find(val=>val===post.id)
+    }
+
     res.send({
         access : true,
+        post : backPost
     })
 })
 

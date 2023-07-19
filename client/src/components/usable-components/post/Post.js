@@ -3,7 +3,7 @@ import ProfileTitle from "../profile/ProfileTitle/ProfileTitle"
 import PostImage from "./PostImage"
 import PostTools from "./PostTools/PostTools"
 
-function Post({ autherUserName, likes, description, autherAvatarImg, img, liked, postId, favorite }){
+function Post({ autherUserName, likes, description, autherAvatarImg, img, liked, postId, favorite, isSingle }){
     return(
         <>
             <div className="post-top-part">
@@ -13,7 +13,7 @@ function Post({ autherUserName, likes, description, autherAvatarImg, img, liked,
                 </div> */}
             </div>
             <PostImage img={img}/>
-            <PostTools liked={liked} favorite={favorite} postId={postId}/>
+            <PostTools liked={liked} favorite={favorite} postId={postId} isSingle={isSingle}/>
             <AnyText 
                 divClass={"post-likes-comments"} 
                 pClass={"post-likes"}
