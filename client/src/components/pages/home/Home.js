@@ -31,6 +31,7 @@ function Home(){
                     liked={post.liked}
                     postId={post.id}
                     favorite={post.favorite}
+                    autherId={post.auther.id}
                 />
             })}
         </div>

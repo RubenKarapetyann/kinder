@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom"
 import AnyText from "../more/AnyText"
 import ProfileTitle from "../profile/ProfileTitle/ProfileTitle"
 import PostImage from "./PostImage"
 import PostTools from "./PostTools/PostTools"
 
-function Post({ autherUserName, likes, description, autherAvatarImg, img, liked, postId, favorite, isSingle }){
+function Post({ autherUserName, likes, description, autherAvatarImg, img, liked, postId, favorite, isSingle, autherId }){
+    const ProfileMiddleware = (children)=> <Link to={"/profile/"+autherId} className="link-without-styles">{children}</Link>
     return(
         <>
             <div className="post-top-part">
-                <ProfileTitle userName={autherUserName} avatarImg={autherAvatarImg}/>
+                <ProfileTitle userName={autherUserName} avatarImg={autherAvatarImg} middleware={ProfileMiddleware}/>
                 {/* <div class="post-manu">
                     <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                 </div> */}

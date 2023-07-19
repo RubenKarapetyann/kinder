@@ -31,6 +31,7 @@ function Post (){
                 postId={post.id}
                 favorite={post.favorite}
                 isSingle
+                autherId={post.auther.id}
             />
         </>
         
