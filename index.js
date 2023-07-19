@@ -207,14 +207,16 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
             post.likers[user.id] = false
             post.likes--
         }else{
+            if(post.auther.id !== user.id && post.likers[user.id] === undefined){
+                users[post.auther.id].notifications = [...users[post.auther.id].notifications, {
+                    id : Math.random(),
+                    autherId : user.id,
+                    date : new Date().getTime(),
+                    type : "like"
+                }]
+            }
             post.likers[user.id] = true
             post.likes++
-            users[post.auther.id].notifications = [...users[post.auther.id].notifications, {
-                id : Math.random(),
-                autherId : user.id,
-                date : new Date().getTime(),
-                type : "like"
-            }]
         }
     }else{
         const currentUser = users[user.id]

@@ -3,10 +3,10 @@
     "postDescription": "pretty summer",
     "id": "asjndasndangsidgsidfasn",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 0,
+    "likes": 2,
     "likers": {
-      "0.6145628391094977": false,
-      "0.8713018945867141": false
+      "0.6145628391094977": true,
+      "0.8713018945867141": true
     },
     "publicDate": "50",
     "auther": {
@@ -97,9 +97,10 @@
     "postDescription": "pasf",
     "id": "rdtrfyghjklredtfvghj",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 51,
+    "likes": 52,
     "likers": {
-      "0.6145628391094977": true
+      "0.6145628391094977": true,
+      "0.8713018945867141": true
     },
     "publicDate": "45",
     "auther": {
@@ -242,9 +243,10 @@
     "postDescription": "bhahahahahahhaah",
     "id": "0.21268094472632537",
     "img": "0.07360515610167262_1688763443690.jpg",
-    "likes": 1,
+    "likes": 2,
     "likers": {
-      "0.6145628391094977": true
+      "0.6145628391094977": true,
+      "0.8713018945867141": true
     },
     "publicDate": 1688763443698,
     "auther": {
@@ -269,9 +271,10 @@
     "postDescription": "joystick",
     "id": "0.8217597629345303",
     "img": "0.29241893472565117_1688768398603.jpg",
-    "likes": 0,
+    "likes": 2,
     "likers": {
-      "0.6145628391094977": false
+      "0.6145628391094977": true,
+      "0.8713018945867141": true
     },
     "publicDate": 1688768398616,
     "auther": {
@@ -292,9 +295,25 @@
     "img": "0.9221474536938459_1688982331074.jpg",
     "likes": 1,
     "likers": {
-      "0.6145628391094977": true
+      "0.6145628391094977": false,
+      "0.8713018945867141": true
     },
     "publicDate": 1688982331081,
+    "auther": {
+      "id": "0.6145628391094977"
+    },
+    "comments": []
+  },
+  "post_0.6200774794117869": {
+    "postDescription": "",
+    "id": "post_0.6200774794117869",
+    "img": "0.18115365068913447_1689805868689.jpg",
+    "likes": 1,
+    "likers": {
+      "0.8713018945867141": false,
+      "0.6145628391094977": true
+    },
+    "publicDate": 1689805869005,
     "auther": {
       "id": "0.6145628391094977"
     },
