@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router"
 import { getHomePosts } from "../../../redux/reducers/homeSlice/homeReducer"
 import Post from "../../usable-components/post/Post"
+import { getLoading } from "../../../utils/loading-helper"
 
 function Home(){
     const dispatch = useDispatch()
@@ -15,11 +16,12 @@ function Home(){
         dispatch(getHomePosts(navigate))
     },[])
 
-    if(loading){<p>loading</p>}
-
+    // if(loading){<p>loading</p>}
+    
 
     return(
         <div className="post">
+            {getLoading(loading)}
             {posts.map(post=>{
                 return <Post
                     autherUserName={post.auther.userName}

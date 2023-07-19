@@ -1,9 +1,12 @@
+import { MoonLoader } from "react-spinners"
 import "./Loading.css"
 
 
 const Loading = ()=>{
     return (
-        <>loading</>
+        <div className="loading-container">
+            <MoonLoader/>
+        </div>
     )
 }
 

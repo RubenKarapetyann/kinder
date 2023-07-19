@@ -5,6 +5,7 @@ import { getPost } from "../../../redux/reducers/postSlice/postReducer"
 import SinglePost from "../../usable-components/post/Post"
 import "../home/css/Home.css"
 import LeftArrow from "../../usable-components/more/LeftArrow"
+import { getLoading } from "../../../utils/loading-helper"
 
 function Post (){
     const { id } = useParams()
@@ -16,9 +17,9 @@ function Post (){
         dispatch(getPost(navigate,id))
     },[])
 
-    if(loading){return<p>loading</p>}
     return (
         <>
+            {getLoading(loading)}
             <LeftArrow/>
             <SinglePost
                 autherUserName={post.auther.userName}

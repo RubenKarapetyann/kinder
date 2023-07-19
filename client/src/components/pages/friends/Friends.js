@@ -4,6 +4,7 @@ import { getFriends } from "../../../redux/reducers/friendsSlice/friendsReducer"
 import { useNavigate } from "react-router"
 import Friend from "./components/Friend"
 import AddNewFriendBtn from "./components/AddNewFriendBtn"
+import { getLoading } from "../../../utils/loading-helper"
 
 
 function Friends(){
@@ -16,9 +17,9 @@ function Friends(){
     },[])
 
 
-    if(loading){return<p>loading...</p>}
     return (
         <>
+            {getLoading(loading)}
             {list.map(friend=>{
                 return <Friend 
                             userName={friend.userName}

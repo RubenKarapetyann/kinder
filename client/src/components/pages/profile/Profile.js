@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router"
 import { useEffect } from "react"
 import { getProfile } from "../../../redux/reducers/profileSlice/profileReducer"
 import { HOME } from "../../../constants/routes-constants"
+import { getLoading } from "../../../utils/loading-helper"
 
 function Profile(){
   const loading = useSelector(store=>store.profile.loading)
@@ -24,10 +25,9 @@ function Profile(){
   },[])
 
 
-
-  if(loading){return<p>loading...</p>}
   return(
       <div className="profile-container">
+        {getLoading(loading)}
         <ProfileDescription/>
         <hr/>
         <ProfilePostsList/>
