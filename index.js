@@ -484,7 +484,7 @@ app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
             userName : currentUser.userName,
             avatarImg : currentUser.avatarImg
         },
-        favorite : !!user.favorites.find(val=>val===currentPost.postId)
+        favorite : !!user.favorites.find(val=>val===currentPost.id)
     }
 
     res.send({
