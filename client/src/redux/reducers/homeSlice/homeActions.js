@@ -9,9 +9,9 @@ export const setHomePosts = (posts)=>{
     }
 }
 
-export const activePostAction = (type,postId)=>{
+export const activePostAction = (post)=>{
     return  {
         type : POST_ACTIVE,
-        payload : {type,postId}
+        payload : {post}
     }
 }

@@ -22,30 +22,35 @@ function homeReducer(state={ loading : false, posts : [] },action){
                 posts : action.payload.posts
             }
         case POST_ACTIVE:
-            if(action.payload.type === "like"){
-                const newPosts = state.posts.map(val=>{
-                    if(val.id === action.payload.postId){
-                        val.liked = !val.liked
-                        val.likes = !val.liked ? --val.likes : ++val.likes
-                    }
-                    return val
-                })
-                return {
-                    ...state,
-                    posts : newPosts
-                } 
-            }else{
-                const newPosts = state.posts.map(val=>{
-                    if(val.id === action.payload.postId){
-                        val.favorite = !val.favorite
-                    }
-                    return val
-                })
-                return {
-                    ...state,
-                    posts : newPosts
-                }
-            }          
+            return {
+                ...state,
+                posts : state.posts.map(post=>post.id===action.payload.post.id ? action.payload.post : post)
+            }
+            // second way
+            // if(action.payload.type === "like"){
+            //     const newPosts = state.posts.map(val=>{
+            //         if(val.id === action.payload.postId){
+            //             val.liked = !val.liked
+            //             val.likes = !val.liked ? --val.likes : ++val.likes
+            //         }
+            //         return val
+            //     })
+            //     return {
+            //         ...state,
+            //         posts : newPosts
+            //     } 
+            // }else{
+            //     const newPosts = state.posts.map(val=>{
+            //         if(val.id === action.payload.postId){
+            //             val.favorite = !val.favorite
+            //         }
+            //         return val
+            //     })
+            //     return {
+            //         ...state,
+            //         posts : newPosts
+            //     }
+            // }          
         default:
             return state
     }
@@ -96,7 +101,7 @@ export const activePost = (navigate,postId,type,isSingle)=>{
                         if(isSingle){
                             dispatch(setPost(result.post))
                         }else{
-                            dispatch(activePostAction(type,postId))
+                            dispatch(activePostAction(result.post))
                         }
                     }
                 })

@@ -3,9 +3,9 @@
     "postDescription": "pretty summer",
     "id": "asjndasndangsidgsidfasn",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 1,
+    "likes": 0,
     "likers": {
-      "0.6145628391094977": true,
+      "0.6145628391094977": false,
       "0.8713018945867141": false
     },
     "publicDate": "50",
@@ -97,9 +97,9 @@
     "postDescription": "pasf",
     "id": "rdtrfyghjklredtfvghj",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 50,
+    "likes": 51,
     "likers": {
-      "0.6145628391094977": false
+      "0.6145628391094977": true
     },
     "publicDate": "45",
     "auther": {
@@ -290,8 +290,10 @@
     "postDescription": "top gear",
     "id": "0.4351839619729243",
     "img": "0.9221474536938459_1688982331074.jpg",
-    "likes": 0,
-    "likers": {},
+    "likes": 1,
+    "likers": {
+      "0.6145628391094977": true
+    },
     "publicDate": 1688982331081,
     "auther": {
       "id": "0.6145628391094977"
