@@ -1,3 +1,5 @@
 export const LOADING_START = "profile-loading-start"
 export const LOADING_FINISH = "profile-loading-finish"
 export const SET_PROFILE = "set-profile"
+export const TAB_CHANGE = "profile-tab-change"
+export const SET_FAVORITES = "set-favorites"
