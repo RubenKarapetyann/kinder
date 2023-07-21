@@ -10,6 +10,7 @@ import { getLoading } from "../../../utils/loading-helper"
 import { FAVORITES } from "../../../constants/profile-constants"
 import { LOADING_FINISH, LOADING_START, SET_FAVORITES } from "../../../constants/profile-slice-constants"
 import { getList } from "../../../utils/api-helper"
+import ProfileTabs from "./components/ProfileTabs"
 
 function Profile(){
   const { activeTab, loading, profile } = useSelector(store=>store.profile)
@@ -38,6 +39,7 @@ function Profile(){
         {getLoading(loading)}
         <ProfileDescription/>
         <hr/>
+        {id === user.id && <ProfileTabs/>}
         <ProfilePostsList/>
     </div>
   )
