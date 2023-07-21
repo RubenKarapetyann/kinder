@@ -448,8 +448,22 @@ app.get(FAVORITES,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const { id } = req.params
 
 
+    if(id !== req.user.id){
+        return res.send({
+            access : false
+        })
+    }
+    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+
+    const favorites = users[id].favorites.map(postId=>({
+        postId,
+        img : posts[postId].img
+    }))
+
     res.send({
         access : true,
+        list : favorites
     })
 })
 
