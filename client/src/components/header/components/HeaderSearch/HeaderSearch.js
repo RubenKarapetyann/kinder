@@ -22,6 +22,12 @@ const HeaderSearch = ()=>{
         }
     },[search])
 
+    useEffect(()=>{
+        if(search !== ""){
+            setSearch("")
+        }
+    },[activeSearch])
+
 
     if(!activeSearch)return null
 
