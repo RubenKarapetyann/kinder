@@ -562,6 +562,7 @@ io.on("connection",(socket)=>{
 
     const addMessage = (message)=>{
         const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+        const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
         const newMessage = {
             text : message.text,
             autherId : message.autherId,
@@ -569,7 +570,12 @@ io.on("connection",(socket)=>{
             sendDate : new Date().getTime()
         }
         chat[roomId].messages.push(newMessage)
-        sendMessage(newMessage)
+        const user = users[message.autherId]
+        sendMessage({
+            ...newMessage,
+            avatarImg : user.avatarImg,
+            userName : user.userName,
+        })
         fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
     }
 
