@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useNavigate, useParams } from "react-router"
 import Message from "./message/Message"
 
@@ -9,14 +9,21 @@ const MessageBox = ({ handle, type })=>{
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { id } = useParams()
+    const boxRef = useRef({})
+
 
     useEffect(()=>{
         dispatch(handle(navigate,id))
     },[])
     
+    useEffect(()=>{
+        boxRef.current.scrollIntoView(false)
+    },[list.length])
+
     return(
-        <div style={{
-            minHeight: "70vh"
+        <div ref={boxRef} style={{
+            minHeight: "70vh",
+            scrollBehavior : "smooth"
         }}>
             {list.map(item=>{
                 return <Message 
