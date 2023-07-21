@@ -33,8 +33,8 @@ function friendsReducer(state={ loading : false, list : [] },action){
 }
 
 
-export const getFriends = (navigate)=>{
-    return getList(navigate,"friends","",SET_FRIENDS_LIST,LOADING_START,LOADING_FINISH)
+export const getFriends = (navigate,id="")=>{
+    return getList(navigate,"friends",id,SET_FRIENDS_LIST,LOADING_START,LOADING_FINISH)
 }
 
 export const deleteFriendById = (navigate,id)=>{

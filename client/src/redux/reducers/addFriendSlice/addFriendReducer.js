@@ -1,7 +1,7 @@
 import { LOADING_START, LOADING_FINISH, LIST_SET, SET_STATUS } from "../../../constants/add-friend-slice-constants"
 import { getHeaders } from "../../../constants/api-constants"
 import { LOGIN } from "../../../constants/routes-constants"
-import { loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { getList, loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setStatus } from "./addFriendActions"
 
 
@@ -60,5 +60,8 @@ export const activeFriend = (id,status,navigate)=>{
     }
 }
 
+export const getAddFriends = (navigate,id="")=>{
+    return getList(navigate,"addfriend",id,LIST_SET,LOADING_START,LOADING_FINISH)
+}
 
 export default addFriendReducer

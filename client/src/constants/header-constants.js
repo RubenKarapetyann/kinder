@@ -4,6 +4,9 @@ import homeIcon from "../images/tabs/home.svg"
 import notificationsIcon from "../images/tabs/notifications.svg"
 import messagesIcon from "../images/tabs/messages.svg"
 import { FaCog, FaPlus, FaSignOutAlt, FaUser } from "react-icons/fa"
+import { getFriends } from "../redux/reducers/friendsSlice/friendsReducer"
+import { getMessagesList } from "../redux/reducers/messagesSlice/messagesReducer"
+import { getAddFriends } from "../redux/reducers/addFriendSlice/addFriendReducer"
 
 export const HEADER_ITEMS = [
     {
@@ -61,7 +64,20 @@ export const HEADER_DROPDOWN = [
         routeName : LOG_OUT,
         icon : <FaSignOutAlt/>
     },
-
 ]
 
 export const NEED_SEARCH = [FRIENDS, MESSAGES, ADD_FRIEND]
+
+
+
+export const NEED_SEARCH_MAP = {
+    [FRIENDS] : {
+        listGeter : getFriends
+    },
+    [MESSAGES] : {
+        listGeter : getMessagesList
+    },
+    [ADD_FRIEND] : {
+        listGeter : getAddFriends
+    }
+}

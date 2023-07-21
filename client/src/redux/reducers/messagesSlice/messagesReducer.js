@@ -24,8 +24,8 @@ function messagesReducer(state={ messages : [], loading : false }, action){
     }
 }
 
-export const getMessagesList = (navigate)=>{
-    return getList(navigate,"messages","",SET_MESSAGES_LIST,LOADING_START,LOADING_FINISH)
+export const getMessagesList = (navigate,id="")=>{
+    return getList(navigate,"messages",id,SET_MESSAGES_LIST,LOADING_START,LOADING_FINISH)
 }
 
 
