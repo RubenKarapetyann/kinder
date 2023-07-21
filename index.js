@@ -261,6 +261,32 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const messages = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
+    if(req.query.search){
+        const messagesList = friends.reduce((arr,friend)=>{
+            if(new RegExp(req.query.search,"i").test(users[friend.friendId].userName)){
+                const currentChat = messages[friend.chatId]
+                const { id:currentUserId } = currentChat.members.find(val=>val.id===friend.friendId)
+                const currentUser = users[currentUserId]
+                return [...arr,{
+                    sender : {
+                        id: currentUserId,
+                        userName: currentUser.userName,
+                        avatarImg: currentUser.avatarImg
+                    },
+                    lastMessage : currentChat.messages[currentChat.messages.length-1] || {},
+                    chatId : friend.chatId
+                }]
+            }
+            return arr
+        },[])
+
+
+        return res.send({
+            access : true,
+            list : messagesList
+        })
+    }
+
     const messagesList = friends.map(friend=>{
         const currentChat = messages[friend.chatId]
         const { id:currentUserId } = currentChat.members.find(val=>val.id===friend.friendId)
