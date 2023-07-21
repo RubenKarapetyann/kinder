@@ -1,9 +1,10 @@
-import { LOADING_START, LOADING_FINISH, SET_PROFILE } from "../../../constants/profile-slice-constants"
+import { POSTS } from "../../../constants/profile-constants"
+import { LOADING_START, LOADING_FINISH, SET_PROFILE, TAB_CHANGE, SET_FAVORITES } from "../../../constants/profile-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
 import { loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setProfile } from "./profileActions"
 
-function profileReducer(state={ loading : false, profile : {auther : {}, posts : []} }, action){
+function profileReducer(state={ loading : false, profile : {auther : {}, posts : [], favorites : null}, activeTab : POSTS }, action){
     switch(action.type){
         case LOADING_START:
             return {
@@ -19,6 +20,19 @@ function profileReducer(state={ loading : false, profile : {auther : {}, posts :
             return {
                 ...state,
                 profile : action.payload.profile
+            }
+        case TAB_CHANGE:
+            return {
+                ...state,
+                activeTab : action.payload.activeTab
+            }
+        case SET_FAVORITES:
+            return {
+                ...state,
+                profile : {
+                    ...state.profile,
+                    favorites : action.payload.list
+                }
             }
         default:
             return state
