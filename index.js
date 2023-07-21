@@ -497,6 +497,26 @@ app.get(FRIENDS,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const user = req.user
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
+    if(req.query.search){
+        const friends = users[user.id].friends.reduce((arr,friend)=>{
+            if(new RegExp(req.query.search,"i").test(users[friend.friendId].userName)){
+                const currentFriend = users[friend.friendId]
+                return [...arr,{
+                    id : friend.friendId,
+                    avatarImg : currentFriend.avatarImg,
+                    userName : currentFriend.userName,
+                    chatId : friend.chatId
+                }]
+            }
+            return arr
+        },[])
+        
+        return res.send({
+            access : true,
+            list : friends
+        })
+    }
+
 
     const friends = users[user.id].friends.map(friend=>{
         const currentFriend = users[friend.friendId]
