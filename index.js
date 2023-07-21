@@ -11,6 +11,7 @@ import http from "http"
 import { Server } from "socket.io" 
 import { NOT_FRIENDS, OTHER_SEND, USER_STATUS_TRANSFORM, YOU_SEND } from "./constants/user-status-constants.js"
 import { getUserStatus } from "./utils/getUserStatus.js"
+import { nanoid } from "nanoid"
 
 
 
@@ -19,7 +20,7 @@ const storageConfig = multer.diskStorage({
         cb(null, "./database/images");
     },
     filename: (req, file, cb) =>{
-        cb(null, `${Math.random()}_${new Date().getTime()}.jpg`);
+        cb(null, `image_${nanoid(8)}.jpg`);
     }
 });
 
@@ -79,7 +80,7 @@ app.post(REGISTER,async (req,res)=>{
         const user = Object.values(users).find(val=>val.email===email)
         if(!user){
             const hashedPassword = await bcrypt.hash(password, 10)
-            const id = Math.random()
+            const id = `user_${nanoid(8)}`
             const newUser = {
                 userName : name,
                 email : email,
@@ -209,7 +210,7 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
         }else{
             if(post.auther.id !== user.id && post.likers[user.id] === undefined){
                 users[post.auther.id].notifications = [...users[post.auther.id].notifications, {
-                    id : Math.random(),
+                    id : `notification_${nanoid(8)}`,
                     autherId : user.id,
                     date : new Date().getTime(),
                     type : "like"
@@ -314,13 +315,13 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)
         text: comment,
         autherId: id,
         likes: 0,
-        id : `comment_${Math.random()}`
+        id : `comment_${nanoid(8)}`
     }
 
     const post = posts[postId]
     post.comments.push(newComment)
     users[post.auther.id].notifications = [...users[post.auther.id].notifications, {
-        id : `notification_${Math.random()}`,
+        id : `notification_${nanoid(8)}`,
         autherId : id,
         date : new Date().getTime(),
         type : "comment"
@@ -389,7 +390,7 @@ app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single(
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
 
-    const postId = `post_${Math.random()}`
+    const postId = `post_${nanoid(8)}`
     posts[postId] = {
         postDescription: req.body.description,
         id: postId,
@@ -541,7 +542,7 @@ io.on("connection",(socket)=>{
         const newMessage = {
             text : message.text,
             autherId : message.autherId,
-            id : `${Math.random()}-"message"`,
+            id : `message_${nanoid(8)}`,
             sendDate : new Date().getTime()
         }
         chat[roomId].messages.push(newMessage)
@@ -611,7 +612,7 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
     if(req.body.status === NOT_FRIENDS){
         otherUser.notifications.push({
-            id: Math.random(),
+            id: `notification_${nanoid(8)}`,
             autherId: currentUser.id,
             date: currentDate,
             type: "friend-requests"
@@ -626,7 +627,7 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
         })
     }else if(req.body.status === OTHER_SEND){
         const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
-        const chatId = "chat-"+Math.random()
+        const chatId = `chat_${nanoid(8)}`
         chat[chatId] = {
             members: [
                 {
@@ -649,7 +650,7 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
         otherUser.friendRequests.meToOther = otherUser.friendRequests.meToOther.filter(req=>req.id !== currentUser.id)
         currentUser.friendRequests.otherToMe = currentUser.friendRequests.otherToMe.filter(req=>req.id !== otherUser.id)
         otherUser.notifications.push({
-            id: Math.random(),
+            id: `notification_${nanoid(8)}`,
             autherId: currentUser.id,
             date: currentDate,
             type: "friend-requests-access"

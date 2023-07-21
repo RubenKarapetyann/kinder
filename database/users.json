@@ -261,6 +261,12 @@
         "autherId": "0.8713018945867141",
         "date": 1689806373124,
         "type": "like"
+      },
+      {
+        "id": "notification_Kv7BiKZe",
+        "autherId": "0.6145628391094977",
+        "date": 1689971666109,
+        "type": "comment"
       }
     ],
     "friendRequests": {
