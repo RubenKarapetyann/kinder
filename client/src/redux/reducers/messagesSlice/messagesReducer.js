@@ -1,7 +1,7 @@
 import { LOADING_FINISH, LOADING_START, SET_MESSAGES_LIST } from "../../../constants/messages-slice-constants"
-import { setMessagesList } from "./messagesActions"
-import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { getList } from "../../../utils/api-helper"
+
+
 function messagesReducer(state={ messages : [], loading : false }, action){
     switch(action.type){
         case LOADING_START:
@@ -17,7 +17,7 @@ function messagesReducer(state={ messages : [], loading : false }, action){
         case SET_MESSAGES_LIST:
             return {
                 ...state,
-                messages : action.payload.messagesList
+                messages : action.payload.list
             }
         default:
             return state
@@ -25,31 +25,9 @@ function messagesReducer(state={ messages : [], loading : false }, action){
 }
 
 export const getMessagesList = (navigate)=>{
-    return (dispatch)=>{
-        const token = localStorage.getItem("jwtToken")
-        if(token){
-            dispatch(loadingStart(LOADING_START))
-            try{
-                fetch("/messages",{
-                    method : "GET",
-                    headers : {
-                        'Content-Type': 'application/json',
-                        "authorization" : "Bearer "+token
-                    }
-                }).then(res=>res.json()).then(result=>{
-                    if(result.access){
-                        dispatch(setMessagesList(result.messagesList))
-                    }
-                    dispatch(loadingFinish(LOADING_FINISH))
-                })
-            }catch(err){
-                navigate("/"+HOME)
-            }
-        }else{
-            navigate("/"+LOGIN)
-        }
-    }
+    return getList(navigate,"messages","",SET_MESSAGES_LIST,LOADING_START,LOADING_FINISH)
 }
+
 
 
 

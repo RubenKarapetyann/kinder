@@ -2,7 +2,7 @@ import { POSTS } from "../../../constants/profile-constants"
 import { LOADING_START, LOADING_FINISH, SET_PROFILE, TAB_CHANGE, SET_FAVORITES } from "../../../constants/profile-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
 import { loadingFinish, loadingStart } from "../../../utils/api-helper"
-import { setProfile } from "./profileActions"
+import { setProfile, tabChange } from "./profileActions"
 
 function profileReducer(state={ loading : false, profile : {auther : {}, posts : [], favorites : null}, activeTab : POSTS }, action){
     switch(action.type){
@@ -54,6 +54,7 @@ export const getProfile = (navigate,id)=>{
                 }).then(res=>res.json()).then(result=>{
                     if(result.access){
                         dispatch(setProfile(result.profile))
+                        dispatch(tabChange(POSTS))
                     }
                     dispatch(loadingFinish(LOADING_FINISH))
                 })

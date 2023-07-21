@@ -278,7 +278,7 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
     res.send({
         access : true,
-        messagesList
+        list : messagesList
     })
 })
 
