@@ -1,10 +1,7 @@
 import { useLocation, useNavigate } from "react-router"
-import { NEED_SEARCH } from "../../../../constants/header-constants"
+import { NEED_SEARCH, NEED_SEARCH_MAP } from "../../../../constants/header-constants"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { getList } from "../../../../utils/api-helper"
-import { LIST_SET, LOADING_START, LOADING_FINISH } from "../../../../constants/add-friend-slice-constants"
-import { ADD_FRIEND } from "../../../../constants/routes-constants"
 
 const HeaderSearch = ()=>{
     const location = useLocation()
@@ -14,9 +11,10 @@ const HeaderSearch = ()=>{
     const navigate = useNavigate()
 
     useEffect(()=>{
-        if(location.pathname.slice(1,) === ADD_FRIEND){
+        if(activeSearch){
+            const currentSlice = NEED_SEARCH_MAP[activeSearch]
             const id = setTimeout(()=>{
-                dispatch(getList(navigate,location.pathname.slice(1,),"?search="+search,LIST_SET,LOADING_START,LOADING_FINISH))
+                dispatch(currentSlice.listGeter(navigate,"?search="+search))
             },1000)
             return ()=>{
                 clearTimeout(id)
