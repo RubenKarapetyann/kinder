@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS, POST, ADD_FRIEND, SETTINGS } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS, POST, ADD_FRIEND, SETTINGS, FAVORITES } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -441,6 +441,15 @@ app.get(PROFILE,passport.authenticate("jwt", {session : false}),(req,res)=>{
     res.send({
         access : true,
         profile
+    })
+})
+
+app.get(FAVORITES,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const { id } = req.params
+
+
+    res.send({
+        access : true,
     })
 })
 
