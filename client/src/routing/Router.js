@@ -5,6 +5,7 @@ import Header from "../components/header/Header"
 import { useSelector } from "react-redux"
 import { SETTINGS_ROUTES } from "../constants/settings-constants"
 import WindowWithCloseButton from "../components/usable-components/window/window-with-close-btn/WindowWithCloseButton"
+import NotificationWindow from "../components/usable-components/window/notification-window/NotificationWindow"
 
 const Home = lazy(()=>import("../components/pages/home/Home"))
 const Friends = lazy(()=>import("../components/pages/friends/Friends"))
@@ -57,6 +58,7 @@ function Router(){
                     <Route path={POST} element={<Post/>}/>
                     <Route path={MY_PROFILE} element={<Profile/>}/>
                 </Routes>
+                <NotificationWindow text={location.pathname.slice(1,)} key={Math.random()}/>
             </main>
         </>
     )
