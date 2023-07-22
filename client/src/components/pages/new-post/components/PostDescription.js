@@ -19,9 +19,10 @@ const PostDescription = ({ children, file })=>{
     },[value,file])
 
 
-    const sendHandle = ()=>{
-        const token = localStorage.getItem("jwtToken")
+    const submitHandle = e =>{
+        e.preventDefault()
         try{
+            const token = localStorage.getItem("jwtToken")
             setLoading(true)
             fetch("/newpost",{
                 headers : {
@@ -43,13 +44,13 @@ const PostDescription = ({ children, file })=>{
     }
 
     return(
-        <div className="posting-container">
+        <form className="posting-container" onSubmit={submitHandle}>
             <div className="mb-3">
                 {children.slice(0,2)}
             </div>
             <FormInput name={"Description"} type={"text"} value={value} changeHandle={changeHandle}/> 
-            {children[2](sendHandle,loading)}
-        </div>
+            {children[2](loading)}
+        </form>
     )
 }
 
