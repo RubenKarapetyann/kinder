@@ -7,9 +7,9 @@ const Like = ({ active })=>{
             data-name="Layer 1" 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 512 512"
-            fill={active && "rgb(255, 48, 64)"}
+            fill={active ? "rgb(255, 48, 64)" : undefined}
             className="rate-tool-svg"
-            color={active && "rgb(255, 48, 64)"}
+            color={active ? "rgb(255, 48, 64)" : undefined}
             >
             {
                 active ? 

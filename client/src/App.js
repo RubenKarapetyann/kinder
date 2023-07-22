@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import store from "./redux/store/store"
 import CheckAuthentication from './components/usable-components/authentication/CheckAuthentication';
 import { getLoading } from './utils/loading-helper';
+import Location from "./components/usable-components/optimisation/Location"
 
 //headeri nkarelu erkrord dzevy reduxov info talna chmoranas y.Davitic harcnes 
 //+ reduxin hasnes pordzi anes
@@ -17,7 +18,9 @@ function App() {
       <Provider store={store}>
         <CheckAuthentication>
             <Suspense fallback={getLoading(true)}>
-              <Router/>
+              <Location>
+                <Router/>
+              </Location>
             </Suspense>
         </CheckAuthentication>
       </Provider>    

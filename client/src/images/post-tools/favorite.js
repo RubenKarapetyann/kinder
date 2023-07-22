@@ -3,8 +3,8 @@ const Favorite = ({ active })=>{
         <svg 
             viewBox="0 0 24 24"
             id="bookmark" 
-            fill={active && "rgb(255, 48, 64)"}
-            color={active && "rgb(255, 48, 64)"}
+            fill={active ? "rgb(255, 48, 64)" : undefined}
+            color={active ? "rgb(255, 48, 64)" : undefined}
             className="rate-tool-svg"
             width="26px">
             {
