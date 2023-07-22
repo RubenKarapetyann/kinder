@@ -9,6 +9,7 @@ const HeaderItems = ()=>{
                     icon={item.displayIcon}
                     key={item.id}
                     route={item.routeName}
+                    displayName={item.displayName}
                 />
             })}
         </ul>
