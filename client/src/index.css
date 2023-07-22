@@ -60,3 +60,20 @@ body::-webkit-scrollbar-thumb{
 .big-icon{
   font-size: 16px;
 }
+
+
+@media (min-height : 600px) {
+  .left-arrow-container {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.left-arrow-container{
+  width: 100%;
+  height : 40px;
+  background : white;
+  display: flex;
+  align-items: center;
+  border-bottom: 0.5px rgb(201, 201, 201) solid;
+}
