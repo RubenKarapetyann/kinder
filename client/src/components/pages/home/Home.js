@@ -16,7 +16,6 @@ function Home(){
         dispatch(getHomePosts(navigate))
     },[])
 
-    // if(loading){<p>loading</p>}
     
 
     return(

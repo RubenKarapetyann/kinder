@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router"
 import { getPost } from "../../../redux/reducers/postSlice/postReducer"
 import SinglePost from "../../usable-components/post/Post"
-import "../home/css/Home.css"
 import LeftArrow from "../../usable-components/more/LeftArrow"
 import { getLoading } from "../../../utils/loading-helper"
 
