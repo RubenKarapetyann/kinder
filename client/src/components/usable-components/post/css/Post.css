@@ -75,3 +75,32 @@
     padding: 2px;
 
 }
+
+.rate-tool-svg{
+    transition: 1s ease-in;
+}
+
+.active-rate-tool-path-favorite{
+    animation-name: favorite;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); 
+
+}
+
+.active-rate-tool-path-like{
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); 
+    animation-name: like;
+}
+
+@keyframes favorite {
+    0%   { transform: scale(1); }
+    90%   { transform: scale(1.1); }
+    100% { transform: scale(1.05); }
+}
+
+@keyframes like {
+    0%   { transform: scale(21); }
+    90%   { transform: scale(22); }
+    100% { transform: scale(21.5); }
+}
