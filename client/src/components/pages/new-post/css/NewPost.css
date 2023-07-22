@@ -4,3 +4,37 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.dropzone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: dashed 3px #ccc;
+    border-radius: 1rem;
+    padding: 2rem;
+    font-size: 20px;
+}
+
+.new-post-file-input{
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.new-post-file-label{
+    margin-top: 1rem;
+    background-color: #0d6efd;
+    border-radius: 4rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    text-align: center;
+    user-select: none;
+}
