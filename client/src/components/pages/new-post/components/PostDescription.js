@@ -7,23 +7,29 @@ import images from "../../../../images/more/images.svg"
 
 const PostDescription = ({ children })=>{
     const [value,setValue] = useState("")
-    const changeHandle = e => setValue(e.target.value)
     const formData = useRef(new FormData())
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const reader = new FileReader()
-    const [file,setFile] = useState(null)
+    const [file,setFile] = useState({
+        mainFile : null,
+        readedFile : null
+    })
 
     useEffect(()=>{
-        if(file){
-            formData.current.set("file",file,"post.jpg")
-            reader.readAsDataURL(file)
+        if(file.mainFile){
+            formData.current.set("file",file.mainFile,"post.jpg")
+            reader.readAsDataURL(file.mainFile)
             reader.onload = function() {
-                setFile(reader.result)
+                setFile({
+                    ...file,
+                    readedFile : reader.result
+                })
             }
         }
-        formData.current.set("description",value)
-    },[value,file])
+        
+    },[file])
+
 
     const submitHandle = e =>{
         e.preventDefault()
@@ -49,16 +55,31 @@ const PostDescription = ({ children })=>{
         }
     }
 
+    const fileChangeHandle = e => setFile({
+        ...file,
+        mainFile : e.target.files[0]
+    })
+    const changeHandle = e => {
+        setValue(e.target.value)
+        formData.current.set("description",e.target.value)
+    }
+
+
     return(
         <form className="posting-container" onSubmit={submitHandle}>
             <div className="dropzone">
-                <img src={images}/>
+                <div className="new-post-image-container">
+                    <img src={file.readedFile ? file.readedFile : images} style={{
+                        width : "200px"
+                    }}/>
+                </div>
                 <input 
                     type="file" 
                     className="new-post-file-input" 
                     id="images" 
                     accept="image/png, image/jpeg, image/jpg" 
                     multiple=""
+                    onChange={fileChangeHandle}
                 />
                 <label htmlFor="images" className="new-post-file-label"><FaUpload/> Upload Image</label>
 
