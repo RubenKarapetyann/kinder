@@ -28,6 +28,8 @@
 
 .post-img-photo{
     border-radius: 10px;
+    width: 100%; 
+    /* delete width */
 }
 
 .post-img{
@@ -36,6 +38,9 @@
     justify-content: center;
     margin-top: 10px;
     overflow-x: hidden;
+    /* new styles */
+    max-width: 100%;
+    max-height: 600px;
 }
 
 

@@ -11,9 +11,6 @@ function Post({ autherUserName, likes, description, autherAvatarImg, img, liked,
         <>
             <div className="post-top-part">
                 <ProfileTitle userName={autherUserName} avatarImg={autherAvatarImg} middleware={ProfileMiddleware}/>
-                {/* <div class="post-manu">
-                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                </div> */}
             </div>
             <PostImage img={img}/>
             <PostTools liked={liked} favorite={favorite} postId={postId} isSingle={isSingle}/>
