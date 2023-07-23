@@ -108,7 +108,7 @@
       "0.6145628391094977": true,
       "0.8713018945867141": true
     },
-    "publicDate": "45",
+    "publicDate": 45,
     "auther": {
       "id": "0.8713018945867141"
     },
@@ -358,6 +358,18 @@
     "likes": 0,
     "likers": {},
     "publicDate": 1690054260403,
+    "auther": {
+      "id": "0.6145628391094977"
+    },
+    "comments": []
+  },
+  "post_QF9F2mtR": {
+    "postDescription": "my image",
+    "id": "post_QF9F2mtR",
+    "img": "image_uWN81kYF.jpg",
+    "likes": 0,
+    "likers": {},
+    "publicDate": 1690134726427,
     "auther": {
       "id": "0.6145628391094977"
     },

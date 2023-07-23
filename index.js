@@ -146,29 +146,33 @@ app.get(LOG_OUT,(req,res)=>{
 
 app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     const user = req.user
+    const { page } = req.query 
     const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    const userPosts = user.posts.map(post=>{
-        const currentPost = posts[post.postId]
-        const currentUser = users[currentPost.auther.id]
-        return getPost(user,currentUser,currentPost) 
-    })
+    const allPosts = [...user.posts.map(post=>getPost(user,user,posts[post.postId])),...user.friends.reduce((state,friend)=>{
+        return state.concat(...users[friend.friendId].posts.map(post=>getPost(user,users[friend.friendId],posts[post.postId])))
+    },[])].sort((p1,p2)=>p2.publicDate-p1.publicDate)
 
-    const friendsPost = user.friends.reduce((state,friend)=>{
-        return state.concat(...users[friend.friendId].posts.map(post=>{
-            const currentPost = posts[post.postId]
-            const currentUser = users[currentPost.auther.id]
-            return getPost(user,currentUser,currentPost)
-        }))
-    },[])
+    // const userPosts = user.posts.map(post=>{
+    //     const currentPost = posts[post.postId]
+    //     const currentUser = users[currentPost.auther.id]
+    //     return getPost(user,currentUser,currentPost) 
+    // })
+
+    // const friendsPost = user.friends.reduce((state,friend)=>{
+    //     return state.concat(...users[friend.friendId].posts.map(post=>{
+    //         const currentPost = posts[post.postId]
+    //         const currentUser = users[currentPost.auther.id]
+    //         return getPost(user,currentUser,currentPost)
+    //     }))
+    // },[])
     
-
     res.send({
         access : true,
-        posts : [...userPosts,...friendsPost]
+        posts : allPosts.slice(page*3,page*3+3)
     })
-})
+}) 
 
 
 

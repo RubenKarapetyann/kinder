@@ -62,7 +62,7 @@ export const getHomePosts = (navigate)=>{
         if(token){
             try{
                 dispatch(loadingStart(LOADING_START))
-                fetch("/home",{
+                fetch("/home?page=0",{
                     method : 'GET',
                     headers : {
                         'Content-Type': 'application/json',
