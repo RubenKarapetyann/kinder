@@ -17,7 +17,7 @@ function Post (){
     },[])
 
     return (
-        <>
+        <div className="post">
             {getLoading(loading)}
             <LeftArrow/>
             <SinglePost
@@ -33,7 +33,7 @@ function Post (){
                 isSingle
                 autherId={post.auther.id}
             />
-        </>
+        </div>
         
     )
 }

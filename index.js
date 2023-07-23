@@ -12,6 +12,7 @@ import { Server } from "socket.io"
 import { NOT_FRIENDS, OTHER_SEND, USER_STATUS_TRANSFORM, YOU_SEND } from "./constants/user-status-constants.js"
 import { getUserStatus } from "./utils/getUserStatus.js"
 import { nanoid } from "nanoid"
+import { getPost } from "./utils/getPost.js"
 
 
 
@@ -151,39 +152,15 @@ app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     const userPosts = user.posts.map(post=>{
         const currentPost = posts[post.postId]
         const currentUser = users[currentPost.auther.id]
-        return ({
-            postDescription : currentPost.postDescription, 
-            id : currentPost.id,
-            img : currentPost.img,
-            likes : currentPost.likes,
-            liked : currentPost.likers[user.id],
-            publicDate : currentPost.publicDate,
-            auther : {
-                id : currentUser.id,
-                userName : currentUser.userName,
-                avatarImg : currentUser.avatarImg
-            },
-            favorite : !!user.favorites.find(val=>val===post.postId)
-    })})
+        return getPost(user,currentUser,currentPost) 
+    })
 
     const friendsPost = user.friends.reduce((state,friend)=>{
         return state.concat(...users[friend.friendId].posts.map(post=>{
             const currentPost = posts[post.postId]
             const currentUser = users[currentPost.auther.id]
-            return ({
-                postDescription : currentPost.postDescription, 
-                id : currentPost.id,
-                img : currentPost.img,
-                likes : currentPost.likes,
-                liked : currentPost.likers[user.id],
-                publicDate : currentPost.publicDate,
-                auther : {
-                    id : currentUser.id,
-                    userName : currentUser.userName,
-                    avatarImg : currentUser.avatarImg
-                },
-                favorite : !!user.favorites.find(val=>val===post.postId)
-        })}))
+            return getPost(user,currentUser,currentPost)
+        }))
     },[])
     
 
@@ -233,21 +210,8 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
     fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
 
 
-    const currentUser = users[user.id]
-    const backPost = {
-        postDescription : post.postDescription, 
-        id : post.id,
-        img : post.img,
-        likes : post.likes,
-        liked : post.likers[user.id],
-        publicDate : post.publicDate,
-        auther : {
-            id : currentUser.id,
-            userName : currentUser.userName,
-            avatarImg : currentUser.avatarImg
-        },
-        favorite : !!currentUser.favorites.find(val=>val===post.id)
-    }
+    const currentUser = users[post.auther.id]
+    const backPost = getPost(user,currentUser,post)
 
     res.send({
         access : true,
@@ -563,20 +527,7 @@ app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const currentPost = posts[id]
     const currentUser = users[currentPost.auther.id]
 
-    const post = {
-        postDescription : currentPost.postDescription, 
-        id : currentPost.id,
-        img : currentPost.img,
-        likes : currentPost.likes,
-        liked : currentPost.likers[user.id],
-        publicDate : currentPost.publicDate,
-        auther : {
-            id : currentUser.id,
-            userName : currentUser.userName,
-            avatarImg : currentUser.avatarImg
-        },
-        favorite : !!user.favorites.find(val=>val===currentPost.id)
-    }
+    const post = getPost(user,currentUser,currentPost)
 
     res.send({
         access : true,
