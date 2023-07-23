@@ -1,4 +1,4 @@
-import { POST_ACTIVE, POST_LIKE, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
+import { PAGE_INCREMENT, POST_ACTIVE, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
 
 export const setHomePosts = (posts)=>{
     return  {
@@ -13,5 +13,11 @@ export const activePostAction = (post)=>{
     return  {
         type : POST_ACTIVE,
         payload : {post}
+    }
+}
+
+export const pageIncrement = ()=>{
+    return {
+        type : PAGE_INCREMENT
     }
 }

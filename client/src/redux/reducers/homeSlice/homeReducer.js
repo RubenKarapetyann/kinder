@@ -1,10 +1,10 @@
-import { LOADING_FINISH, LOADING_START, POST_ACTIVE, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
+import { LOADING_FINISH, LOADING_START, PAGE_INCREMENT, POST_ACTIVE, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
 import { loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setPost } from "../postSlice/postActions"
 import { setHomePosts, activePostAction } from "./homeActions"
 
-function homeReducer(state={ loading : false, posts : [] },action){
+function homeReducer(state={ loading : false, posts : [], page : 0 },action){
     switch (action.type){
         case LOADING_START:
             return {
@@ -19,7 +19,12 @@ function homeReducer(state={ loading : false, posts : [] },action){
         case SET_HOME_POSTS:
             return {
                 ...state,
-                posts : action.payload.posts
+                posts : [...state.posts,...action.payload.posts]
+            }
+        case PAGE_INCREMENT:
+            return {
+                ...state,
+                page : ++state.page
             }
         case POST_ACTIVE:
             return {
@@ -56,13 +61,13 @@ function homeReducer(state={ loading : false, posts : [] },action){
     }
 }
 
-export const getHomePosts = (navigate)=>{
+export const getHomePosts = (navigate,page)=>{
     return (dispatch)=>{
         const token = localStorage.getItem("jwtToken")
         if(token){
             try{
                 dispatch(loadingStart(LOADING_START))
-                fetch("/home?page=0",{
+                fetch("/home?page="+page,{
                     method : 'GET',
                     headers : {
                         'Content-Type': 'application/json',

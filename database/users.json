@@ -418,5 +418,21 @@
       "meToOther": [],
       "otherToMe": []
     }
+  },
+  "user_0EqeRXaI": {
+    "userName": "test",
+    "email": "test@gmail.com",
+    "avatarImg": "https://ionicframework.com/docs/img/demos/avatar.svg",
+    "password": "$2b$10$6Usr9QZOVauJOWvIq2oIu.Z1OERcFBuxoWwTLdoClSBm1laH4apli",
+    "description": "no bio yet",
+    "id": "user_0EqeRXaI",
+    "posts": [],
+    "friends": [],
+    "favorites": [],
+    "notifications": [],
+    "friendRequests": {
+      "meToOther": [],
+      "otherToMe": []
+    }
   }
 }
