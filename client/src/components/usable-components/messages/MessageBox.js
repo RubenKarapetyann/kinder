@@ -27,7 +27,7 @@ const MessageBox = ({ handle, type })=>{
         }}>
             {list.map(item=>{
                 return <Message 
-                            other={!(item.autherId === userId)}
+                            other={type === "comments" || !(item.autherId === userId)}
                             text={item.text}
                             key={item.id}
                             likes={item.likes}

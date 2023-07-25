@@ -5,13 +5,14 @@ import NotificationWindow from "../window/notification-window/NotificationWindow
 const Location = ({ children })=>{
     const location = useLocation()
 
+
     return (
         <>
             {location.pathname !== "/login" && 
             location.pathname !== "/register" && 
             <Header/>}
             {children}
-            <NotificationWindow text={location.pathname.slice(1,)} key={Math.random()}/>
+            <NotificationWindow text={location.pathname.split("/")[1]} key={Math.random()}/>
         </>
     )
 }
