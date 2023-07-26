@@ -1,7 +1,7 @@
 import { getHeaders } from "../../../constants/api-constants"
 import { LOADING_START, LOADING_FINISH, SET_FRIENDS_LIST, DELETE_FRIEND } from "../../../constants/friends-slice-constants"
-import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { getList, loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { HOME } from "../../../constants/routes-constants"
+import { checkToken, getList, loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { deleteFriend } from "./friendsActions"
 
 
@@ -39,25 +39,24 @@ export const getFriends = (navigate,id="")=>{
 
 export const deleteFriendById = (navigate,id)=>{
     return (dispatch)=>{
-        const token = localStorage.getItem("jwtToken")
-        if(token){
-            dispatch(loadingStart(LOADING_START))
+        const func = async token =>{
             try{
-                fetch("/friends/"+id,{
+                dispatch(loadingStart(LOADING_START))
+                const response = await fetch("/friends/"+id,{
                     method : "DELETE",
                     headers : getHeaders(token)
-                }).then(res=>res.json()).then(result=>{
-                    if(result.access){
-                        dispatch(deleteFriend(id))
-                    }
-                    dispatch(loadingFinish(LOADING_FINISH))
                 })
+                const result = await response.json()
+                if(result.access){
+                    dispatch(deleteFriend(id))
+                }
+                dispatch(loadingFinish(LOADING_FINISH))
             }catch(err){
+                dispatch(loadingFinish(LOADING_FINISH))
                 navigate("/"+HOME)
             }
-        }else{
-            navigate("/"+LOGIN)
         }
+        checkToken(func,navigate)
     }
 }
 

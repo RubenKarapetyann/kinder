@@ -283,9 +283,9 @@
     "postDescription": "joystick",
     "id": "0.8217597629345303",
     "img": "0.29241893472565117_1688768398603.jpg",
-    "likes": 2,
+    "likes": 1,
     "likers": {
-      "0.6145628391094977": true,
+      "0.6145628391094977": false,
       "0.8713018945867141": true
     },
     "publicDate": 1688768398616,
@@ -373,8 +373,10 @@
     "postDescription": "my image",
     "id": "post_QF9F2mtR",
     "img": "image_uWN81kYF.jpg",
-    "likes": 0,
-    "likers": {},
+    "likes": 1,
+    "likers": {
+      "0.6145628391094977": true
+    },
     "publicDate": 1690134726427,
     "auther": {
       "id": "0.6145628391094977"

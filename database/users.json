@@ -43,21 +43,18 @@
       {
         "friendId": "0.4864148468727828",
         "chatId": "asdfvgrfbrfrdvdrfbrdfb"
-      },
-      {
-        "friendId": "0.5498439206038626",
-        "chatId": "chat-0.7461246347276194"
       }
     ],
     "favorites": [
       "0.45362862468430354",
       "0.986902839647966",
-      "0.8217597629345303",
       "0.4351839619729243",
       "rdtrfyghjklredtfvghj",
       "0.21268094472632537",
       "post_JOHAyBwQ",
-      "asjndasndangsidgsidfasn"
+      "asjndasndangsidgsidfasn",
+      "post_QF9F2mtR",
+      "0.8217597629345303"
     ],
     "notifications": [
       {
@@ -370,12 +367,7 @@
     "password": "$2b$10$0Y/w1v6BDB7MCawTiYWIIOBVwzRqLwQiV0cfzpI8pg5tIVs9e20G2",
     "id": "0.5498439206038626",
     "posts": [],
-    "friends": [
-      {
-        "friendId": "0.6145628391094977",
-        "chatId": "chat-0.7461246347276194"
-      }
-    ],
+    "friends": [],
     "favorites": [],
     "notifications": [
       {
