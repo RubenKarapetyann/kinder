@@ -1,6 +1,7 @@
+import { getHeaders } from "../../../constants/api-constants"
 import { LOADING_FINISH, LOADING_START, PAGE_INCREMENT, POST_ACTIVE, SET_HOME_POSTS } from "../../../constants/home-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { checkToken, loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setPost } from "../postSlice/postActions"
 import { setHomePosts, activePostAction } from "./homeActions"
 
@@ -63,26 +64,20 @@ function homeReducer(state={ loading : false, posts : [], page : 0 },action){
 
 export const getHomePosts = (navigate,page)=>{
     return (dispatch)=>{
-        const token = localStorage.getItem("jwtToken")
-        if(token){
+        const func = async (token)=>{
             try{
                 dispatch(loadingStart(LOADING_START))
-                fetch("/home?page="+page,{
-                    method : 'GET',
-                    headers : {
-                        'Content-Type': 'application/json',
-                        "authorization" : "Bearer "+token
-                    },
-                }).then((res)=>res.json()).then(result=>{
-                    dispatch(loadingFinish(LOADING_FINISH))
-                    dispatch(setHomePosts(result.posts))
+                const response = await fetch("/home?page="+page,{
+                    headers : getHeaders(token)
                 })
+                const result = await response.json()
+                dispatch(loadingFinish(LOADING_FINISH))
+                dispatch(setHomePosts(result.posts))
             }catch(err){
                 navigate("/"+HOME)
             }
-        }else{
-            navigate("/"+LOGIN)
         }
+        checkToken(func,navigate)
     }
 }
 

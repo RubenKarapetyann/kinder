@@ -49,3 +49,12 @@ export const listSeter = (type,list)=>{
         }
     }
 }
+
+export const checkToken = (func,navigate)=>{
+    const token = getToken()
+    if(token){
+        func(token)
+    }else{
+        navigate("/"+LOGIN)
+    }
+}
