@@ -102,10 +102,10 @@ app.post(REGISTER,async (req,res)=>{
             fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
             res.send({access : true})
         }else{
-            res.send({access : false,message : "email already used"})
+            res.send({access : false,message : "email already used", type : "email"})
         }
     }catch(err){
-        res.status(400).send({access : false,message : "something went wrong"})
+        res.status(400).send({access : false,message : "something went wrong", type : "repeatPassword"})
     }
 })
 
@@ -711,6 +711,11 @@ app.post(SETTINGS,passport.authenticate("jwt", {session : false}),upload.single(
     const currentUser = users[req.user.id]
         
     if(req.body.title === "name"){
+        if(new RegExp(" ").test(req.body.setting)){
+            return res.send({
+                access : false
+            })
+        }
         currentUser.userName = req.body.setting
     }else if(req.body.title === "description"){
         currentUser.description = req.body.setting

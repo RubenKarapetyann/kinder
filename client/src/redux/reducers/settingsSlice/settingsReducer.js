@@ -35,6 +35,8 @@ export const changeSettings = (navigate,formData)=>{
                 if(result.access){
                     dispatch(setUser(result.user))
                     navigate(-1)
+                }else{
+                    navigate(-1)
                 }
                 dispatch(loadingFinish(LOADING_FINISH))
             }catch(err){

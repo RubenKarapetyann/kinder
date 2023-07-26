@@ -29,13 +29,16 @@ function RegisterLogic({ children }){
         errorCleaning()
     },[inputData])
 
-    const submitHandle =(e)=>{
+    const submitHandle = e =>{
         e.preventDefault()
         if(inputData.password.length < 8){
-            dispatch(errorSeter("password cant be shorter 8 symbols"))
+            dispatch(errorSeter("password","password cant be shorter 8 symbols"))
             return
         }else if(inputData.password !== inputData.repeatPassword){
-            dispatch(errorSeter("passwords are different"))
+            dispatch(errorSeter("repeatPassword","passwords are different"))
+            return
+        }else if(new RegExp(" ").test(inputData.name)){
+            dispatch(errorSeter("name","username cannot contain spaces"))
             return
         }
         dispatch(registerApi(inputData,navigate))
@@ -61,6 +64,7 @@ function RegisterLogic({ children }){
                     changeHandle={nameChange}
                     value={inputData.name}
                 />
+                <FormError error={error.name}/>
 
                 <FormInput 
                     type={"email"} 
@@ -68,14 +72,15 @@ function RegisterLogic({ children }){
                     changeHandle={emailChange}
                     value={inputData.email}
                 />
-        
+                <FormError error={error.email}/>
+
                 <FormInput 
                     type={"password"} 
                     name={"Password"}
                     changeHandle={passwordChange}
                     value={inputData.password}
                 />
-
+                <FormError error={error.password}/>
 
                 <FormInput 
                     type={"password"} 
@@ -83,7 +88,7 @@ function RegisterLogic({ children }){
                     changeHandle={repeatPasswordChange}
                     value={inputData.repeatPassword}
                 />
-                <FormError error={error}/>
+                <FormError error={error.repeatPassword}/>
 
                 <button type="submit" className="btn btn-primary btn-block mb-4 form-btn" disabled={loading}>Sign up</button>
                 {children[1]}

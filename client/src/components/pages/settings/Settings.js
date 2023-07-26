@@ -3,7 +3,7 @@ import Title from "../../usable-components/more/Title"
 import { useSelector } from "react-redux"
 import SettingItem from "./components/SettingItem"
 import { Link, Outlet } from "react-router-dom"
-import NotificationWindow from "../../usable-components/window/notification-window/NotificationWindow"
+
 
 function Settings(){
     const { user } = useSelector(store=>store.user)
@@ -20,7 +20,6 @@ function Settings(){
                 /></Link>
             })}
             <Outlet/>
-            <NotificationWindow text={"settings"}/>
         </>
     )
 }

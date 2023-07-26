@@ -77,3 +77,9 @@ body::-webkit-scrollbar-thumb{
   align-items: center;
   border-bottom: 0.5px rgb(201, 201, 201) solid;
 }
+
+.error-container{
+  margin-top: -20px;
+  margin-bottom: 15px;
+  display: block;
+}

@@ -8,11 +8,12 @@ export const errorClear = ()=>{
 }
 
 
-export const errorSeter = (error)=>{
+export const errorSeter = (type,error)=>{
     return {
         type : ERROR_REG,
         payload : {
-            text : error
+            text : error,
+            type
         }
     }
 }

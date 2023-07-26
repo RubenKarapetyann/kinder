@@ -3,7 +3,7 @@ import { LOGIN } from "../../../constants/routes-constants"
 import { loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { errorSeter } from "./registerActions"
 
-function registerReducer(state={ loading : false, error : false },action){
+function registerReducer(state={ loading : false, error : { name : false, email : false, password : false , repeatPassword : false } },action){
     switch (action.type){
         case LOADING_START:
             return {
@@ -18,12 +18,15 @@ function registerReducer(state={ loading : false, error : false },action){
         case ERROR_REG:
             return {
                 ...state,
-                error : action.payload.text
+                error : {
+                    ...state.error,
+                    [action.payload.type] : action.payload.text
+                }
             }
         case CLEAR_ERROR:
             return{
                 ...state,
-                error : false
+                error : { name : false, email : false, password : false , repeatPassword : false }
             }
         default:
             return state
@@ -50,7 +53,7 @@ export const registerApi = (inputData,navigate)=>{
                 if(result.access){
                     navigate("/"+LOGIN)
                 }else{
-                    dispatch(errorSeter(result.message))
+                    dispatch(errorSeter(result.type,result.message))
                 }
               })
         }catch(err){
