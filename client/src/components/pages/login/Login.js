@@ -5,10 +5,12 @@ import LoginLogic from "./components/LoginLogic"
 
 function Login(){
     return(
-        <LoginLogic>
-            <FormTitle text={"Login"}/>
-            <FormText text={"Not a member?"} route={"/register"} routeName={"Register"}/>
-        </LoginLogic>
+        <div className="authorization-container">
+            <LoginLogic>
+                <FormTitle text={"Login"}/>
+                <FormText text={"Not a member?"} route={"/register"} routeName={"Register"}/>
+            </LoginLogic>
+        </div>
     )
 }
 

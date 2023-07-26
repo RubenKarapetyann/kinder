@@ -6,10 +6,12 @@ import RegisterLogic from "./components/RegisterLogic"
 
 function Register(){
     return(
-        <RegisterLogic>
-            <FormTitle text={"Register"}/>
-            <FormText text={"Already have account?"} route={"/login"} routeName={"Login"}/>
-        </RegisterLogic>
+        <div className="authorization-container">
+            <RegisterLogic>
+                <FormTitle text={"Register"}/>
+                <FormText text={"Already have account?"} route={"/login"} routeName={"Login"}/>
+            </RegisterLogic>
+        </div>
     )
 }
 
