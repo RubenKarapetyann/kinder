@@ -33,7 +33,7 @@ function LoginLogic({ children }){
     const submitHandle =(e)=>{
         e.preventDefault()
         if(inputData.password.length < 8){
-            dispatch(errorSeter("incorrect password"))
+            dispatch(errorSeter("password","incorrect password"))
             return
         }
         dispatch(loginApi(inputData,navigate))
@@ -50,6 +50,7 @@ function LoginLogic({ children }){
                     changeHandle={emailChange}
                     value={inputData.email}
                 />
+                <FormError error={error.email}/>
         
                 <FormInput 
                     type={"password"} 
@@ -57,13 +58,13 @@ function LoginLogic({ children }){
                     changeHandle={passwordChange}
                     value={inputData.password}
                 />
+                <FormError error={error.password}/>
         
                 <LoginCheckBox
                     value={inputData.rememberMe}
                     changeHandle={rememberMeChange} 
                 />
         
-                <FormError error={error}/>
                 
                 <button type="submit" className="btn btn-primary btn-block mb-4 form-btn" disabled={loading}>Sign in</button>
                 {children[1]}

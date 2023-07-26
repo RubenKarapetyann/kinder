@@ -4,7 +4,7 @@ import { loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setUser } from "../userSlice/UserActions"
 import { errorSeter } from "./loginActions"
 
-function loginReducer(state={ loading : false, error : false },action){
+function loginReducer(state={ loading : false, error : { email : false, password : false } },action){
     switch (action.type){
         case LOADING_START:
             return {
@@ -19,12 +19,15 @@ function loginReducer(state={ loading : false, error : false },action){
         case ERROR_LOG:
             return {
                 ...state,
-                error : action.payload.text
+                error : {
+                    ...state.error,
+                    [action.payload.type] : action.payload.text
+                }
             }
         case CLEAR_ERROR:
             return{
                 ...state,
-                error : false
+                error : { email : false, password : false }
             }
         default:
             return state
@@ -52,7 +55,7 @@ export const loginApi = (inputData,navigate)=>{
                     localStorage.setItem("jwtToken" , result.token)
                     dispatch(setUser(result.user))
                 }else{
-                    dispatch(errorSeter(result.message))
+                    dispatch(errorSeter(result.type,result.message))
                 }
             })
         }catch(err){

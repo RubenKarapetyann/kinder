@@ -1,3 +1,3 @@
-const FormError = ({ error })=>error && <span>{error}</span>
+const FormError = ({ error })=>error && <span className="error-container">{error}</span>
 
 export default FormError

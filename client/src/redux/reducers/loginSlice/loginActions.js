@@ -7,11 +7,12 @@ export const errorClear = ()=>{
 }
 
 
-export const errorSeter = (error)=>{
+export const errorSeter = (type,error)=>{
     return {
         type : ERROR_LOG,
         payload : {
-            text : error
+            text : error,
+            type,
         }
     }
 }

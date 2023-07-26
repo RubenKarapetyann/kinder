@@ -116,12 +116,12 @@ app.post(LOGIN,async (req,res)=>{
 
 
     if(!user){
-        return res.send({access : false, message : "incorrect email"})
+        return res.send({access : false, message : "incorrect email",type : "email"})
     }
 
     const validPassword = await bcrypt.compare(password,user.password)
     if(!validPassword){
-        return res.send({access : false, message : "incorrect password"})
+        return res.send({access : false, message : "incorrect password", type : "password"})
     }
 
     const token = generateToken(user)
@@ -216,7 +216,7 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
 
     fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
     fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
-    
+
     res.send({
         access : true,
         post : backPost
