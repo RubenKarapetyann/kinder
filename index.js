@@ -210,13 +210,13 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
         }
         users[user.id] = currentUser
     }
-    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
-    fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
-
 
     const currentUser = users[post.auther.id]
-    const backPost = getPost(user,currentUser,post)
+    const backPost = getPost(users[user.id],currentUser,post)
 
+    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
+    
     res.send({
         access : true,
         post : backPost

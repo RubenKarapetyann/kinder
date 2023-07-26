@@ -3,9 +3,9 @@
     "postDescription": "pretty summer",
     "id": "asjndasndangsidgsidfasn",
     "img": "https://picsum.photos/id/237/536/354",
-    "likes": 2,
+    "likes": 1,
     "likers": {
-      "0.6145628391094977": true,
+      "0.6145628391094977": false,
       "0.8713018945867141": true
     },
     "publicDate": "50",
@@ -361,8 +361,10 @@
     "postDescription": "motootootototototot",
     "id": "post_mo5QEzuo",
     "img": "image_EFcuUlpD.jpg",
-    "likes": 0,
-    "likers": {},
+    "likes": 1,
+    "likers": {
+      "0.6145628391094977": true
+    },
     "publicDate": 1690054260403,
     "auther": {
       "id": "0.6145628391094977"

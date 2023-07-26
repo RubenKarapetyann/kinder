@@ -1,6 +1,5 @@
-import { LOGIN } from "../../../constants/routes-constants"
 import { LOADING_FINISH, LOADING_START } from "../../../constants/settings-slice-constants"
-import { loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { checkToken, loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setUser } from "../userSlice/UserActions"
 
 function settingsReducer(state={ loading : false },action){
@@ -22,30 +21,28 @@ function settingsReducer(state={ loading : false },action){
 
 export const changeSettings = (navigate,formData)=>{
     return (dispatch)=>{
-        const token = localStorage.getItem("jwtToken")
-        if(token){
+        const func = async token =>{
             try{
                 dispatch(loadingStart(LOADING_START))
-                fetch("/settings",{
+                const response = await fetch("/settings",{
                     method : "POST",
                     headers : {
                         "authorization" : "Bearer "+token
                     },
                     body : formData
-                }).then(res=>res.json()).then(result=>{
-                    if(result.access){
-                        dispatch(setUser(result.user))
-                        navigate(-1)
-                    }
-                    dispatch(loadingFinish(LOADING_FINISH))
                 })
+                const result = await response.json()
+                if(result.access){
+                    dispatch(setUser(result.user))
+                    navigate(-1)
+                }
+                dispatch(loadingFinish(LOADING_FINISH))
             }catch(err){
                 dispatch(loadingFinish(LOADING_FINISH))
                 navigate(-1)
             }
-        }else{
-            navigate("/"+LOGIN)
         }
+        checkToken(func,navigate)
     }
 }
 

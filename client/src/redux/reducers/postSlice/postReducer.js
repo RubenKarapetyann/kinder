@@ -1,7 +1,7 @@
 import { getHeaders } from "../../../constants/api-constants"
 import { LOADING_FINISH, LOADING_START, SET_POST } from "../../../constants/post-slice-constants"
-import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { HOME } from "../../../constants/routes-constants"
+import { checkToken, loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setPost } from "./postActions"
 
 function postReducer(state={ loading : false, post : { auther : {} } },action){
@@ -28,25 +28,23 @@ function postReducer(state={ loading : false, post : { auther : {} } },action){
 
 export const getPost =(navigate,id)=>{
     return (dispatch)=>{
-        const token = localStorage.getItem("jwtToken")
-        if(token){
-            dispatch(loadingStart(LOADING_START))
+        const func = async token =>{
             try{
-                fetch("/post/"+id,{
-                    method : "GET",
+                dispatch(loadingStart(LOADING_START))
+                const response = await fetch("/post/"+id,{
                     headers : getHeaders(token)
-                }).then(res=>res.json()).then(result=>{
-                    if(result.access){
-                        dispatch(setPost(result.post))
-                    }
-                    dispatch(loadingFinish(LOADING_FINISH))
                 })
+                const result = await response.json()
+                if(result.access){
+                    dispatch(setPost(result.post))
+                }
+                dispatch(loadingFinish(LOADING_FINISH))
             }catch(err){
                 navigate("/"+HOME)
+                dispatch(loadingFinish(LOADING_FINISH))
             }
-        }else{
-            navigate("/"+LOGIN)
         }
+        checkToken(func,navigate)
     }
 }
 

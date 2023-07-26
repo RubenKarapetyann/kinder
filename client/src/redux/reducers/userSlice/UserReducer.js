@@ -1,6 +1,7 @@
 import { getHeaders } from "../../../constants/api-constants"
 import { LOGIN } from "../../../constants/routes-constants"
 import { LOG_OUT, SET_USER } from "../../../constants/user-slice-constants"
+import { checkToken } from "../../../utils/api-helper"
 import { logoutUser, setUser } from "./UserActions"
 
 function userReducer(state={user : {isAuth : false}}, action){
@@ -24,37 +25,41 @@ function userReducer(state={user : {isAuth : false}}, action){
     }
 }
 
-export const checkAuthentication = ()=>{
+export const checkAuthentication = (navigate)=>{
     return (dispatch)=>{
-        const token = localStorage.getItem("jwtToken")
-        try{
-            fetch("/auth",{
-                headers : getHeaders(token)
-            }).then(res=>res.json()).then(result=>{
+        const func = async token =>{
+            try{
+                const response = await fetch("/auth",{
+                    headers : getHeaders(token)
+                })
+                const result = await response.json()
                 dispatch(setUser(result))
-            })
-        }catch(err){
-            console.log(err);
+            }catch(err){
+                console.log(err);
+            }
         }
+        checkToken(func,navigate)
     }
 }
 
 export const userLogout = (navigate)=> {
     return (dispatch)=>{
-        const token = localStorage.getItem("jwtToken")
-        try{
-            fetch("/logout",{
-                headers : getHeaders(token)
-            }).then(res=>res.json()).then(result=>{
+        const func = async token =>{
+            try{
+                const response = await fetch("/logout",{
+                    headers : getHeaders(token)
+                })
+                const result = await response.json()
                 if(result.access){
                     localStorage.setItem("jwtToken", null)
                     dispatch(logoutUser())
                     navigate("/"+LOGIN)
                 }
-            })
-        }catch(err){
-            console.log(err);
+            }catch(err){
+                console.log(err);
+            }
         }
+        checkToken(func,navigate)
     }
 }
 
