@@ -102,6 +102,12 @@
         "autherId": "0.6145628391094977",
         "likes": 0,
         "id": "comment_Z5Yi-e-s"
+      },
+      {
+        "text": "ku",
+        "autherId": "0.6145628391094977",
+        "likes": 0,
+        "id": "comment_gUi2vF0g"
       }
     ]
   },
@@ -383,6 +389,13 @@
     "auther": {
       "id": "0.6145628391094977"
     },
-    "comments": []
+    "comments": [
+      {
+        "text": "great\n",
+        "autherId": "0.6145628391094977",
+        "likes": 0,
+        "id": "comment_55WJM4gd"
+      }
+    ]
   }
 }

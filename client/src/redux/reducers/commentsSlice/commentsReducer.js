@@ -1,6 +1,7 @@
+import { getHeaders } from "../../../constants/api-constants"
 import { LOADING_FINISH, LOADING_START, SET_COMMENTS_LIST, SET_NEW_COMMENT } from "../../../constants/comments-slice-constants"
 import { HOME, LOGIN } from "../../../constants/routes-constants"
-import { getList, loadingFinish, loadingStart } from "../../../utils/api-helper"
+import { checkToken, getList, loadingFinish, loadingStart } from "../../../utils/api-helper"
 import { setNewComment } from "./commentsActions"
 
 function commentsReducer(state={ loading : false, list : [] },action){
@@ -36,32 +37,28 @@ export const getCommentsList = (navigate,id)=>{
 
 export const sendComment = (navigate,comment,postId)=>{
     return (dispatch)=>{
-        const token = localStorage.getItem("jwtToken")
-        if(token){
-            dispatch(loadingStart(LOADING_START))
+        const func = async token =>{
             try{
-                fetch("/comments",{
+                dispatch(loadingStart(LOADING_START))
+                const response = await fetch("/comments",{
                     method : "POST",
-                    headers : {
-                        'Content-Type': 'application/json',
-                        "authorization" : "Bearer "+token
-                    },
+                    headers : getHeaders(token),
                     body : JSON.stringify({
                         comment,
                         postId
                     })
-                }).then(res=>res.json()).then(result=>{
-                    if(result.access){
-                        dispatch(setNewComment(result.comment))
-                    }
-                    dispatch(loadingFinish(LOADING_FINISH))
                 })
+                const result = await response.json()
+                if(result.access){
+                    dispatch(setNewComment(result.comment))
+                }
+                dispatch(loadingFinish(LOADING_FINISH))
             }catch(err){
                 navigate("/"+HOME)
+                dispatch(loadingFinish(LOADING_FINISH))
             }
-        }else{
-            navigate("/"+LOGIN)
         }
+        checkToken(func,navigate)
     }
 }
 

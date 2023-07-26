@@ -14,11 +14,11 @@ const ProfileTitle = ({ userName, comment, children, avatarImg="https://ionicfra
                     {middleware(
                         <>
                             <span className="profile-title-username">{userName}</span>
-                            <span className="profile-title-comment">{comment}</span>
+                            {comment && <span className="profile-title-comment">{comment}</span>}
                         </>
                     )}
                 </div>
-                <div className="profile-title-function">{children}</div>
+                {children && <div className="profile-title-function">{children}</div>}
             </div>
         </div>
     )

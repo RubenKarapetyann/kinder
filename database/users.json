@@ -281,10 +281,27 @@
         "autherId": "0.6145628391094977",
         "date": 1690321752568,
         "type": "comment"
+      },
+      {
+        "id": "notification_8PshBlws",
+        "autherId": "0.6145628391094977",
+        "date": 1690373563814,
+        "type": "comment"
+      },
+      {
+        "id": "notification_kgDReMZp",
+        "autherId": "0.6145628391094977",
+        "date": 1690373846542,
+        "type": "comment"
       }
     ],
     "friendRequests": {
-      "meToOther": [],
+      "meToOther": [
+        {
+          "id": "0.5498439206038626",
+          "date": 1690374082188
+        }
+      ],
       "otherToMe": []
     }
   },
@@ -368,15 +385,20 @@
     "favorites": [],
     "notifications": [
       {
-        "id": 0.11964194481785828,
+        "id": "notification_ics7p0KR",
         "autherId": "0.6145628391094977",
-        "date": 1689628956616,
-        "type": "friend-requests-access"
+        "date": 1690374082188,
+        "type": "friend-requests"
       }
     ],
     "friendRequests": {
       "meToOther": [],
-      "otherToMe": []
+      "otherToMe": [
+        {
+          "id": "0.6145628391094977",
+          "date": 1690374082188
+        }
+      ]
     }
   },
   "0.4864148468727828": {

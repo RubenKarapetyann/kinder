@@ -5,26 +5,23 @@ export const getToken = ()=>localStorage.getItem("jwtToken")
     
 export const getList = (navigate,route,id,LIST_SET,LOADING_START,LOADING_FINISH)=>{
     return (dispatch)=>{
-        const token = localStorage.getItem("jwtToken")
-        if(token){
-            dispatch(loadingStart(LOADING_START))
+        const func = async token =>{
             try{
-                fetch(`/${route}/`+id,{
-                    method : "GET",
+                dispatch(loadingStart(LOADING_START))
+                const response = await fetch(`/${route}/`+id,{
                     headers : getHeaders(token)
-                }).then(res=>res.json()).then(result=>{
-                    if(result.access){
-                        dispatch(listSeter(LIST_SET,result.list))
-                    }
-                    dispatch(loadingFinish(LOADING_FINISH))
                 })
+                const result = await response.json()
+                if(result.access){
+                    dispatch(listSeter(LIST_SET,result.list))
+                }
+                dispatch(loadingFinish(LOADING_FINISH))
             }catch(err){
                 navigate("/"+HOME)
                 dispatch(loadingFinish(LOADING_FINISH))
             }
-        }else{
-            navigate("/"+LOGIN)
         }
+        checkToken(func,navigate)
     }
 }
 
