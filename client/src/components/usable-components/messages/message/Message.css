@@ -31,3 +31,9 @@
     align-items: flex-end;
     margin-top: 5px;
 }
+.chat-message-text{
+    max-width: 100%;
+    word-break:break-all;
+    display: block;
+    height: fit-content;
+}

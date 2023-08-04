@@ -1,9 +1,9 @@
 import ProfileTitle from "./ProfileTitle/ProfileTitle"
 
-const ProfileListItem = ({ children, userName, comment, hr=true, avatarImg, middleware })=>{
+const ProfileListItem = ({ children, userName, comment, hr=true, avatarImg, middleware, type })=>{
     return(
         <>        
-            <ProfileTitle userName={userName} comment={comment} avatarImg={avatarImg} middleware={middleware}>
+            <ProfileTitle userName={userName} comment={comment} avatarImg={avatarImg} middleware={middleware} type={type}>
                 <div>
                     {children}
                 </div>

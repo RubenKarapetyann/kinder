@@ -6,6 +6,7 @@ import { getMessagesList } from "../../../redux/reducers/messagesSlice/messagesR
 import { Link } from "react-router-dom"
 import { getHowLongItsBeen } from "../../../utils/time-helper"
 import { getLoading } from "../../../utils/loading-helper"
+import { MESSAGES } from "../../../constants/routes-constants"
 
 function Messages(){
     const { messages, loading } = useSelector(store=>store.messages)
@@ -24,7 +25,7 @@ function Messages(){
             {getLoading(loading)}
             {messages.map(message=>{
                 return(
-                    <Link to={message.chatId} key={message.chatId} className="link-without-styles">
+                    <Link to={"/"+MESSAGES+"/"+message.chatId} key={message.chatId} className="link-without-styles">
                         <ProfileListItem 
                             userName={message.sender.userName} 
                             comment={message.lastMessage.text} 

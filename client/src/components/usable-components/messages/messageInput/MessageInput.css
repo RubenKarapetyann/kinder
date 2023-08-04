@@ -1,8 +1,8 @@
 .message-input-container{
     width: 100%;
-    height: 20px;
+    height: 30px;
     position: sticky;
-    bottom: 60px;
+    bottom: 30px;
     background-color: white;
 }
 .message-input-container::after{

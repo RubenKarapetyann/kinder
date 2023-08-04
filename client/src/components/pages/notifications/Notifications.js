@@ -1,12 +1,9 @@
 import ProfileListItem from "../../usable-components/profile/ProfileListItem"
-import { FRIENDS_DROPDOWN } from "../../../constants/friends-constants"
-import DropDown from "../../usable-components/dropdown/DropDown"
 import Title from "../../usable-components/more/Title"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useRef } from "react"
 import { useNavigate } from "react-router"
 import { getNotifications } from "../../../redux/reducers/notificationsSlice/notificationsReducer"
-import { MESSAGES, PROFILE } from "../../../constants/routes-constants"
 
 function Notifications(){
     const notifications  = useSelector(store=>store.notifications.list)
@@ -44,6 +41,7 @@ function Notifications(){
                             hr={false} 
                             userName={notification.userName} 
                             comment={notification.text}
+                            type="notifications"
                         >
                             {/* <DropDown list={NOTIFICATIONS_DROPDOWN}/> */}
                         </ProfileListItem>

@@ -10,24 +10,27 @@ const MessageBox = ({ handle, type })=>{
     const navigate = useNavigate()
     const { id } = useParams()
     const boxRef = useRef({})
+    const isComments = type === "comments"
 
 
     useEffect(()=>{
         dispatch(handle(navigate,id))
-    },[])
+    },[id])
     
     useEffect(()=>{
-        boxRef.current.scrollIntoView(false)
+        boxRef.current.scrollTo(0, list.length*200)
     },[list.length])
 
     return(
         <div ref={boxRef} style={{
-            minHeight: "70vh",
-            scrollBehavior : "smooth"
+            height: isComments ? "auto" : "100%",
+            minHeight: isComments ? "65vh" : "auto",
+            scrollBehavior : "smooth",
+            overflowY : "auto",
         }}>
             {list.map(item=>{
                 return <Message 
-                            other={type === "comments" || !(item.autherId === userId)}
+                other={isComments || !(item.autherId === userId)}
                             text={item.text}
                             key={item.id}
                             likes={item.likes}
