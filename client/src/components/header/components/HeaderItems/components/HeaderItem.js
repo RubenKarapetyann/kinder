@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 
-const HeaderItem = ({ icon, route, displayName })=>{
+const HeaderItem = ({ icon, route, displayName, notViewed })=>{
     return (
         <li>
             <NavLink to={route} className="nav-link px-2 link-secondary">
@@ -9,6 +9,7 @@ const HeaderItem = ({ icon, route, displayName })=>{
                     <span style={{
                         fontSize : "11px"
                     }}>{displayName}</span>
+                    {!!notViewed && <span className="not-viewed-header-container">{notViewed}</span>}
                 </span>
             </NavLink>
         </li>

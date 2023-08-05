@@ -4,14 +4,16 @@ import { LOG_OUT, SET_USER } from "../../../constants/user-slice-constants"
 import { checkToken } from "../../../utils/api-helper"
 import { logoutUser, setUser } from "./UserActions"
 
-function userReducer(state={user : {isAuth : false}}, action){
+function userReducer(state={user : {isAuth : false}, notViewed : {} }, action){
     switch(action.type){
         case SET_USER:
             return {
                 ...state,
                 user : {
-                    ...action.payload.user
-                }
+                    ...action.payload.user.user,
+                    isAuth : action.payload.user.isAuth,
+                },
+                notViewed : action.payload.user.notViewed
             }
         case LOG_OUT:
             return {

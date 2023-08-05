@@ -30,9 +30,25 @@ header{
     flex-direction: column;
     align-items: center;
     width: 70px;
+    position: relative;
     height: 100%;
 }
 
 .header-item-container:hover{
     background-color: rgb(238, 238, 238);
+}
+
+.not-viewed-header-container{
+    background-color: red;
+    border-radius: 50%;
+    height: 17px;
+    width: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+    align-self: flex-end;
+    position: absolute;
+    top: 0;
 }

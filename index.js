@@ -545,13 +545,29 @@ app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
 })
 
 app.get(AUTH,passport.authenticate("jwt", {session : false}),(req,res)=>{
+    const user = req.user
+    
+    let countNotifications = 0
+    for( let i in user.notifications ){
+        if(user.notifications[i].watched){
+            break
+        }
+        countNotifications++
+    }
+
+    
     res.send({
         isAuth : true,
-        name : req.user.userName,
-        email : req.user.email,
-        id : req.user.id,
-        avatarImg : req.user.avatarImg,
-        description : req.user.description
+        user : {
+            name : req.user.userName,
+            email : req.user.email,
+            id : req.user.id,
+            avatarImg : req.user.avatarImg,
+            description : req.user.description
+        },
+        notViewed : {
+            notifications : countNotifications
+        }
     })
 })
 

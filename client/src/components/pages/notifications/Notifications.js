@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useRef } from "react"
 import { useNavigate } from "react-router"
 import { getNotifications } from "../../../redux/reducers/notificationsSlice/notificationsReducer"
+import { checkAuthentication } from "../../../redux/reducers/userSlice/UserReducer"
 
 function Notifications(){
     const notifications  = useSelector(store=>store.notifications.list)
@@ -13,6 +14,7 @@ function Notifications(){
 
     useEffect(()=>{
         dispatch(getNotifications(navigate))
+        dispatch(checkAuthentication(navigate))
     },[])
 
     return (
