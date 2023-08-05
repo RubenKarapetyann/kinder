@@ -18,7 +18,7 @@ function Notifications(){
     return (
         <>
             {notifications.map(notification=>{
-                const currentDate = `${new Date(notification.date).getFullYear()}-${new Date(notification.date).getMonth()}-${new Date(notification.date).getDay()}`
+                const currentDate = `${new Date(notification.date).toLocaleDateString('en-GB')}`
                 prevDate.current = {
                     prevDate : prevDate.current.currentDate,
                     currentDate,

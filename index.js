@@ -190,12 +190,13 @@ app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
             post.likes--
         }else{
             if(post.auther.id !== user.id && post.likers[user.id] === undefined){
-                users[post.auther.id].notifications = [...users[post.auther.id].notifications, {
+                users[post.auther.id].notifications = [{
                     id : `notification_${nanoid(8)}`,
                     autherId : user.id,
                     date : new Date().getTime(),
-                    type : "like"
-                }]
+                    type : "like",
+                    watched : false
+                },...users[post.auther.id].notifications]
             }
             post.likers[user.id] = true
             post.likes++
@@ -314,12 +315,13 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)
 
     const post = posts[postId]
     post.comments.push(newComment)
-    users[post.auther.id].notifications = [...users[post.auther.id].notifications, {
+    users[post.auther.id].notifications = [{
         id : `notification_${nanoid(8)}`,
         autherId : id,
         date : new Date().getTime(),
-        type : "comment"
-    }]
+        type : "comment",
+        watched : false
+    },...users[post.auther.id].notifications]
     fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
     fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
 
@@ -371,7 +373,7 @@ app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=
         }
     })
 
-    
+
     fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
     res.send({
         access : true,
@@ -644,12 +646,13 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
 
     if(req.body.status === NOT_FRIENDS){
-        otherUser.notifications.push({
+        otherUser.notifications = [{
             id: `notification_${nanoid(8)}`,
             autherId: currentUser.id,
             date: currentDate,
-            type: "friend-requests"
-        })
+            type: "friend-requests",
+            watched : false
+        },...otherUser.notifications]
         otherUser.friendRequests.otherToMe.push({
             id : currentUser.id,
             date : currentDate
@@ -682,12 +685,13 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
         })
         otherUser.friendRequests.meToOther = otherUser.friendRequests.meToOther.filter(req=>req.id !== currentUser.id)
         currentUser.friendRequests.otherToMe = currentUser.friendRequests.otherToMe.filter(req=>req.id !== otherUser.id)
-        otherUser.notifications.push({
+        otherUser.notifications = [{
             id: `notification_${nanoid(8)}`,
             autherId: currentUser.id,
             date: currentDate,
-            type: "friend-requests-access"
-        })
+            type: "friend-requests-access",
+            watched : false
+        },...otherUser.notifications]
         fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
     }else if(req.body.status === YOU_SEND){
         currentUser.friendRequests.meToOther = currentUser.friendRequests.meToOther.filter(req=>req.id !== otherUser.id)
