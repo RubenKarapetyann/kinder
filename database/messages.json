@@ -13,79 +13,19 @@
         "text": "barev",
         "autherId": "0.8713018945867141",
         "id": "absibasdujasdi",
-        "sendDate": 10
+        "sendDate": 10,
+        "watchers": {
+
+        }
       },
       {
         "text": "sdfsdf",
         "autherId": "0.6145628391094977",
         "id": "gfbdrfgdrgdrfgdrf",
-        "sendDate": 20
-      },
-      {
-        "text": "hello",
-        "autherId": "0.6145628391094977",
-        "id": "0.5564669334830106-\"message\"",
-        "sendDate": 1689372966002
-      },
-      {
-        "text": "hi\n",
-        "autherId": "0.6145628391094977",
-        "id": "0.9692588902141415-\"message\"",
-        "sendDate": 1689372971826
-      },
-      {
-        "text": "darov",
-        "autherId": "0.6145628391094977",
-        "id": "0.5931671210091085-\"message\"",
-        "sendDate": 1689373221464
-      },
-      {
-        "text": "asasd",
-        "autherId": "0.6145628391094977",
-        "id": "0.9051218350730617-\"message\"",
-        "sendDate": 1689373225977
-      },
-      {
-        "text": "asdasd",
-        "autherId": "0.6145628391094977",
-        "id": "0.4888615156237548-\"message\"",
-        "sendDate": 1689600284422
-      },
-      {
-        "text": "hi",
-        "autherId": "0.6145628391094977",
-        "id": "0.9791466856894508-\"message\"",
-        "sendDate": 1689600936381
-      },
-      {
-        "text": "ku",
-        "autherId": "0.6145628391094977",
-        "id": "0.5858320212569366-\"message\"",
-        "sendDate": 1689635170894
-      },
-      {
-        "text": "test",
-        "autherId": "0.6145628391094977",
-        "id": "message_vm03WoO7",
-        "sendDate": 1689971713556
-      },
-      {
-        "text": "asdasda",
-        "autherId": "0.6145628391094977",
-        "id": "message_CqFAQWmx",
-        "sendDate": 1689977675635
-      },
-      {
-        "text": "asdasd",
-        "autherId": "0.6145628391094977",
-        "id": "message_KWUOHdHq",
-        "sendDate": 1689978014098
-      },
-      {
-        "text": "hii",
-        "autherId": "0.6145628391094977",
-        "id": "message_NE0YjwRn",
-        "sendDate": 1690373883956
+        "sendDate": 20,
+        "watchers": {
+
+        }
       }
     ]
   },
@@ -103,13 +43,20 @@
         "text": "asdasd",
         "autherId": "0.4864148468727828",
         "id": "asfvsdvsdfv",
-        "sendDate": 20
+        "sendDate": 20,
+        "watchers": {
+          "0.4864148468727828": true,
+          "0.6145628391094977": true
+        }
       },
       {
         "text": "hi",
         "autherId": "0.6145628391094977",
         "id": "0.10941757026824228-\"message\"",
-        "sendDate": 1689372999249
+        "sendDate": 1689372999249,
+        "watchers": {
+          "0.6145628391094977": true
+        }
       }
     ]
   }

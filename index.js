@@ -236,14 +236,32 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
                 const currentChat = messages[friend.chatId]
                 const { id:currentUserId } = currentChat.members.find(val=>val.id===friend.friendId)
                 const currentUser = users[currentUserId]
+                const lastMessage = currentChat.messages[currentChat.messages.length-1] || {}
+                let dontWathcedCount = 0
+                for ( let i = currentChat.messages.length-1 ; i > 0 ; i-- ){
+                    if( currentChat.messages[i].watchers[id] ){
+                        break
+                    }
+                    dontWathcedCount++
+                    if( dontWathcedCount >= 99 ){
+                        break
+                    }
+                } 
                 return [...arr,{
                     sender : {
                         id: currentUserId,
                         userName: currentUser.userName,
                         avatarImg: currentUser.avatarImg
                     },
-                    lastMessage : currentChat.messages[currentChat.messages.length-1] || {},
-                    chatId : friend.chatId
+                    lastMessage : {
+                        text : lastMessage.text,
+                        autherId : lastMessage.autherId,
+                        id : lastMessage.id,
+                        sendDate : lastMessage.sendDate,
+                        watched : !!lastMessage.watchers[id]
+                    },
+                    chatId : friend.chatId,
+                    dontWathcedCount    
                 }]
             }
             return arr
@@ -260,14 +278,32 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
         const currentChat = messages[friend.chatId]
         const { id:currentUserId } = currentChat.members.find(val=>val.id===friend.friendId)
         const currentUser = users[currentUserId]
+        const lastMessage = currentChat.messages[currentChat.messages.length-1] || {}
+        let dontWathcedCount = 0
+        for ( let i = currentChat.messages.length-1 ; i > 0 ; i-- ){
+            if( currentChat.messages[i].watchers[id] ){
+                break
+            }
+            dontWathcedCount++
+            if( dontWathcedCount >= 99 ){
+                break
+            }
+        } 
         return {
             sender : {
                 id: currentUserId,
                 userName: currentUser.userName,
                 avatarImg: currentUser.avatarImg
             },
-            lastMessage : currentChat.messages[currentChat.messages.length-1] || {},
-            chatId : friend.chatId
+            lastMessage : {
+                text : lastMessage.text,
+                autherId : lastMessage.autherId,
+                id : lastMessage.id,
+                sendDate : lastMessage.sendDate,
+                watched : !!lastMessage.watchers[id]
+            },
+            chatId : friend.chatId,
+            dontWathcedCount
         }
     })
 
@@ -339,11 +375,13 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)
 
 app.get(CHAT,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const { id:chatId } = req.params
+    const user = req.user
     const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
     const messages = chat[chatId].messages.map(message=>{
         const currentUser = users[message.autherId]
+        message.watchers[user.id] = true
         return {
             ...message,
             avatarImg : currentUser.avatarImg,
@@ -351,7 +389,7 @@ app.get(CHAT,passport.authenticate("jwt", {session : false}),(req,res)=>{
         }
     })
 
-
+    fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
     res.send({
         access : true,
         list : messages
@@ -546,6 +584,7 @@ app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
 
 app.get(AUTH,passport.authenticate("jwt", {session : false}),(req,res)=>{
     const user = req.user
+    const messages = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
     
     let countNotifications = 0
     for( let i in user.notifications ){
@@ -555,7 +594,12 @@ app.get(AUTH,passport.authenticate("jwt", {session : false}),(req,res)=>{
         countNotifications++
     }
 
-    
+    let countMessages = 0
+    user.friends.forEach(friend => {
+        const chat = messages[friend.chatId]
+        countMessages = chat.messages[chat.messages.length-1].watchers[user.id] ? countMessages : ++countMessages
+    })
+
     res.send({
         isAuth : true,
         user : {
@@ -566,7 +610,8 @@ app.get(AUTH,passport.authenticate("jwt", {session : false}),(req,res)=>{
             description : req.user.description
         },
         notViewed : {
-            notifications : countNotifications
+            notifications : countNotifications,
+            messages : countMessages
         }
     })
 })
@@ -589,7 +634,10 @@ io.on("connection",(socket)=>{
             text : message.text,
             autherId : message.autherId,
             id : `message_${nanoid(8)}`,
-            sendDate : new Date().getTime()
+            sendDate : new Date().getTime(),
+            watchers : {
+                [message.autherId] : true
+            }
         }
         chat[roomId].messages.push(newMessage)
         const user = users[message.autherId]
