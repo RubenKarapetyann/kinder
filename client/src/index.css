@@ -95,3 +95,20 @@ body::-webkit-scrollbar-thumb{
   top: 0;
   overflow-x: hidden;
 }
+
+.unwatched-styles{
+  color: black;
+  font-weight: bold;
+}
+
+.not-viewed-container{
+  background-color: red;
+  border-radius: 50%;
+  height: 17px;
+  width: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+}

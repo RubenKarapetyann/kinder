@@ -55,6 +55,13 @@
     ],
     "notifications": [
       {
+        "id": "notification_K5Wh4SpF",
+        "autherId": "0.8713018945867141",
+        "date": 1691254302992,
+        "type": "like",
+        "watched": true
+      },
+      {
         "id": "asdasnasfiasdasd",
         "autherId": 0.8713018945867141,
         "date": 10,

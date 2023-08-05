@@ -381,9 +381,10 @@
     "postDescription": "my image",
     "id": "post_QF9F2mtR",
     "img": "image_uWN81kYF.jpg",
-    "likes": 1,
+    "likes": 2,
     "likers": {
-      "0.6145628391094977": true
+      "0.6145628391094977": true,
+      "0.8713018945867141": true
     },
     "publicDate": 1690134726427,
     "auther": {

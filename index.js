@@ -238,7 +238,7 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
                 const currentUser = users[currentUserId]
                 const lastMessage = currentChat.messages[currentChat.messages.length-1] || {}
                 let dontWathcedCount = 0
-                for ( let i = currentChat.messages.length-1 ; i > 0 ; i-- ){
+                for ( let i = currentChat.messages.length-1 ; i >= 0 ; i-- ){
                     if( currentChat.messages[i].watchers[id] ){
                         break
                     }
@@ -280,7 +280,7 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
         const currentUser = users[currentUserId]
         const lastMessage = currentChat.messages[currentChat.messages.length-1] || {}
         let dontWathcedCount = 0
-        for ( let i = currentChat.messages.length-1 ; i > 0 ; i-- ){
+        for ( let i = currentChat.messages.length-1 ; i >= 0 ; i-- ){
             if( currentChat.messages[i].watchers[id] ){
                 break
             }

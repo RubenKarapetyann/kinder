@@ -4,7 +4,10 @@ const ProfileListItem = ({ children, userName, comment, hr=true, avatarImg, midd
     return(
         <>        
             <ProfileTitle userName={userName} comment={comment} avatarImg={avatarImg} middleware={middleware} type={type}>
-                <div>
+                <div style={{
+                    display : "flex",
+                    gap : 5
+                }}>
                     {children}
                 </div>
             </ProfileTitle>

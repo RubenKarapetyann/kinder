@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import { getHowLongItsBeen } from "../../../utils/time-helper"
 import { getLoading } from "../../../utils/loading-helper"
 import { MESSAGES } from "../../../constants/routes-constants"
+import { checkAuthentication } from "../../../redux/reducers/userSlice/UserReducer"
 
 function Messages(){
     const { messages, loading } = useSelector(store=>store.messages)
@@ -15,6 +16,7 @@ function Messages(){
 
     useEffect(()=>{
         dispatch(getMessagesList(navigate))
+        dispatch(checkAuthentication(navigate))
     },[])
 
 
@@ -31,7 +33,10 @@ function Messages(){
                             comment={message.lastMessage.text} 
                             avatarImg={message.sender.avatarImg}
                         >
-                            <span>{getHowLongItsBeen(message.lastMessage.sendDate)}</span>
+                            <>
+                                {!!message.dontWathcedCount && <span className="not-viewed-container">{message.dontWathcedCount}</span>}
+                                <span className={message.lastMessage.watched ? null : "unwatched-styles"}>{getHowLongItsBeen(message.lastMessage.sendDate)}</span>
+                            </>
                         </ProfileListItem>
                     </Link>
                 )
