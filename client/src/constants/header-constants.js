@@ -25,13 +25,15 @@ export const HEADER_ITEMS = [
         id : Math.random(),
         displayName : "notifications",
         displayIcon : <img src={notificationsIcon} alt="notifications"/>,
-        routeName : NOTIFICATIONS
+        routeName : NOTIFICATIONS,
+        getNotViewed : "notifications"
     },
     {
         id : Math.random(),
         displayName : "messages",
         displayIcon : <img src={messagesIcon} alt="messages"/>,
-        routeName : MESSAGES
+        routeName : MESSAGES,
+        getNotViewed : "messages"
     },
 ]
 

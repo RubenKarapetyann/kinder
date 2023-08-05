@@ -357,11 +357,12 @@ app.get(CHAT,passport.authenticate("jwt", {session : false}),(req,res)=>{
 })
 
 app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const user = req.user
     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    const user = users[req.user.id]
 
     const notifications = user.notifications.map(notification=>{
         const currentUser = users[notification.autherId]
+        notification.watched = true
         return {
             ...notification,
             avatarImg : currentUser.avatarImg,
@@ -370,6 +371,8 @@ app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=
         }
     })
 
+    
+    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
     res.send({
         access : true,
         list : notifications
