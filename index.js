@@ -73,15 +73,31 @@ app.use('/profile', express.static('./database/images'));
 app.use('/post', express.static('./database/images'));
 app.use(SETTINGS, express.static('./database/images'));
 app.use(MESSAGES, express.static('./database/images'));
+app.use(LOGIN, express.static('./database/images'));
 
-passport.use(new JwtStrategy(jwtConfig,(payload, done)=>{
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const user = users[payload.sub]
 
-    if(user){
-        return done(null, user)
-    }else{
-        return done(null,false)
+passport.use(new JwtStrategy(jwtConfig,async (payload, done)=>{
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // const user = users[payload.sub]
+
+    // if(user){
+    //     return done(null, user)
+    // }else{
+    //     return done(null,false)
+    // }
+
+
+    //db version
+    try{
+        const users = db.collection("users")
+        const user = await users.findOne({ id : payload.sub })
+        if(user){
+            return done(null, user)
+        }else{
+            return done(null,false)
+        }
+    }catch(err){
+        console.log(err);
     }
 }));
 
