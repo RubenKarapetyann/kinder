@@ -439,54 +439,54 @@ app.post(HOME, passport.authenticate("jwt", {session : false}),async (req,res)=>
 })
 
 
-app.get(MESSAGES,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const { id, friends  } = req.user
-    const messages = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+app.get(MESSAGES,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const { id, friends  } = req.user
+    // const messages = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    if(req.query.search){
-        const messagesList = friends.reduce((arr,friend)=>{
-            if(new RegExp(req.query.search,"i").test(users[friend.friendId].userName)){
-                const currentChat = messages[friend.chatId]
-                const { id:currentUserId } = currentChat.members.find(val=>val.id===friend.friendId)
-                const currentUser = users[currentUserId]
-                const lastMessage = currentChat.messages[currentChat.messages.length-1] || {}
-                let dontWathcedCount = 0
-                for ( let i = currentChat.messages.length-1 ; i >= 0 ; i-- ){
-                    if( currentChat.messages[i].watchers[id] ){
-                        break
-                    }
-                    dontWathcedCount++
-                    if( dontWathcedCount >= 99 ){
-                        break
-                    }
-                } 
-                return [...arr,{
-                    sender : {
-                        id: currentUserId,
-                        userName: currentUser.userName,
-                        avatarImg: currentUser.avatarImg
-                    },
-                    lastMessage : {
-                        text : lastMessage.text,
-                        autherId : lastMessage.autherId,
-                        id : lastMessage.id,
-                        sendDate : lastMessage.sendDate,
-                        watched : !!lastMessage.watchers[id]
-                    },
-                    chatId : friend.chatId,
-                    dontWathcedCount    
-                }]
-            }
-            return arr
-        },[])
+    // if(req.query.search){
+    //     const messagesList = friends.reduce((arr,friend)=>{
+    //         if(new RegExp(req.query.search,"i").test(users[friend.friendId].userName)){
+    //             const currentChat = messages[friend.chatId]
+    //             const { id:currentUserId } = currentChat.members.find(val=>val.id===friend.friendId)
+    //             const currentUser = users[currentUserId]
+    //             const lastMessage = currentChat.messages[currentChat.messages.length-1] || {}
+    //             let dontWathcedCount = 0
+    //             for ( let i = currentChat.messages.length-1 ; i >= 0 ; i-- ){
+    //                 if( currentChat.messages[i].watchers[id] ){
+    //                     break
+    //                 }
+    //                 dontWathcedCount++
+    //                 if( dontWathcedCount >= 99 ){
+    //                     break
+    //                 }
+    //             } 
+    //             return [...arr,{
+    //                 sender : {
+    //                     id: currentUserId,
+    //                     userName: currentUser.userName,
+    //                     avatarImg: currentUser.avatarImg
+    //                 },
+    //                 lastMessage : {
+    //                     text : lastMessage.text,
+    //                     autherId : lastMessage.autherId,
+    //                     id : lastMessage.id,
+    //                     sendDate : lastMessage.sendDate,
+    //                     watched : !!lastMessage.watchers[id]
+    //                 },
+    //                 chatId : friend.chatId,
+    //                 dontWathcedCount    
+    //             }]
+    //         }
+    //         return arr
+    //     },[])
 
 
-        return res.send({
-            access : true,
-            list : messagesList
-        })
-    }
+    //     return res.send({
+    //         access : true,
+    //         list : messagesList
+    //     })
+    //}
 
     const messagesList = friends.map(friend=>{
         const currentChat = messages[friend.chatId]
