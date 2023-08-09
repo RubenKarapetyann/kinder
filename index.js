@@ -933,27 +933,57 @@ app.get(PROFILE,passport.authenticate("jwt", {session : false}),async (req,res)=
     }
 })
 
-app.get(FAVORITES,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const { id } = req.params
+app.get(FAVORITES,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const { id } = req.params
 
 
-    if(id !== req.user.id){
-        return res.send({
-            access : false
+    // if(id !== req.user.id){
+    //     return res.send({
+    //         access : false
+    //     })
+    // }
+    // const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+
+    // const favorites = users[id].favorites.map(postId=>({
+    //     postId,
+    //     img : posts[postId].img
+    // }))
+
+    // res.send({
+    //     access : true,
+    //     list : favorites
+    // })
+    
+
+    //db version
+    try{
+        const { id } = req.params
+        
+        if(id !== req.user.id){
+            return res.send({
+                access : false
+            })
+        }
+        const users = db.collection("users")
+        const posts = db.collection("posts")
+        const user = await users.findOne({ id })
+    
+        const favorites = await Promise.all(user.favorites.map(async postId=>{
+            const image = (await posts.findOne({ id : postId })).img
+            return {
+                postId,
+                img : image
+            }
+        }))
+    
+        res.send({
+            access : true,
+            list : favorites
         })
+    }catch(err){
+        res.status(400).send({ access : false })
     }
-    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-
-    const favorites = users[id].favorites.map(postId=>({
-        postId,
-        img : posts[postId].img
-    }))
-
-    res.send({
-        access : true,
-        list : favorites
-    })
 })
 
 app.get(FRIENDS,passport.authenticate("jwt", {session : false}),(req,res)=>{
