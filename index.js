@@ -245,34 +245,66 @@ app.get(LOG_OUT,(req,res)=>{
 })
 
 
-app.get(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
-    const user = req.user
-    const { page } = req.query 
-    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+app.get(HOME, passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const user = req.user
+    // const { page } = req.query 
+    // const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    const allPosts = [...user.posts.map(post=>getPost(user,user,posts[post.postId])),...user.friends.reduce((state,friend)=>{
-        return state.concat(...users[friend.friendId].posts.map(post=>getPost(user,users[friend.friendId],posts[post.postId])))
-    },[])].sort((p1,p2)=>p2.publicDate-p1.publicDate)
+    // const allPosts = [...user.posts.map(post=>getPost(user,user,posts[post.postId])),...user.friends.reduce((state,friend)=>{
+    //     return state.concat(...users[friend.friendId].posts.map(post=>getPost(user,users[friend.friendId],posts[post.postId])))
+    // },[])].sort((p1,p2)=>p2.publicDate-p1.publicDate)
 
-    // const userPosts = user.posts.map(post=>{
-    //     const currentPost = posts[post.postId]
-    //     const currentUser = users[currentPost.auther.id]
-    //     return getPost(user,currentUser,currentPost) 
+    // // const userPosts = user.posts.map(post=>{
+    // //     const currentPost = posts[post.postId]
+    // //     const currentUser = users[currentPost.auther.id]
+    // //     return getPost(user,currentUser,currentPost) 
+    // // })
+
+    // // const friendsPost = user.friends.reduce((state,friend)=>{
+    // //     return state.concat(...users[friend.friendId].posts.map(post=>{
+    // //         const currentPost = posts[post.postId]
+    // //         const currentUser = users[currentPost.auther.id]
+    // //         return getPost(user,currentUser,currentPost)
+    // //     }))
+    // // },[])
+    
+    // res.send({
+    //     access : true,
+    //     posts : allPosts.slice(page*3,page*3+3)
     // })
 
-    // const friendsPost = user.friends.reduce((state,friend)=>{
-    //     return state.concat(...users[friend.friendId].posts.map(post=>{
-    //         const currentPost = posts[post.postId]
-    //         const currentUser = users[currentPost.auther.id]
-    //         return getPost(user,currentUser,currentPost)
-    //     }))
-    // },[])
+
+    //db version
+    try{const user = req.user
+        const { page } = req.query 
     
-    res.send({
-        access : true,
-        posts : allPosts.slice(page*3,page*3+3)
-    })
+        const users = db.collection("users")
+        const posts = db.collection("posts")
+
+        const userPosts = await Promise.all(user.posts.map(async post=>{
+            const currentPost = await posts.findOne({ id :post.postId })
+            return getPost(user,user,currentPost)
+        }))
+
+        const friendsPosts = (await Promise.all([user.friends.reduce(async (state,friend)=>{
+            const currentFriend = await users.findOne({ id : friend.friendId })
+            return state.concat(await Promise.all(currentFriend.posts.map(async post=>{
+                const currentPost = await posts.findOne({ id :post.postId })
+                return getPost(user,currentFriend,currentPost)
+            })))
+        },[])]))[0]
+
+        const allPosts = [...userPosts,...friendsPosts].sort((p1,p2)=>p2.publicDate-p1.publicDate)
+    
+        res.send({
+            access : true,
+            posts : allPosts.slice(page*3,page*3+3)
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+        console.log(err);
+    }
 }) 
 
 
