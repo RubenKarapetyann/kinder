@@ -1612,38 +1612,85 @@ app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),async (req,r
 })
 
 
-app.post(SETTINGS,passport.authenticate("jwt", {session : false}),upload.single("setting"),(req,res)=>{
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+app.post(SETTINGS,passport.authenticate("jwt", {session : false}),upload.single("setting"),async (req,res)=>{
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    const currentUser = users[req.user.id]
+    // const currentUser = users[req.user.id]
         
-    if(req.body.title === "name"){
-        if(new RegExp(" ").test(req.body.setting)){
-            return res.send({
-                access : false
+    // if(req.body.title === "name"){
+    //     if(new RegExp(" ").test(req.body.setting)){
+    //         return res.send({
+    //             access : false
+    //         })
+    //     }
+    //     currentUser.userName = req.body.setting
+    // }else if(req.body.title === "description"){
+    //     currentUser.description = req.body.setting
+    // }else{
+    //     currentUser.avatarImg = req.file.filename
+    // }
+
+
+
+    // fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    // res.send({
+    //     access : true,
+    //     user : {
+    //         isAuth : true,
+    //         name : currentUser.userName,
+    //         email : currentUser.email,
+    //         id : currentUser.id,
+    //         avatarImg : currentUser.avatarImg,
+    //         description : currentUser.description
+    //     }
+    // })
+
+    //db version
+    try{
+        const users = db.collection("users")
+
+        if(req.body.title === "name"){
+            if(new RegExp(" ").test(req.body.setting)){
+                return res.send({
+                    access : false
+                })
+            }
+            await users.updateOne({ id : req.user.id },{
+                $set : {
+                    userName : req.body.setting
+                }
+            })
+        }else if(req.body.title === "description"){
+            await users.updateOne({ id : req.user.id },{
+                $set : {
+                    description : req.body.setting
+                }
+            })
+        }else{
+            await users.updateOne({ id : req.user.id },{
+                $set : {
+                    avatarImg : req.body.setting
+                }
             })
         }
-        currentUser.userName = req.body.setting
-    }else if(req.body.title === "description"){
-        currentUser.description = req.body.setting
-    }else{
-        currentUser.avatarImg = req.file.filename
+
+        const currentUser = await users.findOne({ id : req.user.id })
+        res.send({
+            access : true,
+            user : {
+                isAuth : true,
+                user : {
+                    name : currentUser.userName,
+                    email : currentUser.email,
+                    id : currentUser.id,
+                    avatarImg : currentUser.avatarImg,
+                    description : currentUser.description
+                }
+            }
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
     }
-
-
-
-    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
-    res.send({
-        access : true,
-        user : {
-            isAuth : true,
-            name : currentUser.userName,
-            email : currentUser.email,
-            id : currentUser.id,
-            avatarImg : currentUser.avatarImg,
-            description : currentUser.description
-        }
-    })
 })
 
 
