@@ -13,7 +13,7 @@ function userReducer(state={user : {isAuth : false}, notViewed : {} }, action){
                     ...action.payload.user.user,
                     isAuth : action.payload.user.isAuth,
                 },
-                notViewed : action.payload.user.notViewed
+                notViewed : action.payload.user.notViewed || state.notViewed
             }
         case LOG_OUT:
             return {

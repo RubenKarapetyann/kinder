@@ -13,13 +13,15 @@ export const HEADER_ITEMS = [
         id : Math.random(),
         displayName : "home",
         displayIcon : <img src={homeIcon} alt="home"/>,
-        routeName : HOME
+        routeName : HOME,
+        getNotViewed : ""
     },
     {
         id : Math.random(),
         displayName : "friends",
         displayIcon : <img src={friendsIcon} alt="friends"/>,
-        routeName : FRIENDS
+        routeName : FRIENDS,
+        getNotViewed : ""
     },
     {
         id : Math.random(),

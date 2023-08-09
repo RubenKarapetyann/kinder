@@ -36,7 +36,9 @@
 .profile-img-container{
     width: 30%;
     display: flex;
-    height: 200px;
+    /* height: 200px; */
+    max-height: 200px;
+    height: auto;
     justify-content: center;
     margin-top: 10px;
     overflow-x: hidden;

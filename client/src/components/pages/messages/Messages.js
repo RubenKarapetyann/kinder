@@ -32,6 +32,7 @@ function Messages(){
                             userName={message.sender.userName} 
                             comment={message.lastMessage.text} 
                             avatarImg={message.sender.avatarImg}
+                            type={"messages"}
                         >
                             <>
                                 {!!message.dontWathcedCount && <span className="not-viewed-container">{message.dontWathcedCount}</span>}

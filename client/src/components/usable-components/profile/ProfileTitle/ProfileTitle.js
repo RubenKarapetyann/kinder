@@ -1,7 +1,7 @@
 import "./ProfileTitle.css"
 
 const ProfileTitle = ({ userName, comment="", children, type, avatarImg="https://ionicframework.com/docs/img/demos/avatar.svg", middleware=(children)=>children })=>{
-    comment = (type!=="notifications") && comment.length >=10 ? comment.slice(0,10) + "..." : comment
+    comment = (type==="messages") && comment.length >=10 ? comment.slice(0,10) + "..." : comment
     return(
         <div className="profile-title-container">
             <span>
