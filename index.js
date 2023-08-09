@@ -1071,25 +1071,53 @@ app.get(FRIENDS,passport.authenticate("jwt", {session : false}),async (req,res)=
     }
 })
 
-app.delete(FRIENDS+"/:id",passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const { id } = req.params
-    const { id:userId } = req.user
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+app.delete(FRIENDS+"/:id",passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const { id } = req.params
+    // const { id:userId } = req.user
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
     
-    let chatId 
-    users[userId].friends = users[userId].friends.filter(friend=>friend.friendId===id ? (chatId=friend.chatId) && false : true)
-    users[id].friends = users[id].friends.filter(friend=>friend.friendId!==userId)
-    delete chat[chatId]
+    // let chatId 
+    // users[userId].friends = users[userId].friends.filter(friend=>friend.friendId===id ? (chatId=friend.chatId) && false : true)
+    // users[id].friends = users[id].friends.filter(friend=>friend.friendId!==userId)
+    // delete chat[chatId]
 
 
 
-    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
-    fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
+    // fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    // fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
 
-    res.send({
-        access : true
-    })
+    // res.send({
+    //     access : true
+    // })
+
+    //db version
+    try{
+        const { id } = req.params
+        const { id:userId } = req.user        
+    
+        const chat = db.collection("messages")
+        const users = db.collection("users")
+            
+        const doc = await users.findOneAndUpdate({ id : userId },{ $pull : {
+            friends : { friendId : id }
+        }})
+        const friend = doc.value.friends.find(friend=>friend.friendId===id)
+        const chatId = friend.chatId
+
+        await chat.deleteOne({ id : chatId })
+        await users.updateOne({ id : id },{
+            $pull : {
+                friends : { friendId : userId }
+            }
+        })
+    
+        res.send({
+            access : true
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+    }
 })
 
 app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
