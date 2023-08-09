@@ -174,29 +174,66 @@ app.post(REGISTER,async (req,res)=>{
 })
 
 app.post(LOGIN,async (req,res)=>{
-    const { email, password } = req.body
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const user = Object.values(users).find(val=>val.email===email)
+    // const { email, password } = req.body
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // const user = Object.values(users).find(val=>val.email===email)
 
 
-    if(!user){
-        return res.send({access : false, message : "incorrect email",type : "email"})
+    // if(!user){
+    //     return res.send({access : false, message : "incorrect email",type : "email"})
+    // }
+
+    // const validPassword = await bcrypt.compare(password,user.password)
+    // if(!validPassword){
+    //     return res.send({access : false, message : "incorrect password", type : "password"})
+    // }
+
+    // const token = generateToken(user)
+
+    // res.send({access : true, token,
+    //     user : {
+    //         isAuth : true,
+    //         user : {
+    //             name : user.userName,
+    //             email : user.email,
+    //             id : user.id,
+    //             avatarImg : user.avatarImg,
+    //             description : user.description
+    //         }
+    // }})
+
+
+    //db version
+    try{
+        const { email, password } = req.body
+        const users = db.collection("users")
+        const user = await users.findOne({ email : email })
+    
+        if(!user){
+            return res.send({access : false, message : "incorrect email",type : "email"})
+        }
+    
+        const validPassword = await bcrypt.compare(password,user.password)
+        if(!validPassword){
+            return res.send({access : false, message : "incorrect password", type : "password"})
+        }
+    
+        const token = generateToken(user)
+    
+        res.send({access : true, token,
+            user : {
+                isAuth : true,
+                user : {
+                    name : user.userName,
+                    email : user.email,
+                    id : user.id,
+                    avatarImg : user.avatarImg,
+                    description : user.description
+                }
+        }})
+    }catch(err){
+        res.status(400).send({ access : false })
     }
-
-    const validPassword = await bcrypt.compare(password,user.password)
-    if(!validPassword){
-        return res.send({access : false, message : "incorrect password", type : "password"})
-    }
-
-    const token = generateToken(user)
-
-    res.send({access : true, token, user : { 
-        name : user.userName,
-        email : user.email,
-        id : user.id,
-        avatarImg : user.avatarImg,
-        description : user.description
-    }})
 })
 
 
