@@ -1157,38 +1157,76 @@ app.get(POST,passport.authenticate("jwt", {session : false}),async (req,res)=>{
     }
 })
 
-app.get(AUTH,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const user = req.user
-    const messages = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+app.get(AUTH,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const user = req.user
+    // const messages = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
     
-    let countNotifications = 0
-    for( let i in user.notifications ){
-        if(user.notifications[i].watched){
-            break
+    // let countNotifications = 0
+    // for( let i in user.notifications ){
+    //     if(user.notifications[i].watched){
+    //         break
+    //     }
+    //     countNotifications++
+    // }
+
+    // let countMessages = 0
+    // user.friends.forEach(friend => {
+    //     const chat = messages[friend.chatId]
+    //     countMessages = chat.messages[chat.messages.length-1].watchers[user.id] ? countMessages : ++countMessages
+    // })
+
+    // res.send({
+    //     isAuth : true,
+    //     user : {
+    //         name : req.user.userName,
+    //         email : req.user.email,
+    //         id : req.user.id,
+    //         avatarImg : req.user.avatarImg,
+    //         description : req.user.description
+    //     },
+    //     notViewed : {
+    //         notifications : countNotifications,
+    //         messages : countMessages
+    //     }
+    // })
+
+    //db version
+    try{
+        const user = req.user
+        const messages = db.collection("messages")
+
+        let countNotifications = 0
+        for( let i in user.notifications ){
+            if(user.notifications[i].watched){
+                break
+            }
+            countNotifications++
         }
-        countNotifications++
+    
+        let countMessages = 0
+        await Promise.all(user.friends.map(async friend => {
+            const chat = await messages.findOne({ id : friend.chatId })
+            countMessages = chat.messages.length >= 1 ? (chat.messages[chat.messages.length-1].watchers[user.id] ? countMessages : ++countMessages) : 0
+        }))
+    
+        res.send({
+            isAuth : true,
+            user : {
+                name : req.user.userName,
+                email : req.user.email,
+                id : req.user.id,
+                avatarImg : req.user.avatarImg,
+                description : req.user.description
+            },
+            notViewed : {
+                notifications : countNotifications,
+                messages : countMessages
+            }
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+        console.log(err);
     }
-
-    let countMessages = 0
-    user.friends.forEach(friend => {
-        const chat = messages[friend.chatId]
-        countMessages = chat.messages[chat.messages.length-1].watchers[user.id] ? countMessages : ++countMessages
-    })
-
-    res.send({
-        isAuth : true,
-        user : {
-            name : req.user.userName,
-            email : req.user.email,
-            id : req.user.id,
-            avatarImg : req.user.avatarImg,
-            description : req.user.description
-        },
-        notViewed : {
-            notifications : countNotifications,
-            messages : countMessages
-        }
-    })
 })
 
 
