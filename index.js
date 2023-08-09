@@ -752,27 +752,57 @@ app.get(CHAT,passport.authenticate("jwt", {session : false}),async (req,res)=>{
     }
 })
 
-app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const user = users[req.user.id]
+app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // const user = users[req.user.id]
 
-    const notifications = user.notifications.map(notification=>{
-        const currentUser = users[notification.autherId]
-        notification.watched = true
-        return {
-            ...notification,
-            avatarImg : currentUser.avatarImg,
-            userName : currentUser.userName ,
-            text : NOTIFICATIONS_TYPES[notification.type]
-        }
-    })
+    // const notifications = user.notifications.map(notification=>{
+    //     const currentUser = users[notification.autherId]
+    //     notification.watched = true
+    //     return {
+    //         ...notification,
+    //         avatarImg : currentUser.avatarImg,
+    //         userName : currentUser.userName ,
+    //         text : NOTIFICATIONS_TYPES[notification.type]
+    //     }
+    // })
 
 
-    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
-    res.send({
-        access : true,
-        list : notifications
-    })
+    // fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    // res.send({
+    //     access : true,
+    //     list : notifications
+    // })
+
+
+    //db version
+    try{
+        const users = db.collection("users")
+        const user = await users.findOne({ id : req.user.id })
+
+        const notifications = await Promise.all(user.notifications.map(async notification=>{
+            const currentUser = await users.findOne({ id : notification.autherId })
+            await users.updateOne({ id : user.id, "notifications.id" : notification.id },{
+                $set : {
+                    "notifications.$.watched" : true
+                }
+            })
+            return {
+                ...notification,
+                avatarImg : currentUser.avatarImg,
+                userName : currentUser.userName ,
+                text : NOTIFICATIONS_TYPES[notification.type]
+            }
+        }))
+
+
+        res.send({
+            access : true,
+            list : notifications
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+    }
 })
 
 
