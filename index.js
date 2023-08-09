@@ -1392,77 +1392,223 @@ app.get(ADD_FRIEND,passport.authenticate("jwt", {session : false}),async (req,re
 
 
 
-app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const currentUser = users[req.user.id]
-    const otherUser = users[req.body.id]
-    const currentDate = new Date().getTime()
+app.post(ADD_FRIEND,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // const currentUser = users[req.user.id]
+    // const otherUser = users[req.body.id]
+    // const currentDate = new Date().getTime()
 
 
-    if(req.body.status === NOT_FRIENDS){
-        otherUser.notifications = [{
-            id: `notification_${nanoid(8)}`,
-            autherId: currentUser.id,
-            date: currentDate,
-            type: "friend-requests",
-            watched : false
-        },...otherUser.notifications]
-        otherUser.friendRequests.otherToMe.push({
-            id : currentUser.id,
-            date : currentDate
-        })
-        currentUser.friendRequests.meToOther.push({
-            id : otherUser.id,
-            date : currentDate
-        })
-    }else if(req.body.status === OTHER_SEND){
-        const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
-        const chatId = `chat_${nanoid(8)}`
-        chat[chatId] = {
-            members: [
-                {
-                  id: currentUser.id
-                },
-                {
-                  id: otherUser.id
+    // if(req.body.status === NOT_FRIENDS){
+    //     otherUser.notifications = [{
+    //         id: `notification_${nanoid(8)}`,
+    //         autherId: currentUser.id,
+    //         date: currentDate,
+    //         type: "friend-requests",
+    //         watched : false
+    //     },...otherUser.notifications]
+    //     otherUser.friendRequests.otherToMe.push({
+    //         id : currentUser.id,
+    //         date : currentDate
+    //     })
+    //     currentUser.friendRequests.meToOther.push({
+    //         id : otherUser.id,
+    //         date : currentDate
+    //     })
+    // }else if(req.body.status === OTHER_SEND){
+    //     const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+    //     const chatId = `chat_${nanoid(8)}`
+    //     chat[chatId] = {
+    //         members: [
+    //             {
+    //               id: currentUser.id
+    //             },
+    //             {
+    //               id: otherUser.id
+    //             }
+    //           ],
+    //         messages : []
+    //     }
+    //     currentUser.friends.push({
+    //         friendId : otherUser.id,
+    //         chatId
+    //     })
+    //     otherUser.friends.push({
+    //         friendId : currentUser.id,
+    //         chatId
+    //     })
+    //     otherUser.friendRequests.meToOther = otherUser.friendRequests.meToOther.filter(req=>req.id !== currentUser.id)
+    //     currentUser.friendRequests.otherToMe = currentUser.friendRequests.otherToMe.filter(req=>req.id !== otherUser.id)
+    //     otherUser.notifications = [{
+    //         id: `notification_${nanoid(8)}`,
+    //         autherId: currentUser.id,
+    //         date: currentDate,
+    //         type: "friend-requests-access",
+    //         watched : false
+    //     },...otherUser.notifications]
+    //     fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
+    // }else if(req.body.status === YOU_SEND){
+    //     currentUser.friendRequests.meToOther = currentUser.friendRequests.meToOther.filter(req=>req.id !== otherUser.id)
+    //     otherUser.friendRequests.otherToMe = currentUser.friendRequests.otherToMe.filter(req=>req.id !== currentUser.id)
+    //     otherUser.notifications = otherUser.notifications.filter(notification=>{
+    //         if(notification.type !== "friend-requests" && notification.autherId !== currentUser.id){
+    //             return notification
+    //         }
+    //     })
+    // }
+
+    // fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    // res.send({
+    //     access : true,
+    //     status : USER_STATUS_TRANSFORM[req.body.status],
+    //     id : otherUser.id
+    // })
+
+
+
+    //db version
+    try{
+        const users = db.collection("users")
+
+        const currentUser = await users.findOne({ id : req.user.id })
+        const otherUser =  await users.findOne({ id : req.body.id })
+
+
+        const currentDate = new Date().getTime()
+
+
+        if(req.body.status === NOT_FRIENDS){
+
+            await users.updateOne({ id : req.body.id },{
+                $push : {
+                    notifications : {
+                        $each : [{
+                            id: `notification_${nanoid(8)}`,
+                            autherId: req.user.id,
+                            date: currentDate,
+                            type: "friend-requests",
+                            watched : false
+                        }],
+                        $position : 0
+                    }
                 }
-              ],
-            messages : []
-        }
-        currentUser.friends.push({
-            friendId : otherUser.id,
-            chatId
-        })
-        otherUser.friends.push({
-            friendId : currentUser.id,
-            chatId
-        })
-        otherUser.friendRequests.meToOther = otherUser.friendRequests.meToOther.filter(req=>req.id !== currentUser.id)
-        currentUser.friendRequests.otherToMe = currentUser.friendRequests.otherToMe.filter(req=>req.id !== otherUser.id)
-        otherUser.notifications = [{
-            id: `notification_${nanoid(8)}`,
-            autherId: currentUser.id,
-            date: currentDate,
-            type: "friend-requests-access",
-            watched : false
-        },...otherUser.notifications]
-        fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
-    }else if(req.body.status === YOU_SEND){
-        currentUser.friendRequests.meToOther = currentUser.friendRequests.meToOther.filter(req=>req.id !== otherUser.id)
-        otherUser.friendRequests.otherToMe = currentUser.friendRequests.otherToMe.filter(req=>req.id !== currentUser.id)
-        otherUser.notifications = otherUser.notifications.filter(notification=>{
-            if(notification.type !== "friend-requests" && notification.autherId !== currentUser.id){
-                return notification
-            }
-        })
-    }
+            })
 
-    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
-    res.send({
-        access : true,
-        status : USER_STATUS_TRANSFORM[req.body.status],
-        id : otherUser.id
-    })
+            await users.updateOne({ id : req.body.id },{
+                $push : {
+                    "friendRequests.otherToMe" : {
+                        id : req.user.id,
+                        date : currentDate
+                    }
+                }
+            })
+
+            await users.updateOne({ id : req.user.id },{
+                $push : {
+                    "friendRequests.meToOther" : {
+                        id : req.body.id,
+                        date : currentDate
+                    }
+                }
+            })
+        }else if(req.body.status === OTHER_SEND){
+            const chat = db.collection("messages")
+            const chatId = `chat_${nanoid(8)}`
+
+            await chat.insertOne({
+                members: [
+                    {
+                        id: currentUser.id
+                    },
+                    {
+                        id: otherUser.id
+                    }
+                ],
+                messages : [],
+                id : chatId
+            })
+
+            await users.updateOne({ id : req.user.id },{
+                $push : {
+                    friends : {
+                        friendId : req.body.id,
+                        chatId
+                    }
+                }
+            })
+
+            await users.updateOne({ id : req.body.id },{
+                $push : {
+                    friends : {
+                        friendId : req.user.id,
+                        chatId
+                    }
+                }
+            })
+            await users.updateOne({ id : req.body.id },{
+                $pull : {
+                    "friendRequests.meToOther" : {
+                        id : req.user.id
+                    }
+                }
+            })
+            await users.updateOne({ id : req.user.id },{
+                $pull : {
+                    "friendRequests.otherToMe" : {
+                        id : req.body.id
+                    }
+                }
+            })
+
+            await users.updateOne({ id : req.body.id },{
+                $push : {
+                    notifications : {
+                        $each : [{
+                            id: `notification_${nanoid(8)}`,
+                            autherId: req.user.id,
+                            date: currentDate,
+                            type: "friend-requests-access",
+                            watched : false
+                        }],
+                        $position : 0
+                    }
+                }
+            })
+        }else if(req.body.status === YOU_SEND){
+            await users.updateOne({ id : req.user.id },{
+                $pull : {
+                    "friendRequests.meToOther" : {
+                        id : req.body.id
+                    }
+                }
+            })
+            await users.updateOne({ id : req.body.id },{
+                $pull : {
+                    "friendRequests.otherToMe" : {
+                        id : req.user.id
+                    }
+                }
+            })
+
+            await users.updateOne({ id : req.body.id },{
+                $pull : {
+                    notifications : {
+                        autherId : req.user.id,
+                        type : "friend-requests"
+                    }
+                }
+            })
+        }
+
+        res.send({
+            access : true,
+            status : USER_STATUS_TRANSFORM[req.body.status],
+            id : req.body.id
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+        console.log(err);
+    }
 })
 
 
