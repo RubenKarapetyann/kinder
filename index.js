@@ -103,10 +103,46 @@ passport.use(new JwtStrategy(jwtConfig,async (payload, done)=>{
 
 
 app.post(REGISTER,async (req,res)=>{
+    // try{
+    //     const {email, name, password} = req.body
+    //     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    //     const user = Object.values(users).find(val=>val.email===email)
+    //     if(!user){
+    //         const hashedPassword = await bcrypt.hash(password, 10)
+    //         const id = `user_${nanoid(8)}`
+    //         const newUser = {
+    //             userName : name,
+    //             email : email,
+    //             avatarImg : "https://ionicframework.com/docs/img/demos/avatar.svg",
+    //             password : hashedPassword,
+    //             description : "no bio yet",
+    //             id,
+    //             posts : [],
+    //             friends : [],
+    //             favorites : [],
+    //             notifications : [],
+    //             friendRequests : {
+    //                 meToOther : [],
+    //                 otherToMe : []
+    //             }
+    //         }
+    //         users[id] = newUser
+    //         fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    //         res.send({access : true})
+    //     }else{
+    //         res.send({access : false,message : "email already used", type : "email"})
+    //     }
+    // }catch(err){
+    //     res.status(400).send({access : false,message : "something went wrong", type : "repeatPassword"})
+    // }
+
+
+
+    //db version
     try{
         const {email, name, password} = req.body
-        const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-        const user = Object.values(users).find(val=>val.email===email)
+        const users = db.collection("users")
+        const user = await users.findOne({ email : email })
         if(!user){
             const hashedPassword = await bcrypt.hash(password, 10)
             const id = `user_${nanoid(8)}`
@@ -126,14 +162,14 @@ app.post(REGISTER,async (req,res)=>{
                     otherToMe : []
                 }
             }
-            users[id] = newUser
-            fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+            await users.insertOne(newUser)
             res.send({access : true})
         }else{
             res.send({access : false,message : "email already used", type : "email"})
         }
     }catch(err){
         res.status(400).send({access : false,message : "something went wrong", type : "repeatPassword"})
+        console.log(err);
     }
 })
 
