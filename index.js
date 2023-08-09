@@ -614,39 +614,87 @@ app.get(COMMENTS,passport.authenticate("jwt", {session : false}),async (req,res)
 })
 
 
-app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const { id, avatarImg, userName } = req.user
-    const { comment,postId } = req.body
-    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const { id, avatarImg, userName } = req.user
+    // const { comment,postId } = req.body
+    // const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    const newComment = {
-        text: comment,
-        autherId: id,
-        likes: 0,
-        id : `comment_${nanoid(8)}`
-    }
+    // const newComment = {
+    //     text: comment,
+    //     autherId: id,
+    //     likes: 0,
+    //     id : `comment_${nanoid(8)}`
+    // }
 
-    const post = posts[postId]
-    post.comments.push(newComment)
-    users[post.auther.id].notifications = [{
-        id : `notification_${nanoid(8)}`,
-        autherId : id,
-        date : new Date().getTime(),
-        type : "comment",
-        watched : false
-    },...users[post.auther.id].notifications]
-    fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
-    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    // const post = posts[postId]
+    // post.comments.push(newComment)
+    // users[post.auther.id].notifications = [{
+    //     id : `notification_${nanoid(8)}`,
+    //     autherId : id,
+    //     date : new Date().getTime(),
+    //     type : "comment",
+    //     watched : false
+    // },...users[post.auther.id].notifications]
+    // fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
+    // fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
 
-    res.send({
-        access : true,
-        comment : {
-            ...newComment,
-            avatarImg,
-            userName
+    // res.send({
+    //     access : true,
+    //     comment : {
+    //         ...newComment,
+    //         avatarImg,
+    //         userName
+    //     }
+    // })
+
+
+    //db version
+    try{
+        const { id, avatarImg, userName } = req.user
+        const { comment,postId } = req.body
+        const users = db.collection("users")
+        const posts = db.collection("posts")
+    
+        const newComment = {
+            text: comment,
+            autherId: id,
+            likes: 0,
+            id : `comment_${nanoid(8)}`
         }
-    })
+    
+
+        const post = (await posts.findOneAndUpdate({ id : postId },{ $push : { comments : newComment } })).value
+
+        if( id !== post.auther.id ){
+            await users.updateOne({ id : post.auther.id },{
+                $push : {
+                    notifications : {
+                        $each : [{
+                            id : `notification_${nanoid(8)}`,
+                            autherId : id,
+                            date : new Date().getTime(),
+                            type : "comment",
+                            watched : false
+                        }],
+                        $position : 0
+                    }
+                }
+            })
+        }
+    
+    
+        res.send({
+            access : true,
+            comment : {
+                ...newComment,
+                avatarImg,
+                userName
+            }
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+    }
 })
 
 
