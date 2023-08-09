@@ -526,6 +526,8 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),async (req,res)
     //     access : true,
     //     list : messagesList
     // })
+
+    //db version
     try{
         const { id, friends  } = req.user
         const users = db.collection("users")
@@ -565,25 +567,50 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),async (req,res)
 })
 
 
-app.get(COMMENTS,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const { id:postId } = req.params
-    // const { id, friends  } = req.user
-    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+app.get(COMMENTS,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const { id:postId } = req.params
+    // // const { id, friends  } = req.user
+    // const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    const comments = posts[postId].comments.map(comment=>{
-        const currentUser = users[comment.autherId]
-        return {
-            ...comment,
-            avatarImg : currentUser.avatarImg,
-            userName : currentUser.userName,
-        }
-    })
+    // const comments = posts[postId].comments.map(comment=>{
+    //     const currentUser = users[comment.autherId]
+    //     return {
+    //         ...comment,
+    //         avatarImg : currentUser.avatarImg,
+    //         userName : currentUser.userName,
+    //     }
+    // })
 
-    res.send({
-        access : true,
-        list : comments
-    })
+    // res.send({
+    //     access : true,
+    //     list : comments
+    // })
+
+
+    //db version
+    try{
+        const { id:postId } = req.params
+        const users = db.collection("users")
+        const posts = db.collection("posts")
+    
+        const post = await posts.findOne({ id : postId })
+        const comments = await Promise.all(post.comments.map(async comment=>{
+            const currentUser = await users.findOne({ id : comment.autherId })
+            return {
+                ...comment,
+                avatarImg : currentUser.avatarImg,
+                userName : currentUser.userName,
+            }
+        }))
+    
+        res.send({
+            access : true,
+            list : comments
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+    }
 })
 
 
