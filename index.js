@@ -309,52 +309,133 @@ app.get(HOME, passport.authenticate("jwt", {session : false}),async (req,res)=>{
 
 
 
-app.post(HOME, passport.authenticate("jwt", {session : false}), (req,res)=>{
-    const user = req.user
-    const { postId, type } = req.body
-    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+app.post(HOME, passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const user = req.user
+    // const { postId, type } = req.body
+    // const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    const post = posts[postId]
+    // const post = posts[postId]
 
-    if(type === "like"){
-        if(post.likers[user.id]){
-            post.likers[user.id] = false
-            post.likes--
-        }else{
-            if(post.auther.id !== user.id && post.likers[user.id] === undefined){
-                users[post.auther.id].notifications = [{
-                    id : `notification_${nanoid(8)}`,
-                    autherId : user.id,
-                    date : new Date().getTime(),
-                    type : "like",
-                    watched : false
-                },...users[post.auther.id].notifications]
+    // if(type === "like"){
+    //     if(post.likers[user.id]){
+    //         post.likers[user.id] = false
+    //         post.likes--
+    //     }else{
+    //         if(post.auther.id !== user.id && post.likers[user.id] === undefined){
+    //             users[post.auther.id].notifications = [{
+    //                 id : `notification_${nanoid(8)}`,
+    //                 autherId : user.id,
+    //                 date : new Date().getTime(),
+    //                 type : "like",
+    //                 watched : false
+    //             },...users[post.auther.id].notifications]
+    //         }
+    //         post.likers[user.id] = true
+    //         post.likes++
+    //     }
+    // }else{
+    //     const currentUser = users[user.id]
+    //     const post = currentUser.favorites.find(val=>val === postId)
+    //     if(post){
+    //         currentUser.favorites = currentUser.favorites.filter(val=>val!==postId)
+    //     }else{
+    //         currentUser.favorites.push(postId)
+    //     }
+    //     users[user.id] = currentUser
+    // }
+
+    // const currentUser = users[post.auther.id]
+    // const backPost = getPost(users[user.id],currentUser,post)
+
+    // fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+    // fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
+
+    // res.send({
+    //     access : true,
+    //     post : backPost
+    // })
+
+
+    //db version
+    try{
+        const user = req.user
+        const { postId, type } = req.body
+        const users = db.collection("users")
+        const posts = db.collection("posts")
+    
+        const post = await posts.findOne({ id : postId })
+    
+        if(type === "like"){
+            if(post.likers[user.id]){
+                post.likers[user.id] = false
+                post.likes--
+    
+                await posts.updateOne({ id : postId },{
+                    $inc : {
+                        likes : -1
+                    },
+                    $set : {
+                        likers : { [user.id] : false }
+                    }
+                })  
+            }else{
+                if(post.auther.id !== user.id && post.likers[user.id] === undefined){
+                    await users.updateOne({ id : post.auther.id },{
+                        $push : {
+                            notifications : {
+                                $each : [{
+                                    id : `notification_${nanoid(8)}`,
+                                    autherId : user.id,
+                                    date : new Date().getTime(),
+                                    type : "like",
+                                    watched : false
+                                }],
+                                $position : 0
+                            }
+                        }
+                    })
+                }
+                await posts.updateOne({ id : postId },{
+                    $inc : {
+                        likes : 1
+                    },
+                    $set : {
+                        likers : { [user.id] : true }
+                    }
+                })  
             }
-            post.likers[user.id] = true
-            post.likes++
-        }
-    }else{
-        const currentUser = users[user.id]
-        const post = currentUser.favorites.find(val=>val === postId)
-        if(post){
-            currentUser.favorites = currentUser.favorites.filter(val=>val!==postId)
         }else{
-            currentUser.favorites.push(postId)
+            const currentUser = user
+            const post = currentUser.favorites.find(val=>val === postId)
+            if(post){
+                await users.updateOne({ id : user.id },{
+                    $pull : {
+                        favorites : postId
+                    }
+                })
+            }else{
+                await users.updateOne({ id : user.id },{
+                    $push : {
+                        favorites : postId
+                    }
+                })
+            }
         }
-        users[user.id] = currentUser
+    
+        const currentUser = await users.findOne({ id : post.auther.id })
+        const updatedUser = await users.findOne({ id : user.id })
+        const updatedPost = await posts.findOne({ id : postId })
+
+        const backPost = getPost(updatedUser,currentUser,updatedPost)
+
+        res.send({
+            access : true,
+            post : backPost
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
     }
-
-    const currentUser = users[post.auther.id]
-    const backPost = getPost(users[user.id],currentUser,post)
-
-    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
-    fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
-
-    res.send({
-        access : true,
-        post : backPost
-    })
 })
 
 
