@@ -699,27 +699,57 @@ app.post(POST_COMMENTS,passport.authenticate("jwt", {session : false}),async (re
 
 
 
-app.get(CHAT,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const { id:chatId } = req.params
-    const user = req.user
-    const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+app.get(CHAT,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const { id:chatId } = req.params
+    // const user = req.user
+    // const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    const messages = chat[chatId].messages.map(message=>{
-        const currentUser = users[message.autherId]
-        message.watchers[user.id] = true
-        return {
-            ...message,
-            avatarImg : currentUser.avatarImg,
-            userName : currentUser.userName,
-        }
-    })
+    // const messages = chat[chatId].messages.map(message=>{
+    //     const currentUser = users[message.autherId]
+    //     message.watchers[user.id] = true
+    //     return {
+    //         ...message,
+    //         avatarImg : currentUser.avatarImg,
+    //         userName : currentUser.userName,
+    //     }
+    // })
 
-    fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
-    res.send({
-        access : true,
-        list : messages
-    })
+    // fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
+    // res.send({
+    //     access : true,
+    //     list : messages
+    // })
+
+    //db version
+    try{
+        const { id:chatId } = req.params
+        const user = req.user
+        const chat = db.collection("messages")
+        const users = db.collection("users")
+
+        const currentChat = await chat.findOne({ id : chatId })
+        const messages = await Promise.all(currentChat.messages.map(async message=>{
+            const currentUser = await users.findOne({ id : message.autherId })
+            const userId = user.id
+            await chat.updateOne({ id : chatId, "messages.id" : message.id },{
+                $set : {
+                    "messages.$.watchers" : { [userId] : true }
+                }
+            })
+            return {
+                ...message,
+                avatarImg : currentUser.avatarImg,
+                userName : currentUser.userName,
+            }
+        }))
+        res.send({
+            access : true,
+            list : messages
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+    }
 })
 
 app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),(req,res)=>{
