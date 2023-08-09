@@ -14,6 +14,7 @@ import { getUserStatus } from "./utils/getUserStatus.js"
 import { nanoid } from "nanoid"
 import { getPost } from "./utils/getPost.js"
 import { MongoClient } from "mongodb"
+import getMessages from "./utils/getMessages.js"
 
 
 
@@ -488,43 +489,79 @@ app.get(MESSAGES,passport.authenticate("jwt", {session : false}),async (req,res)
     //     })
     //}
 
-    const messagesList = friends.map(friend=>{
-        const currentChat = messages[friend.chatId]
-        const { id:currentUserId } = currentChat.members.find(val=>val.id===friend.friendId)
-        const currentUser = users[currentUserId]
-        const lastMessage = currentChat.messages[currentChat.messages.length-1] || {}
-        let dontWathcedCount = 0
-        for ( let i = currentChat.messages.length-1 ; i >= 0 ; i-- ){
-            if( currentChat.messages[i].watchers[id] ){
-                break
-            }
-            dontWathcedCount++
-            if( dontWathcedCount >= 99 ){
-                break
-            }
-        } 
-        return {
-            sender : {
-                id: currentUserId,
-                userName: currentUser.userName,
-                avatarImg: currentUser.avatarImg
-            },
-            lastMessage : {
-                text : lastMessage.text,
-                autherId : lastMessage.autherId,
-                id : lastMessage.id,
-                sendDate : lastMessage.sendDate,
-                watched : !!lastMessage.watchers[id]
-            },
-            chatId : friend.chatId,
-            dontWathcedCount
-        }
-    })
+    // const messagesList = friends.map(friend=>{
+    //     const currentChat = messages[friend.chatId]
+    //     const { id:currentUserId } = currentChat.members.find(val=>val.id===friend.friendId)
+    //     const currentUser = users[currentUserId]
+    //     const lastMessage = currentChat.messages[currentChat.messages.length-1] || {}
+    //     let dontWathcedCount = 0
+    //     for ( let i = currentChat.messages.length-1 ; i >= 0 ; i-- ){
+    //         if( currentChat.messages[i].watchers[id] ){
+    //             break
+    //         }
+    //         dontWathcedCount++
+    //         if( dontWathcedCount >= 99 ){
+    //             break
+    //         }
+    //     } 
+    //     return {
+    //         sender : {
+    //             id: currentUserId,
+    //             userName: currentUser.userName,
+    //             avatarImg: currentUser.avatarImg
+    //         },
+    //         lastMessage : {
+    //             text : lastMessage.text,
+    //             autherId : lastMessage.autherId,
+    //             id : lastMessage.id,
+    //             sendDate : lastMessage.sendDate,
+    //             watched : !!lastMessage.watchers[id]
+    //         },
+    //         chatId : friend.chatId,
+    //         dontWathcedCount
+    //     }
+    // })
 
-    res.send({
-        access : true,
-        list : messagesList
-    })
+    // res.send({
+    //     access : true,
+    //     list : messagesList
+    // })
+    try{
+        const { id, friends  } = req.user
+        const users = db.collection("users")
+        const messages = db.collection("messages")
+
+        if(req.query.search){
+            const messagesList = await Promise.all([friends.reduce(async (arr,friend)=>{
+                const currentUser = await users.findOne({ id : friend.friendId })
+                if(new RegExp(req.query.search,"i").test(currentUser.userName)){
+                    const currentChat = await messages.findOne({ id : friend.chatId })
+                    return [...arr,getMessages(currentUser,currentChat,id,friend.chatId)]
+                }
+                return arr
+            },[])])
+    
+            return res.send({
+                access : true,
+                list : messagesList[0]
+            })
+        }
+    
+        const messagesList = await Promise.all(friends.map(async friend=>{
+            const currentChat = await messages.findOne({ id : friend.chatId })
+            const currentUser = await users.findOne({ id : friend.friendId })
+
+            return getMessages(currentUser,currentChat,id,friend.chatId)
+        }))
+    
+        res.send({
+            access : true,
+            list : messagesList
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+        console.log(err);
+    }
 })
 
 
