@@ -13,6 +13,7 @@ import { NOT_FRIENDS, OTHER_SEND, USER_STATUS_TRANSFORM, YOU_SEND } from "./cons
 import { getUserStatus } from "./utils/getUserStatus.js"
 import { nanoid } from "nanoid"
 import { getPost } from "./utils/getPost.js"
+import { MongoClient } from "mongodb"
 
 
 
@@ -36,6 +37,17 @@ const io = new Server(server,{
         methods: ["GET", "POST"]
     }
 })
+
+const client = new MongoClient(`mongodb+srv://ruben:${process.env.DB_PASSWORD}@kinder.0qql5fa.mongodb.net/`)
+const cleanUp = ()=>{
+    client.close()
+    process.exit()
+}
+process.on("SIGINT",cleanUp)
+process.on("SIGTERM",cleanUp)
+
+await client.connect()
+const db = client.db("kinder")
 
 const { Strategy:JwtStrategy, ExtractJwt } = passportJWT
 const jwtConfig = {
