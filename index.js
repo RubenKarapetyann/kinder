@@ -1300,44 +1300,93 @@ io.on("connection",(socket)=>{
     })
 })
 
-app.get(ADD_FRIEND,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const user = req.user
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    let filteredList  = []
-    const search = req.query.search
+app.get(ADD_FRIEND,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const user = req.user
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // let filteredList  = []
+    // const search = req.query.search
 
-    if(search === ""){
-        filteredList = user.friendRequests.otherToMe.map(user=>{
-            const currentUser = users[user.id]
-            return { 
-                id : currentUser.id,
-                avatarImg : currentUser.avatarImg,
-                userName : currentUser.userName,
-                status : OTHER_SEND
+    // if(search === ""){
+    //     filteredList = user.friendRequests.otherToMe.map(user=>{
+    //         const currentUser = users[user.id]
+    //         return { 
+    //             id : currentUser.id,
+    //             avatarImg : currentUser.avatarImg,
+    //             userName : currentUser.userName,
+    //             status : OTHER_SEND
+    //         }
+    //     })
+    //     return res.send({
+    //         access : true,
+    //         list : filteredList
+    //     })
+    // }
+
+    // for (let i in users){
+    //     if(new RegExp(search,"i").test(users[i].userName) && user.id !== users[i].id){
+    //         const currentUser = users[i]
+    //         const status = getUserStatus(user.friendRequests.otherToMe,user.friendRequests.meToOther,user.friends,currentUser.id)
+    //         filteredList.push({
+    //             id : currentUser.id,
+    //             avatarImg : currentUser.avatarImg,
+    //             userName : currentUser.userName,
+    //             status
+    //         })
+    //     }
+    // }
+    // res.send({
+    //     access : true,
+    //     list : filteredList
+    // })
+
+
+    //db version
+    try{
+        const user = req.user
+        const users = db.collection("users")
+        let filteredList  = []
+        const search = req.query.search
+    
+        if(search === ""){
+            filteredList = await Promise.all(user.friendRequests.otherToMe.map(async user=>{
+                const currentUser = await users.findOne({ id : user.id })
+                return { 
+                    id : currentUser.id,
+                    avatarImg : currentUser.avatarImg,
+                    userName : currentUser.userName,
+                    status : OTHER_SEND
+                }
+            }))
+            return res.send({
+                access : true,
+                list : filteredList
+            })
+        }
+    
+    
+        const allUsers = await users.find({}).toArray()
+    
+        for (let i in allUsers){
+            if(new RegExp(search,"i").test(allUsers[i].userName) && user.id !== allUsers[i].id){
+                const currentUser = allUsers[i]
+                const status = getUserStatus(user.friendRequests.otherToMe,user.friendRequests.meToOther,user.friends,currentUser.id)
+                filteredList.push({
+                    id : currentUser.id,
+                    avatarImg : currentUser.avatarImg,
+                    userName : currentUser.userName,
+                    status
+                })
             }
-        })
-        return res.send({
+        }
+    
+    
+        res.send({
             access : true,
             list : filteredList
         })
+    }catch(err){
+        res.status(400).send({ access : false })
     }
-
-    for (let i in users){
-        if(new RegExp(search,"i").test(users[i].userName) && user.id !== users[i].id){
-            const currentUser = users[i]
-            const status = getUserStatus(user.friendRequests.otherToMe,user.friendRequests.meToOther,user.friends,currentUser.id)
-            filteredList.push({
-                id : currentUser.id,
-                avatarImg : currentUser.avatarImg,
-                userName : currentUser.userName,
-                status
-            })
-        }
-    }
-    res.send({
-        access : true,
-        list : filteredList
-    })
 
 })
 
