@@ -806,34 +806,66 @@ app.get(NOTIFICATIONS,passport.authenticate("jwt", {session : false}),async (req
 })
 
 
-app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single("file"),(req,res)=>{
-    const user = req.user
+app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single("file"),async (req,res)=>{
+    // const user = req.user
 
-    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
 
-    const postId = `post_${nanoid(8)}`
-    posts[postId] = {
-        postDescription: req.body.description,
-        id: postId,
-        img: req.file.filename,
-        likes: 0,
-        likers: {},
-        publicDate: new Date().getTime(),
-        auther: {
-            id: user.id
-        },
-        comments: []  
+    // const postId = `post_${nanoid(8)}`
+    // posts[postId] = {
+    //     postDescription: req.body.description,
+    //     id: postId,
+    //     img: req.file.filename,
+    //     likes: 0,
+    //     likers: {},
+    //     publicDate: new Date().getTime(),
+    //     auther: {
+    //         id: user.id
+    //     },
+    //     comments: []  
+    // }
+    // users[user.id].posts.push({postId})
+
+    // fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
+    // fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
+
+    // res.send({
+    //     access : true
+    // })
+
+
+    //db version
+    try{
+        const user = req.user
+
+        const posts = db.collection("posts")
+        const users = db.collection("users")
+    
+        const postId = `post_${nanoid(8)}`
+        await posts.insertOne({
+            postDescription: req.body.description,
+            id: postId,
+            img: req.file.filename,
+            likes: 0,
+            likers: {},
+            publicDate: new Date().getTime(),
+            auther: {
+                id: user.id
+            },
+            comments: []  
+        })
+        await users.updateOne({ id : user.id }, { $push : {
+            posts : {postId}
+        }})
+
+        res.send({
+            access : true
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
     }
-    users[user.id].posts.push({postId})
-
-    fs.writeFileSync("./database/posts.json", JSON.stringify(posts,undefined,2));
-    fs.writeFileSync("./database/users.json", JSON.stringify(users,undefined,2));
-
-    res.send({
-        access : true
-    })
 })
 
 
