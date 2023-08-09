@@ -869,34 +869,68 @@ app.post(NEW_POST,passport.authenticate("jwt", {session : false}),upload.single(
 })
 
 
-app.get(PROFILE,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const { id } = req.params
-    const user = req.user
+app.get(PROFILE,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // const { id } = req.params
+    // const user = req.user
 
 
-    const isFriend = user.friends.find(friend=>friend.friendId === id) || id === user.id
-    const currentUser = users[id]
-    const profile = {
-        auther : {
-            id : currentUser.id,
-            userName : currentUser.userName,
-            avatarImg : currentUser.avatarImg,
-            description : currentUser.description,
-            friendsCount : currentUser.friends.length,
-            postsCount : currentUser.posts.length
-        },
-        posts : isFriend ? currentUser.posts.map(post=>({
-            postId : post.postId,
-            img : posts[post.postId].img
-        })) : []
+    // const isFriend = user.friends.find(friend=>friend.friendId === id) || id === user.id
+    // const currentUser = users[id]
+    // const profile = {
+    //     auther : {
+    //         id : currentUser.id,
+    //         userName : currentUser.userName,
+    //         avatarImg : currentUser.avatarImg,
+    //         description : currentUser.description,
+    //         friendsCount : currentUser.friends.length,
+    //         postsCount : currentUser.posts.length
+    //     },
+    //     posts : isFriend ? currentUser.posts.map(post=>({
+    //         postId : post.postId,
+    //         img : posts[post.postId].img
+    //     })) : []
+    // }
+
+    // res.send({
+    //     access : true,
+    //     profile
+    // })
+
+
+    //db version
+    try{
+        const { id } = req.params
+        const user = req.user
+        const users = db.collection("users")
+        const posts = db.collection("posts")
+
+
+        const isFriend = await users.findOne({ id : user.id, friends : { $elemMatch : { friendId : id } }}) || id === user.id
+        const currentUser = await users.findOne({ id })
+        const profile = {
+            auther : {
+                id : currentUser.id,
+                userName : currentUser.userName,
+                avatarImg : currentUser.avatarImg,
+                description : currentUser.description,
+                friendsCount : currentUser.friends.length,
+                postsCount : currentUser.posts.length
+            },
+            posts : isFriend ? await Promise.all(currentUser.posts.map(async post=>({
+                postId : post.postId,
+                img : (await posts.findOne({ id : post.postId })).img //posts[post.postId].img
+            }))) : []
+        }
+
+        res.send({
+            access : true,
+            profile
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
     }
-
-    res.send({
-        access : true,
-        profile
-    })
 })
 
 app.get(FAVORITES,passport.authenticate("jwt", {session : false}),(req,res)=>{
