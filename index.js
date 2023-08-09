@@ -986,45 +986,89 @@ app.get(FAVORITES,passport.authenticate("jwt", {session : false}),async (req,res
     }
 })
 
-app.get(FRIENDS,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const user = req.user
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+app.get(FRIENDS,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const user = req.user
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
 
-    if(req.query.search){
-        const friends = users[user.id].friends.reduce((arr,friend)=>{
-            if(new RegExp(req.query.search,"i").test(users[friend.friendId].userName)){
-                const currentFriend = users[friend.friendId]
-                return [...arr,{
-                    id : friend.friendId,
-                    avatarImg : currentFriend.avatarImg,
-                    userName : currentFriend.userName,
-                    chatId : friend.chatId
-                }]
-            }
-            return arr
-        },[])
+    // if(req.query.search){
+    //     const friends = users[user.id].friends.reduce((arr,friend)=>{
+    //         if(new RegExp(req.query.search,"i").test(users[friend.friendId].userName)){
+    //             const currentFriend = users[friend.friendId]
+    //             return [...arr,{
+    //                 id : friend.friendId,
+    //                 avatarImg : currentFriend.avatarImg,
+    //                 userName : currentFriend.userName,
+    //                 chatId : friend.chatId
+    //             }]
+    //         }
+    //         return arr
+    //     },[])
         
-        return res.send({
+    //     return res.send({
+    //         access : true,
+    //         list : friends
+    //     })
+    // }
+
+
+    // const friends = users[user.id].friends.map(friend=>{
+    //     const currentFriend = users[friend.friendId]
+    //     return ({
+    //         id : friend.friendId,
+    //         avatarImg : currentFriend.avatarImg,
+    //         userName : currentFriend.userName,
+    //         chatId : friend.chatId
+    //     })
+    // })
+
+    // res.send({
+    //     access : true,
+    //     list : friends
+    // })
+
+    //db version
+    try{
+        const user = req.user
+        const users = db.collection("users")
+    
+        if(req.query.search){
+            const friends = await Promise.all([user.friends.reduce(async (arr,friend)=>{
+                const currentFriend = await users.findOne({ id : friend.friendId })
+                if(new RegExp(req.query.search,"i").test(currentFriend.userName)){
+                    return [...arr,{
+                        id : friend.friendId,
+                        avatarImg : currentFriend.avatarImg,
+                        userName : currentFriend.userName,
+                        chatId : friend.chatId
+                    }]
+                }
+                return arr
+            },[])])
+            
+            return res.send({
+                access : true,
+                list : friends[0]
+            })
+        }
+    
+    
+        const friends = await Promise.all(user.friends.map(async friend=>{
+            const currentFriend = await users.findOne({ id : friend.friendId })
+            return ({
+                id : friend.friendId,
+                avatarImg : currentFriend.avatarImg,
+                userName : currentFriend.userName,
+                chatId : friend.chatId
+            })
+        }))
+    
+        res.send({
             access : true,
             list : friends
         })
+    }catch(err){
+        res.status(400).send({ access : false })
     }
-
-
-    const friends = users[user.id].friends.map(friend=>{
-        const currentFriend = users[friend.friendId]
-        return ({
-            id : friend.friendId,
-            avatarImg : currentFriend.avatarImg,
-            userName : currentFriend.userName,
-            chatId : friend.chatId
-        })
-    })
-
-    res.send({
-        access : true,
-        list : friends
-    })
 })
 
 app.delete(FRIENDS+"/:id",passport.authenticate("jwt", {session : false}),(req,res)=>{
