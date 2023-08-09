@@ -1120,20 +1120,41 @@ app.delete(FRIENDS+"/:id",passport.authenticate("jwt", {session : false}),async 
     }
 })
 
-app.get(POST,passport.authenticate("jwt", {session : false}),(req,res)=>{
-    const { id } = req.params
-    const user = req.user
-    const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
-    const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
-    const currentPost = posts[id]
-    const currentUser = users[currentPost.auther.id]
+app.get(POST,passport.authenticate("jwt", {session : false}),async (req,res)=>{
+    // const { id } = req.params
+    // const user = req.user
+    // const posts = JSON.parse(fs.readFileSync('./database/posts.json',{ encoding: 'utf8', flag: 'r' }))
+    // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // const currentPost = posts[id]
+    // const currentUser = users[currentPost.auther.id]
 
-    const post = getPost(user,currentUser,currentPost)
+    // const post = getPost(user,currentUser,currentPost)
 
-    res.send({
-        access : true,
-        post
-    })
+    // res.send({
+    //     access : true,
+    //     post
+    // })
+
+
+    //db version
+    try{
+        const { id } = req.params
+        const user = req.user
+        const posts = db.collection("posts")
+        const users = db.collection("users")
+    
+        const currentPost = await posts.findOne({ id : id })
+        const currentUser = await users.findOne({ id : currentPost.auther.id })
+    
+        const post = getPost(user,currentUser,currentPost)
+    
+        res.send({
+            access : true,
+            post
+        })
+    }catch(err){
+        res.status(400).send({ access : false })
+    }
 })
 
 app.get(AUTH,passport.authenticate("jwt", {session : false}),(req,res)=>{
