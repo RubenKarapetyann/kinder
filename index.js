@@ -1240,9 +1240,34 @@ io.on("connection",(socket)=>{
         io.in(socket.roomId).emit('message:add', message)
     }
 
-    const addMessage = (message)=>{
-        const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
-        const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    // const addMessage = (message)=>{
+    //     const chat = JSON.parse(fs.readFileSync('./database/messages.json',{ encoding: 'utf8', flag: 'r' }))
+    //     const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
+    //     const newMessage = {
+    //         text : message.text,
+    //         autherId : message.autherId,
+    //         id : `message_${nanoid(8)}`,
+    //         sendDate : new Date().getTime(),
+    //         watchers : {
+    //             [message.autherId] : true
+    //         }
+    //     }
+    //     chat[roomId].messages.push(newMessage)
+    //     const user = users[message.autherId]
+    //     sendMessage({
+    //         ...newMessage,
+    //         avatarImg : user.avatarImg,
+    //         userName : user.userName,
+    //     })
+    //     fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
+    // }
+
+
+
+    //db version
+    const addMessage = async (message)=>{
+        const chat = db.collection("messages")
+        const users = db.collection("users")
         const newMessage = {
             text : message.text,
             autherId : message.autherId,
@@ -1252,14 +1277,17 @@ io.on("connection",(socket)=>{
                 [message.autherId] : true
             }
         }
-        chat[roomId].messages.push(newMessage)
-        const user = users[message.autherId]
+        await chat.updateOne({ id : roomId },{
+            $push : { 
+                messages : newMessage
+            }
+        })
+        const user = await users.findOne({ id : message.autherId })
         sendMessage({
             ...newMessage,
             avatarImg : user.avatarImg,
             userName : user.userName,
         })
-        fs.writeFileSync("./database/messages.json", JSON.stringify(chat,undefined,2));
     }
 
     // socket.on('message:get', getMessages)
