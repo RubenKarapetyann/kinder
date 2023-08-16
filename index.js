@@ -15,7 +15,8 @@ import { nanoid } from "nanoid"
 import { getPost } from "./utils/getPost.js"
 import { MongoClient } from "mongodb"
 import getMessages from "./utils/getMessages.js"
-
+import cookieParser from "cookie-parser"
+import cookie from "cookie"
 
 
 const storageConfig = multer.diskStorage({
@@ -75,7 +76,7 @@ app.use('/post', express.static('./database/images'));
 app.use(SETTINGS, express.static('./database/images'));
 app.use(MESSAGES, express.static('./database/images'));
 app.use(LOGIN, express.static('./database/images'));
-
+app.use(cookieParser())
 
 passport.use(new JwtStrategy(jwtConfig,async (payload, done)=>{
     // const users = JSON.parse(fs.readFileSync('./database/users.json',{ encoding: 'utf8', flag: 'r' }))
