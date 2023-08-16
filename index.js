@@ -17,6 +17,7 @@ import { MongoClient } from "mongodb"
 import getMessages from "./utils/getMessages.js"
 import cookieParser from "cookie-parser"
 import cookie from "cookie"
+import generateToken, { jwtConfig } from "./utils/token-util.js"
 
 
 const storageConfig = multer.diskStorage({
@@ -51,20 +52,7 @@ process.on("SIGTERM",cleanUp)
 await client.connect()
 const db = client.db("kinder")
 
-const { Strategy:JwtStrategy, ExtractJwt } = passportJWT
-const jwtConfig = {
-    jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey : process.env.SESSION_SECRET
-}
-const generateToken = (user)=> {
-    const payload = {
-        sub : user.id
-    }
-
-    const token = jwt.sign(payload, jwtConfig.secretOrKey)
-    return token
-}
-
+const { Strategy:JwtStrategy } = passportJWT
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
