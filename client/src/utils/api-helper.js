@@ -1,8 +1,26 @@
 import { getHeaders } from "../constants/api-constants"
 import { HOME, LOGIN } from "../constants/routes-constants"
+import { isTokenExpired } from "./time-helper"
 
-export const getToken = ()=>localStorage.getItem("jwtToken")
-    
+// let isFetching = false
+export const getToken = async ()=>{
+    const token = localStorage.getItem("jwtToken")
+    // if( !isFetching ){
+        if( !token || isTokenExpired(token) ){
+            try{
+                // isFetching = true
+                const response = await fetch("/refresh")
+                const res = await response.json()
+                // isFetching = false
+                localStorage.setItem("jwtToken",res.token)
+            }catch(err){
+                console.log(err);
+            }
+        // }    
+    }
+    return localStorage.getItem("jwtToken")
+}
+
 export const getList = (navigate,route,id,LIST_SET,LOADING_START,LOADING_FINISH)=>{
     return (dispatch)=>{
         const func = async token =>{
@@ -47,8 +65,8 @@ export const listSeter = (type,list)=>{
     }
 }
 
-export const checkToken = (func,navigate)=>{
-    const token = getToken()
+export const checkToken = async (func,navigate)=>{
+    const token = await getToken()
     if(token){
         func(token)
     }else{

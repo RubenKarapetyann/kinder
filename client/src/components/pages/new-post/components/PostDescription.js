@@ -4,6 +4,7 @@ import { useNavigate } from "react-router"
 import { HOME } from "../../../../constants/routes-constants"
 import { FaUpload } from "react-icons/fa"
 import images from "../../../../images/more/images.svg"
+import { getToken } from "../../../../utils/api-helper"
 
 const PostDescription = ({ children })=>{
     const [value,setValue] = useState("")
@@ -31,10 +32,10 @@ const PostDescription = ({ children })=>{
     },[file])
 
 
-    const submitHandle = e =>{
+    const submitHandle = async e =>{
         e.preventDefault()
         try{
-            const token = localStorage.getItem("jwtToken")
+            const token = await getToken()
             setLoading(true)
             fetch("/newpost",{
                 headers : {

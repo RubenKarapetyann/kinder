@@ -239,11 +239,11 @@ app.get(LOG_OUT,(req,res)=>{
     req.headers.authorization = null
     res.setHeader(
         "Set-Cookie",
-        cookie.serialize("refreshToken",refreshToken,{
-            httpOnly : true,
-            maxAge : 60*60*1000
+        cookie.serialize("refreshToken", "", {
+            httpOnly: true,
+            maxAge: 0,
         })
-    )
+    );
     res.send({
         access : true
     })
