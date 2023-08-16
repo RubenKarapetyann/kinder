@@ -1,5 +1,5 @@
 import express from "express"
-import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS, POST, ADD_FRIEND, SETTINGS, FAVORITES } from "./constants/routes-constants.js"
+import { REGISTER, LOGIN, AUTH, LOG_OUT, HOME, MESSAGES, COMMENTS, POST_COMMENTS, CHAT, NOTIFICATIONS, NEW_POST, PROFILE, FRIENDS, POST, ADD_FRIEND, SETTINGS, FAVORITES, REFRESH } from "./constants/routes-constants.js"
 import jwt from "jsonwebtoken"
 import passport from "passport"
 import passportJWT from "passport-jwt"
@@ -18,6 +18,7 @@ import getMessages from "./utils/getMessages.js"
 import cookieParser from "cookie-parser"
 import cookie from "cookie"
 import generateToken, { jwtConfig } from "./utils/token-util.js"
+import { checkRefreshTokenMiddleware } from "./utils/middlewares.js"
 
 
 const storageConfig = multer.diskStorage({
@@ -246,6 +247,20 @@ app.get(LOG_OUT,(req,res)=>{
     res.send({
         access : true
     })
+})
+
+app.get(REFRESH,checkRefreshTokenMiddleware,(req,res)=>{
+    const [ token, refreshToken ] = generateToken(req.user)
+
+    
+    res.setHeader(
+        "Set-Cookie",
+        cookie.serialize("refreshToken", refreshToken, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60,
+        })
+    );
+    res.send({ token });
 })
 
 
