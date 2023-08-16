@@ -7,3 +7,16 @@ export const getHowLongItsBeen = (date)=>{
         <>{date && <span>{time} ago</span>}</>
     )
 }
+
+export const isTokenExpired = token =>{
+    if(!token){
+        return true
+    }
+
+    const { exp, iat } = JSON.parse(window.atob(token.split(".")[1]))
+    const currentTime = Math.floor(new Date().getTime()/1000)
+
+    if( currentTime + 5 >= exp ){
+        return true
+    }
+}
