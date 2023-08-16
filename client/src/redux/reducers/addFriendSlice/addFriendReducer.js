@@ -33,7 +33,7 @@ function addFriendReducer(state={ loading : false, list : [] },action){
 
 
 export const activeFriend = (id,status,navigate)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 dispatch(loadingStart(LOADING_START))
@@ -53,7 +53,7 @@ export const activeFriend = (id,status,navigate)=>{
                 console.log(err);
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 

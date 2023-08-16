@@ -27,7 +27,7 @@ function postReducer(state={ loading : false, post : { auther : {} } },action){
 }
 
 export const getPost =(navigate,id)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 dispatch(loadingStart(LOADING_START))
@@ -44,7 +44,7 @@ export const getPost =(navigate,id)=>{
                 dispatch(loadingFinish(LOADING_FINISH))
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 

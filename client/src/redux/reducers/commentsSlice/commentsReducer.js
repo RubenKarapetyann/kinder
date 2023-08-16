@@ -36,7 +36,7 @@ export const getCommentsList = (navigate,id)=>{
 }
 
 export const sendComment = (navigate,comment,postId)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 dispatch(loadingStart(LOADING_START))
@@ -58,7 +58,7 @@ export const sendComment = (navigate,comment,postId)=>{
                 dispatch(loadingFinish(LOADING_FINISH))
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 

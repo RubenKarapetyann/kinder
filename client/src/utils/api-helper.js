@@ -22,7 +22,7 @@ export const getToken = async ()=>{
 }
 
 export const getList = (navigate,route,id,LIST_SET,LOADING_START,LOADING_FINISH)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 dispatch(loadingStart(LOADING_START))
@@ -39,7 +39,7 @@ export const getList = (navigate,route,id,LIST_SET,LOADING_START,LOADING_FINISH)
                 dispatch(loadingFinish(LOADING_FINISH))
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 

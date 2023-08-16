@@ -20,7 +20,7 @@ function settingsReducer(state={ loading : false },action){
 }
 
 export const changeSettings = (navigate,formData)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 dispatch(loadingStart(LOADING_START))
@@ -44,7 +44,7 @@ export const changeSettings = (navigate,formData)=>{
                 navigate(-1)
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 

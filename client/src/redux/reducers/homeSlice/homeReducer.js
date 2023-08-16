@@ -38,7 +38,7 @@ function homeReducer(state={ loading : false, posts : [], page : 0 },action){
 }
 
 export const getHomePosts = (navigate,page)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 dispatch(loadingStart(LOADING_START))
@@ -53,12 +53,12 @@ export const getHomePosts = (navigate,page)=>{
                 navigate("/"+HOME)
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 
 export const activePost = (navigate,postId,type,isSingle)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 const response = await fetch("/home",{
@@ -81,7 +81,7 @@ export const activePost = (navigate,postId,type,isSingle)=>{
                 navigate("/"+HOME)
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 

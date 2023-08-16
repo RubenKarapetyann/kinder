@@ -38,7 +38,7 @@ export const getFriends = (navigate,id="")=>{
 }
 
 export const deleteFriendById = (navigate,id)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 dispatch(loadingStart(LOADING_START))
@@ -56,7 +56,7 @@ export const deleteFriendById = (navigate,id)=>{
                 navigate("/"+HOME)
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 

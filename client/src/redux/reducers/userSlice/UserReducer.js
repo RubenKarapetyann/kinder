@@ -28,7 +28,7 @@ function userReducer(state={user : {isAuth : false}, notViewed : {} }, action){
 }
 
 export const checkAuthentication = (navigate)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 const response = await fetch("/auth",{
@@ -40,12 +40,12 @@ export const checkAuthentication = (navigate)=>{
                 console.log(err);
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 
 export const userLogout = (navigate)=> {
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 const response = await fetch("/logout",{
@@ -61,7 +61,7 @@ export const userLogout = (navigate)=> {
                 console.log(err);
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 

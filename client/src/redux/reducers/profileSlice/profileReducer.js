@@ -41,7 +41,7 @@ function profileReducer(state={ loading : false, profile : {auther : {}, posts :
 }
 
 export const getProfile = (navigate,id)=>{
-    return (dispatch)=>{
+    return async (dispatch)=>{
         const func = async token =>{
             try{
                 dispatch(loadingStart(LOADING_START))
@@ -59,7 +59,7 @@ export const getProfile = (navigate,id)=>{
                 navigate("/"+HOME)
             }
         }
-        checkToken(func,navigate)
+        await checkToken(func,navigate)
     }
 }
 
