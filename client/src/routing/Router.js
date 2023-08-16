@@ -22,13 +22,17 @@ const Logout = lazy(()=>import("../components/pages/logout/Logout"))
 
 function Router(){
     const { user } = useSelector(store=>store.user)
+    
+    const checkAuth = (element)=>{
+        return user.isAuth ? element : <Navigate to={"/"+LOGIN}/>
+    }
     return(
         <main className="container">
             <Routes>
                 <Route path="*" element={<Navigate to={HOME}/>}/>
                 <Route path={LOGIN} element={user.isAuth ? <Navigate to={HOME}/> : <Login/>}/>
                 <Route path={REGISTER} element={user.isAuth ? <Navigate to={HOME}/> : <Register/>}/>
-                <Route path={HOME} element={<Home/>}/>
+                <Route path={HOME} element={checkAuth(<Home/>)}/>
                 <Route path={FRIENDS} element={<Friends/>}/>
                 <Route path={NOTIFICATIONS} element={<Notifications/>}/>
                 <Route path={MESSAGES} element={<Messages/>}/>

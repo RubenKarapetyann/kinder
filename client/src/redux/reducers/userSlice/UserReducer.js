@@ -53,7 +53,7 @@ export const userLogout = (navigate)=> {
                 })
                 const result = await response.json()
                 if(result.access){
-                    localStorage.setItem("jwtToken", null)
+                    localStorage.setItem("jwtToken", "")
                     dispatch(logoutUser())
                     navigate("/"+LOGIN)
                 }
