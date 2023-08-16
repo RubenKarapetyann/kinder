@@ -11,12 +11,19 @@ export const jwtConfig = {
 }
 
 const generateToken = (user)=> {
-    const payload = {
-        sub : user.id
+    const accessPayload = {
+        sub : user.id || user.sub,
+        exp : Math.floor(new Date().getTime()/1000) + 10
     }
 
-    const token = jwt.sign(payload, jwtConfig.secretOrKey)
-    return token
+    const refreshPayload = {
+        sub : user.id || user.sub,
+        exp : Math.floor(new Date().getTime()/1000) + 60*60
+    }
+
+    const token = jwt.sign(accessPayload, jwtConfig.secretOrKey)
+    const refresh = jwt.sign(refreshPayload, process.env.REFRESH_SECRET)
+    return [token, refresh]
 }
 
 export default generateToken

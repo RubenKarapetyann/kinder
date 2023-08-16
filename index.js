@@ -208,8 +208,15 @@ app.post(LOGIN,async (req,res)=>{
             return res.send({access : false, message : "incorrect password", type : "password"})
         }
     
-        const token = generateToken(user)
-    
+        const [ token, refreshToken ] = generateToken(user)
+        
+        res.setHeader(
+            "Set-Cookie",
+            cookie.serialize("refreshToken",refreshToken,{
+                httpOnly : true,
+                maxAge : 60*60*1000
+            })
+        )
         res.send({access : true, token,
             user : {
                 isAuth : true,
@@ -229,6 +236,13 @@ app.post(LOGIN,async (req,res)=>{
 
 app.get(LOG_OUT,(req,res)=>{
     req.headers.authorization = null
+    res.setHeader(
+        "Set-Cookie",
+        cookie.serialize("refreshToken",refreshToken,{
+            httpOnly : true,
+            maxAge : 60*60*1000
+        })
+    )
     res.send({
         access : true
     })
